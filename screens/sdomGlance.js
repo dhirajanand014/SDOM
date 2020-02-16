@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
+        paddingLeft: 10,
         justifyContent: 'flex-end',
     },
     titleContainer: {
