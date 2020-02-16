@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Be Violent",
+        "description": "Wonderlust",
+        "link": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+        "industries": [
+            "Hollywood"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Intersteller",
+        "description": "English movie",
+        "link": "https://i.pinimg.com/236x/57/87/90/57879084d8684a15499a783fee66ba4b.jpg",
+        "industries": [
+            "Hollywood"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Venom",
+        "description": "English movie",
+        "link": "https://wallpaperaccess.com/full/819123.jpg",
+        "industries": [
+            "Hollywood"
+        ]
+    },
+    {
+        "id": 4,
+        "title": "The Witcher",
+        "description": "English movie",
+        "link": "https://i.imgur.com/lgmbHYD.jpg",
+        "industries": [
+            "Hollywood"
+        ]
+    },
+]
