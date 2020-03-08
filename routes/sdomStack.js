@@ -1,7 +1,6 @@
 import React from 'react';
-export const Screens = {
-    SDOMGlance: {
-        screen: sdomGlance
-    }
+import { sdomGlance } from '../screens/sdomGlance';
+export const sdomScreens = props => {
 }
+
 //const stackScreens = createStackNavigator(Screens);

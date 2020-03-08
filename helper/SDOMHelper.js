@@ -11,3 +11,11 @@ export const fetchData = () => {
     // }
     return data;
 }
+
+export const formatData = (data, numColumns) => {
+    let numberOfElementsLastRow = data.length % numColumns;
+    while (numberOfElementsLastRow != numColumns) {
+        data.push({ categoryName: `blank`, empty })
+        numberOfElementsLastRow += 1;
+    }
+}
