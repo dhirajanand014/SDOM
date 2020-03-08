@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 import {
     Animated,
-    StyleSheet,
     Text,
     View,
     Image,
@@ -17,6 +16,7 @@ import {
 } from "react-native-parallax-swiper";
 import { fetchData } from '../helper/SDOMHelper';
 import data from '../data/data.json'
+import { glancePostStyles } from '../styles/sdomStyles';
 
 
 const smallRetweetIcon = require('../assets/retweet.png');
@@ -87,24 +87,24 @@ export function sdomGlance({ navigation }) {
                                         style={{ width: width, height: height }} />
                                 }
                                 ForegroundComponent={
-                                    <View style={styles.innerContainer} colors={['transparent', 'black']}>
-                                        <View style={styles.titleContainer}>
-                                            <Text style={styles.titleName}>
+                                    <View style={glancePostStyles.innerContainer} colors={['transparent', 'black']}>
+                                        <View style={glancePostStyles.titleContainer}>
+                                            <Text style={glancePostStyles.titleName}>
                                                 {item.title}
                                             </Text>
                                         </View>
-                                        <View style={styles.descriptionContainer}>
-                                            <Text style={styles.descriptionText}>
+                                        <View style={glancePostStyles.descriptionContainer}>
+                                            <Text style={glancePostStyles.descriptionText}>
                                                 {item.description}
                                             </Text>
                                         </View>
-                                        <View style={styles.smallButtonsContainer}>
-                                            <View style={styles.bottomIconsContainer}>
-                                                <View style={[styles.buttonWithTextContainer]}>
+                                        <View style={glancePostStyles.smallButtonsContainer}>
+                                            <View style={glancePostStyles.bottomIconsContainer}>
+                                                <View style={[glancePostStyles.buttonWithTextContainer]}>
                                                     <View
                                                         style={[
-                                                            styles.smallButtonContainer,
-                                                            styles.smallButtonWithTextIconContainer,
+                                                            glancePostStyles.smallButtonContainer,
+                                                            glancePostStyles.smallButtonWithTextIconContainer,
                                                         ]} >
                                                         <TouchableOpacity onPress={() => Linking.openURL(item.link)}>
                                                             <Text style={{ color: 'white' }}>
@@ -114,7 +114,7 @@ export function sdomGlance({ navigation }) {
                                                     </View>
                                                 </View>
                                             </View>
-                                            <Image style={styles.icon} source={smallEllipsesIcon} />
+                                            <Image style={glancePostStyles.icon} source={smallEllipsesIcon} />
                                         </View>
                                     </View>
                                 } />
@@ -123,20 +123,20 @@ export function sdomGlance({ navigation }) {
                 }
             </ParallaxSwiper>
 
-            <View style={[styles.largeButtonContainer, { right: 64 }]}>
+            <View style={[glancePostStyles.largeButtonContainer, { right: 64 }]}>
                 <TouchableOpacity>
-                    <Image style={styles.icon} source={heartIcon} />
+                    <Image style={glancePostStyles.icon} source={heartIcon} />
                 </TouchableOpacity>
             </View>
-            <View style={[styles.largeButtonContainer, { right: 12 }]}>
+            <View style={[glancePostStyles.largeButtonContainer, { right: 12 }]}>
                 <TouchableOpacity>
-                    <Image style={styles.icon} source={shareIcon} />
+                    <Image style={glancePostStyles.icon} source={shareIcon} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.progressBarContainer}>
+            <View style={glancePostStyles.progressBarContainer}>
                 <Animated.View
                     style={[
-                        styles.progressBar,
+                        glancePostStyles.progressBar,
                         {
                             transform: [
                                 {
@@ -154,111 +154,3 @@ export function sdomGlance({ navigation }) {
         </View >
     );
 }
-const styles = StyleSheet.create({
-    foregroundTextContainer: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "transparent"
-    },
-    foregroundText: {
-        fontSize: 34,
-        fontWeight: "700",
-        letterSpacing: 0.41,
-        color: "white"
-    },
-    gradient: {
-        paddingHorizontal: 12,
-        paddingVertical: 24,
-        backgroundColor: 'transparent',
-    },
-    innerContainer: {
-        flex: 1,
-        paddingLeft: 10,
-        justifyContent: 'flex-end',
-    },
-    titleContainer: {
-        flexDirection: 'row',
-        marginBottom: 5,
-    },
-    descriptionContainer: {
-        flexDirection: 'row',
-        marginBottom: 14,
-    },
-    titleName: {
-        marginRight: 4,
-        fontSize: 24,
-        fontWeight: '700',
-        display: 'flex',
-        color: 'white',
-    },
-    titleText: {
-        fontSize: 16,
-        color: 'white',
-    },
-    descriptionContainer: {
-        marginBottom: 12,
-    },
-    descriptionText: {
-        fontSize: 16,
-        color: 'white',
-    },
-    buttonWithTextContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 24,
-    },
-    bottomIconsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    icon: {
-        tintColor: 'white',
-    },
-    linkButtonText: {
-        fontSize: 12,
-        fontWeight: '600',
-        color: 'rgba(255,255,255,0.5)',
-    },
-    smallButtonsContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 8,
-    },
-    smallButtonContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 'auto',
-        paddingLeft: 10,
-        paddingRight: 10,
-        color: 'white',
-        height: 24,
-        backgroundColor: 'rgba(255,255,255,0.2)',
-    },
-    smallButtonWithTextIconContainer: {
-        marginRight: 12,
-    },
-    largeButtonContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 12,
-        width: 32,
-        height: 32,
-        backgroundColor: 'rgba(0,0,0,0.25)',
-        borderRadius: 16,
-    },
-    progressBarContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 4,
-        backgroundColor: 'rgba(255,255,255,0.2)',
-    },
-    progressBar: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'white',
-    }
-});
