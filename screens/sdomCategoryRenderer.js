@@ -1,43 +1,18 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native'
-import { ceil } from 'react-native-reanimated';
+import { Text, TouchableOpacity, ImageBackground } from 'react-native'
+import { flatListItemStyles } from '../styles/sdomStyles';
+import CheckBox from '@react-native-community/checkbox';
 
-
-export const sdomCategoryRenderer = (props) => {
-    const { item, index } = props;
+export const sdomCategoryRenderer = ({ item }, categoryState, setCategoryState) => {
     return (
-        <View>
-            <TouchableOpacity
-                style={{
-                    height: 200,
-                    alignItems: 'center',
-                    width: 200,
-                    position: 'relative',
-                    borderWidth: 1,
-                    borderColor: 'blue',
-                }}>
-                <ImageBackground
-                    source={{ uri: 'https://placehold.it/200x200' }}
-                    style={{
-                        height: 200,
-                        width: 200,
-                        opacity: 0.6,
-                        position: 'absolute',
-                    }}
-                />
-                <View
-                    style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Hello World!</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-export const addCategoryRenderer = () => {
-    return (
-        <View>
-            <Text>asdsd</Text>
-        </View>
+        <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}>
+            <ImageBackground source={{ uri: item.categoryCover }} imageStyle={{ opacity: 0.5 }}
+                style={flatListItemStyles.sdomCategoryImageRenderer}>
+                <Text style={flatListItemStyles.GridViewTextLayout}>{item.categoryTitle}</Text>
+                <CheckBox value={categoryState.isSelected}
+                    onValueChange={(value) => setCategoryState({ ...categoryState, isSelected: value })}
+                    style={flatListItemStyles.checkbox} tintColors={{ true: '#2196F3', false: 'pink' }} />
+            </ImageBackground>
+        </TouchableOpacity>
     )
 }

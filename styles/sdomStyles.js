@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export const glancePostStyles = StyleSheet.create({
     foregroundTextContainer: {
@@ -113,13 +112,49 @@ export const glancePostStyles = StyleSheet.create({
 export const flatListItemStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: 20
+        justifyContent: "center",
+        backgroundColor: "#e5e5e5"
     },
-    item: {
-        alignItems: 'center',
-        justifyContent: 'center',
+    headerText: {
+        fontSize: 20,
+        textAlign: "center",
+        margin: 10,
+        fontWeight: "bold"
+    },
+    GridViewContainer: {
         flex: 1,
-        margin: 1,
-        height: Dimensions.get('window').width / numColumns
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 150,
+        backgroundColor: 'rgba(0,0,0,.6)',
+        overflow: 'hidden',
+        margin: 5,
+        borderRadius: 10,
+    },
+    GridViewTextLayout: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        color: '#fff',
+        padding: 10,
+    },
+    sdomCategoryImageRenderer: {
+        flex: 1,
+        width: "100%",
+        height: "100%"
+    },
+    sdomCategoryTextOverlay: {
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    sdomCheckboxContainer: {
+        flexDirection: "row",
+        marginBottom: 20,
+    },
+    checkbox: {
+        position: "absolute",
+        bottom: 0,
+        alignSelf: "flex-end"
     }
 });

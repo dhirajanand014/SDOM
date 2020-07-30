@@ -1,6 +1,60 @@
 [
     {
-        "categoryId": 1,
+        "id": 1,
+        "categoryTitle": "Bollywood",
+        "categoryCover": "https://www.taemana.com/wp-content/uploads/2017/09/team-placeholder.png",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "categoryTitle": "Bollywood",
+        "categoryCover": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "categoryId": 4,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 5,
         "categoryTitle": "Bollywood",
         "post": [
             {
