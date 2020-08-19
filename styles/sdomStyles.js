@@ -158,3 +158,18 @@ export const flatListItemStyles = StyleSheet.create({
         alignSelf: "flex-end"
     }
 });
+
+export const drawerStyles = StyleSheet.create({
+    drawerContent: {
+        flex: 1
+    },
+    drawerSection: {
+        paddingLeft: 20
+    },
+    bottomDrawerSection: {
+        marginBottom: 15,
+        flex: 1,
+        borderTopColor: '#f4f4f4',
+        borderTopWidth: 1
+    }
+})

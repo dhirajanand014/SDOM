@@ -37,7 +37,7 @@ export function sdomGlance({ navigation }) {
         }
 
     }, []);
-    const { width, height } = Dimensions.get("window");
+    const { width, height } = Dimensions.get("screen");
     const myCustomAnimatedValue = new Animated.Value(0);
 
     const getPageTransformStyle = (index) => ({
