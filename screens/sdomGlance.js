@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { DrawerActions } from '@react-navigation/native';
 
 import {
     Animated,
@@ -8,7 +9,8 @@ import {
     Image,
     TouchableOpacity,
     Linking,
-    Dimensions
+    Dimensions,
+    StatusBar
 } from 'react-native';
 import {
     ParallaxSwiper,
@@ -17,7 +19,7 @@ import {
 import { fetchData } from '../helper/SDOMHelper';
 import data from '../data/data.json'
 import { glancePostStyles } from '../styles/sdomStyles';
-
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const smallRetweetIcon = require('../assets/retweet.png');
 const smallHeartIcon = require('../assets/heart-small.png');
@@ -25,6 +27,7 @@ const smallEllipsesIcon = require('../assets/ellipses.png');
 const xIcon = require('../assets/x.png');
 const heartIcon = require('../assets/heart-big.png');
 const shareIcon = require('../assets/share.png');
+
 
 export function sdomGlance({ navigation }) {
     const [SDOMdatastate, setSDOMdatastate] = useState([]);
@@ -37,7 +40,8 @@ export function sdomGlance({ navigation }) {
         }
 
     }, []);
-    const { width, height } = Dimensions.get("screen");
+    let { width, height } = Dimensions.get("window");
+    height += StatusBar.currentHeight;
     const myCustomAnimatedValue = new Animated.Value(0);
 
     const getPageTransformStyle = (index) => ({
@@ -69,6 +73,10 @@ export function sdomGlance({ navigation }) {
     console.log(data)
     return (
         <View>
+            <TouchableOpacity style={{ alignItems: "flex-end", position: "absolute", zIndex: 100, top: 50, left: 10, padding: 10 }}
+                onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+                <Icon size={25} color="black" name="bars" />
+            </TouchableOpacity>
             <ParallaxSwiper
                 speed={0.75}
                 animatedValue={myCustomAnimatedValue}

@@ -65,5 +65,57 @@
                 "postLocation": "Bangalore, India"
             }
         ]
+    },
+    {
+        "id": 6,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "categoryTitle": "Bollywood",
+        "post": [
+            {
+                "postId": 1,
+                "postTitle": "Gunda",
+                "postDescription": "Cult hindi movie",
+                "postImage": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
+                "postLocation": "Bangalore, India"
+            }
+        ]
     }
 ]

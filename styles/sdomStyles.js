@@ -109,6 +109,21 @@ export const glancePostStyles = StyleSheet.create({
     }
 });
 
+export const categoryViewStyles = StyleSheet.create({
+    container: {
+        fontSize: 25,
+        flexDirection: "row",
+        marginLeft: 20,
+        marginTop: 70,
+        marginBottom: 30,
+        alignItems: "center"
+    },
+    categoryView: {
+        width: '100%',
+        height: '100%'
+    }
+})
+
 export const flatListItemStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -123,19 +138,14 @@ export const flatListItemStyles = StyleSheet.create({
     },
     GridViewContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 150,
-        backgroundColor: 'rgba(0,0,0,.6)',
-        overflow: 'hidden',
-        margin: 5,
-        borderRadius: 10,
+        justifyContent: 'space-between',
     },
     GridViewTextLayout: {
         fontSize: 20,
+        position: 'absolute',
+        bottom: 0,
         fontWeight: 'bold',
-        justifyContent: 'center',
-        color: '#fff',
+        color: 'black',
         padding: 10,
     },
     sdomCategoryImageRenderer: {
@@ -152,10 +162,42 @@ export const flatListItemStyles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 20,
     },
-    checkbox: {
-        position: "absolute",
-        bottom: 0,
-        alignSelf: "flex-end"
+    checkBoxSelected: {
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden'
+    },
+    imageBackGround: {
+        opacity: 0.5,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden'
+    },
+    cardSurface: {
+        elevation: 8,
+        height: 150,
+        overflow: 'hidden',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+        borderRadius: 8,
+    }
+});
+
+export const headerStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    headerText: {
+        fontWeight: 'bold',
+    },
+    headerSave: {
+        padding: 15,
+        top: 2
+    },
+    textSave: {
+        color: "black",
+        fontWeight: "bold"
     }
 });
 
@@ -172,4 +214,4 @@ export const drawerStyles = StyleSheet.create({
         borderTopColor: '#f4f4f4',
         borderTopWidth: 1
     }
-})
+});
