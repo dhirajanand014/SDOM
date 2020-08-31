@@ -4,16 +4,21 @@ import { flatListItemStyles } from '../styles/sdomStyles';
 import { Text, Surface } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-export const sdomCategoryRenderer = ({ item }, categoryState, setCategoryState) => {
+export const sdomCategoryRenderer = (item, index, category) => {
+    const { categoryCover, categoryTitle } = item;
     return (
         <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}
-            onPress={() => setCategoryState({ ...categoryState, isSelected: !categoryState.isSelected })}>
+            onPress={() => {
+                category.categories[index].isSelected = !category.categories[index].isSelected;
+                setCategory({ ...category });
+            }}>
             <Surface style={flatListItemStyles.cardSurface}>
-                <ImageBackground source={{ uri: item.categoryCover }}
-                    style={categoryState.isSelected ? flatListItemStyles.checkBoxSelected : flatListItemStyles.imageBackGround}>
-                    <Text style={flatListItemStyles.GridViewTextLayout}>{item.categoryTitle}</Text>
+                <ImageBackground source={{ uri: categoryCover }}
+                    style={category.categories[index].isSelected ? flatListItemStyles.checkBoxSelected : flatListItemStyles.imageBackGround}>
+                    <Text style={flatListItemStyles.GridViewTextLayout}>{categoryTitle}</Text>
                     {
-                        categoryState.isSelected && <Icon name='check' size={80} color="black" style={{ alignSelf: "center" }} />
+                        category.categories[index].isSelected &&
+                        <Icon name='check' size={80} color="black" style={{ alignSelf: "center" }} />
                     }
                 </ImageBackground>
             </Surface>
