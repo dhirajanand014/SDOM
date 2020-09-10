@@ -8,7 +8,6 @@ import { SDOMCategory } from './screens/SDOMCategory';
 import SideDrawer from './components/SideDrawer'
 import { headerStyles } from './styles/sdomStyles';
 import { fetchAndUpdateCategoryState, isSaveButtonEnabled } from './helper/SDOMHelper.js';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, TouchableRipple, Button } from 'react-native-paper';
 import { View } from 'react-native';
 
@@ -36,6 +35,8 @@ export default function App() {
             <CategoryStack.Navigator screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', headerShown: true }} animation="fade">
                 <CategoryStack.Screen name="Category" component={SDOMCategory} options={{
                     headerTitle: 'Select Categories',
+                    headerStyle: { backgroundColor: '#3d3d3d' },
+                    headerTintColor: '#fff',
                     headerTitleAlign: 'center',
                     headerRight: () => {
                         <View>
@@ -46,7 +47,7 @@ export default function App() {
                         </View>
                     },
                     headerTitleStyle: headerStyles.headerText,
-                    headerLeft: () => <HeaderBackButton onPress={() => {
+                    headerLeft: () => <HeaderBackButton tintColor='#fff' onPress={() => {
                         navigation.goBack();
                     }} />
                 }}>

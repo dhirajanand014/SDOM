@@ -22,7 +22,7 @@ export function SDOMCategory({ navigation }) {
 
     return (
         <View>
-            <ImageBackground style={categoryViewStyles.categoryView} source={require('../assets/category_backround_image.png')}>
+            <ImageBackground style={categoryViewStyles.categoryView} style={{ backgroundColor: '#3d3d3d' }}>
                 <FlatList data={category.categories} style={{ height: height }}
                     renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={2}
                     keyExtractor={(item, index) => item.categoryId} />

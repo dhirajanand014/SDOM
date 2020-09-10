@@ -15,11 +15,6 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
             <Surface style={flatListItemStyles.cardSurface}>
                 <ImageBackground source={{ uri: categoryCover }}
                     style={category.categories[index].isSelected ? flatListItemStyles.checkBoxSelected : flatListItemStyles.imageBackGround}>
-                    <Text style={flatListItemStyles.GridViewTextLayout}>{categoryTitle}</Text>
-                    {
-                        category.categories[index].isSelected &&
-                        <Icon name='check' size={80} color="black" style={{ alignSelf: "center" }} />
-                    }
                 </ImageBackground>
             </Surface>
         </TouchableOpacity>

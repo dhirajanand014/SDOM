@@ -166,21 +166,28 @@ export const flatListItemStyles = StyleSheet.create({
     checkBoxSelected: {
         width: '100%',
         height: '100%',
+        borderColor: '#fcc200',
+        borderWidth: 3,
+        overflow: 'hidden',
+        shadowColor: '#fcc200',
+        shadowRadius: 18,
+        shadowOpacity: .7,
         overflow: 'hidden'
     },
     imageBackGround: {
-        opacity: 0.5,
         width: '100%',
         height: '100%',
         overflow: 'hidden'
     },
     cardSurface: {
         elevation: 8,
-        height: 150,
+        height: 180,
+        width: 180,
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 5,
+        marginHorizontal: 8,
+        marginVertical: 5,
         borderRadius: 8,
     }
 });
