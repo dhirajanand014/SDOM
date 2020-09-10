@@ -1,18 +1,20 @@
-import React, { useEffect, useContext } from 'react';
-import { FlatList, View, ImageBackground, Dimensions, StatusBar } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { FlatList, View, ImageBackground, Dimensions, StatusBar, Text } from 'react-native';
 import { SDOMCategoryContext } from '../App';
 import { categoryViewStyles } from '../styles/sdomStyles';
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
+import ViewPager from '@react-native-community/viewpager';
 
-export function sdomCategory({ navigation }) {
+export function SDOMCategory({ navigation }) {
 
-    const { category, fetchCategories } = useContext(SDOMCategoryContext);
+    const { fetchCategories } = useContext(SDOMCategoryContext);
+
+    const [category, setCategory] = useState({
+        categories: []
+    });
 
     useEffect(() => {
-        debugger
-        (async () => {
-            await fetchCategories();
-        })();
+        fetchCategories(category, setCategory);
     }, []);
 
     let { height } = Dimensions.get("window");
@@ -22,7 +24,7 @@ export function sdomCategory({ navigation }) {
         <View>
             <ImageBackground style={categoryViewStyles.categoryView} source={require('../assets/category_backround_image.png')}>
                 <FlatList data={category.categories} style={{ height: height }}
-                    renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category)} numColumns={2}
+                    renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={2}
                     keyExtractor={(item, index) => item.categoryId} />
             </ImageBackground>
         </View>

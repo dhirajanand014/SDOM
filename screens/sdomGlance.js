@@ -16,10 +16,11 @@ import {
     ParallaxSwiper,
     ParallaxSwiperPage
 } from "react-native-parallax-swiper";
-import { fetchData } from '../helper/SDOMHelper';
-import data from '../data/data.json'
+import ViewPager from '@react-native-community/viewpager';
+import { fetchPostsAndSaveToState } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import Icon from 'react-native-vector-icons/AntDesign'
+import FastImage from 'react-native-fast-image';
 
 const smallRetweetIcon = require('../assets/retweet.png');
 const smallHeartIcon = require('../assets/heart-small.png');
@@ -30,16 +31,12 @@ const shareIcon = require('../assets/share.png');
 
 
 export function sdomGlance({ navigation }) {
-    const [SDOMdatastate, setSDOMdatastate] = useState([]);
-    useEffect(() => {
-        try {
-            const data = fetchData();
-            setSDOMdatastate({ data });
-        } catch (error) {
-            console.log(error);
-        }
+    const [sdomDatastate, setSdomDatastate] = useState([]);
 
+    useEffect(() => {
+        fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate);
     }, []);
+
     let { width, height } = Dimensions.get("window");
     height += StatusBar.currentHeight;
     const myCustomAnimatedValue = new Animated.Value(0);
@@ -70,14 +67,87 @@ export function sdomGlance({ navigation }) {
             }
         ]
     });
-    console.log(data)
+    console.log(sdomDatastate)
     return (
         <View>
             <TouchableOpacity style={{ alignItems: "flex-end", position: "absolute", zIndex: 100, top: 50, left: 10, padding: 10 }}
                 onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
                 <Icon size={25} color="black" name="bars" />
             </TouchableOpacity>
-            <ParallaxSwiper
+
+            <ViewPager style={{ width: width, height: height }} orientation={"vertical"} transitionStyle={"scroll"}
+                onPageScroll={(e) => getPageTransformStyle(e.nativeEvent.position)} initialPage={0}>
+                {
+                    sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
+                        return (
+                            <View>
+                                <View key={index}>
+                                    <Image source={{ uri: item.postImage }} style={{ width, height: height }} />
+                                    <View style={glancePostStyles.innerContainer} colors={['transparent', 'black']}>
+                                        <Text style={glancePostStyles.titleName}>
+                                            {item.postTitle}
+                                        </Text>
+                                        <Text style={glancePostStyles.descriptionText}>
+                                            {item.postDescription}
+                                        </Text>
+                                        <View style={glancePostStyles.smallButtonsContainer}>
+                                            <View style={glancePostStyles.bottomIconsContainer}>
+                                                <View style={[glancePostStyles.buttonWithTextContainer]}>
+                                                    <View
+                                                        style={[
+                                                            glancePostStyles.smallButtonContainer,
+                                                            glancePostStyles.smallButtonWithTextIconContainer,
+                                                        ]} >
+                                                        <TouchableOpacity onPress={() => Linking.openURL(item.postLink)}>
+                                                            <Text style={{ color: 'white' }}>
+                                                                Read more
+                                                            </Text>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                </View>
+                                            </View>
+                                            <Image style={glancePostStyles.icon} source={smallEllipsesIcon} />
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View style={[glancePostStyles.largeButtonContainer, { right: 64 }]}>
+                                    <TouchableOpacity>
+                                        <Image style={glancePostStyles.icon} source={heartIcon} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={[glancePostStyles.largeButtonContainer, { right: 12 }]}>
+                                    <TouchableOpacity>
+                                        <Image style={glancePostStyles.icon} source={shareIcon} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={glancePostStyles.progressBarContainer}>
+                                    {sdomDatastate.posts &&
+                                        <Animated.View
+                                            style={[
+                                                glancePostStyles.progressBar,
+                                                {
+                                                    transform: [
+                                                        {
+                                                            translateX: myCustomAnimatedValue.interpolate({
+                                                                inputRange: [0, (width + 6) * (sdomDatastate.posts.length - 1)],
+                                                                outputRange: [-width, 0],
+                                                                extrapolate: 'clamp',
+                                                            }),
+                                                        },
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    }
+                                </View>
+                            </View>
+                        )
+                    })}
+            </ViewPager>
+
+
+            {/* <ParallaxSwiper
                 speed={0.75}
                 animatedValue={myCustomAnimatedValue}
                 dividerWidth={6}
@@ -87,23 +157,23 @@ export function sdomGlance({ navigation }) {
                 progressBarBackgroundColor="rgba(0,0,0,0.25)"
                 progressBarValueBackgroundColor="white">
                 {
-                    SDOMdatastate.data && SDOMdatastate.data.map((item, index) => {
+                    sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
                         return (
-                            <ParallaxSwiperPage key={item.id}
+                            <ParallaxSwiperPage key={item.postId}
                                 BackgroundComponent={
-                                    <Image source={{ uri: item.link }}
-                                        style={{ width: width, height: height }} />
+                                    <FastImage source={{ uri: item.postImage }} priority={FastImage.priority.low}
+                                        cache={FastImage.cacheControl.immutable} style={{ width, height: height }} />
                                 }
                                 ForegroundComponent={
                                     <View style={glancePostStyles.innerContainer} colors={['transparent', 'black']}>
                                         <View style={glancePostStyles.titleContainer}>
                                             <Text style={glancePostStyles.titleName}>
-                                                {item.title}
+                                                {item.postTitle}
                                             </Text>
                                         </View>
                                         <View style={glancePostStyles.descriptionContainer}>
                                             <Text style={glancePostStyles.descriptionText}>
-                                                {item.description}
+                                                {item.postDescription}
                                             </Text>
                                         </View>
                                         <View style={glancePostStyles.smallButtonsContainer}>
@@ -114,7 +184,7 @@ export function sdomGlance({ navigation }) {
                                                             glancePostStyles.smallButtonContainer,
                                                             glancePostStyles.smallButtonWithTextIconContainer,
                                                         ]} >
-                                                        <TouchableOpacity onPress={() => Linking.openURL(item.link)}>
+                                                        <TouchableOpacity onPress={() => Linking.openURL(item.postLink)}>
                                                             <Text style={{ color: 'white' }}>
                                                                 Read more
                                                             </Text>
@@ -158,7 +228,7 @@ export function sdomGlance({ navigation }) {
                         },
                     ]}
                 />
-            </View>
+            </View> */}
         </View >
     );
 }

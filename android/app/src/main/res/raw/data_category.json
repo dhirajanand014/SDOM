@@ -1,9 +1,9 @@
 [
     {
-        "id": 1,
+        "categoryId": 1,
         "categoryTitle": "Bollywood",
         "categoryCover": "https://www.taemana.com/wp-content/uploads/2017/09/team-placeholder.png",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -14,10 +14,10 @@
         ]
     },
     {
-        "id": 2,
-        "categoryTitle": "Bollywood",
+        "categoryId": 2,
+        "categoryTitle": "Gaming",
         "categoryCover": "https://www.jakpost.travel/wimages/large/34-348536_comics-drawings-world-movie-posters-mobile-wallpaper-westworld.jpg",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -28,9 +28,9 @@
         ]
     },
     {
-        "id": 3,
+        "categoryId": 3,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -43,7 +43,7 @@
     {
         "categoryId": 4,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -56,7 +56,7 @@
     {
         "id": 5,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -67,9 +67,9 @@
         ]
     },
     {
-        "id": 6,
+        "categoryId": 6,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -80,9 +80,9 @@
         ]
     },
     {
-        "id": 7,
+        "categoryId": 7,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -93,9 +93,9 @@
         ]
     },
     {
-        "id": 8,
+        "categoryId": 8,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",
@@ -106,9 +106,9 @@
         ]
     },
     {
-        "id": 9,
+        "categoryId": 9,
         "categoryTitle": "Bollywood",
-        "post": [
+        "posts": [
             {
                 "postId": 1,
                 "postTitle": "Gunda",

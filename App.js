@@ -1,15 +1,16 @@
 import 'react-native-gesture-handler';
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { sdomGlance } from './screens/sdomGlance';
-import { sdomCategory } from './screens/sdomCategory';
+import { SDOMCategory } from './screens/SDOMCategory';
 import SideDrawer from './components/SideDrawer'
 import { headerStyles } from './styles/sdomStyles';
-import { fetchCategoryData, isSaveButtonEnabled } from './helper/SDOMHelper.js';
+import { fetchAndUpdateCategoryState, isSaveButtonEnabled } from './helper/SDOMHelper.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Text } from 'react-native-paper';
+import { Text, TouchableRipple, Button } from 'react-native-paper';
+import { View } from 'react-native';
 
 export const SDOMCategoryContext = React.createContext();
 
@@ -18,17 +19,9 @@ export default function App() {
     const CategoryStack = createStackNavigator();
     const Drawer = createDrawerNavigator();
 
-    const [category, setCategory] = useState({
-        categories: []
-    });
-
-    const fetchCategories = useCallback(async () => {
-        debugger;
-        const categoryData = await fetchCategoryData();
-
-        categoryData.filter((item) => item.posts.length).map((category) => category.isSelected = false);
-        setCategory({ ...category, categories: categoryData });
-    }, []);
+    const fetchCategories = (category, setCategory) => {
+        fetchAndUpdateCategoryState(category, setCategory);
+    }
 
     const GlanceScreenStack = ({ navigation }) => {
         return (
@@ -41,32 +34,35 @@ export default function App() {
     const CategoryScreenStack = ({ navigation }) => {
         return (
             <CategoryStack.Navigator screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', headerShown: true }} animation="fade">
-                <CategoryStack.Screen name="Category" component={sdomCategory} options={{
-                    headerTitle: 'Discover Categories',
+                <CategoryStack.Screen name="Category" component={SDOMCategory} options={{
+                    headerTitle: 'Select Categories',
                     headerTitleAlign: 'center',
                     headerRight: () => {
-                        <TouchableOpacity style={headerStyles.headerSave}
-                            onPress={() => alert('This is a button!')}>
-                            <Text style={headerStyles.textSave}>Save</Text>
-                        </TouchableOpacity>
+                        <View>
+                            <TouchableRipple style={headerStyles.headerSave}
+                                onPress={() => alert('This is a button!')}>
+                                <Text style={headerStyles.textSave}>Save</Text>
+                            </TouchableRipple>
+                        </View>
                     },
                     headerTitleStyle: headerStyles.headerText,
                     headerLeft: () => <HeaderBackButton onPress={() => {
                         navigation.goBack();
                     }} />
-                }} />
+                }}>
+                </CategoryStack.Screen>
             </CategoryStack.Navigator>
         )
     }
 
     return (
-        <SDOMCategoryContext.Provider value={{ category, fetchCategories }}>
+        <SDOMCategoryContext.Provider value={{ fetchCategories }}>
             <NavigationContainer>
                 <Drawer.Navigator initialRouteName="SDOMGlance" drawerContent={(props) => <SideDrawer {...props} />}>
                     <Drawer.Screen name="SDOMGlance" component={GlanceScreenStack} />
                     <Drawer.Screen name="Category" component={CategoryScreenStack} />
                 </Drawer.Navigator>
-            </NavigationContainer>
+            </NavigationContainer >
         </SDOMCategoryContext.Provider>
     )
 }

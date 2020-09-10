@@ -4,7 +4,7 @@ import { flatListItemStyles } from '../styles/sdomStyles';
 import { Text, Surface } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-export const sdomCategoryRenderer = (item, index, category) => {
+export const sdomCategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover, categoryTitle } = item;
     return (
         <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}

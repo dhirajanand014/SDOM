@@ -25,11 +25,11 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleContainer: {
         flexDirection: 'row',
-        marginBottom: 5,
+        marginBottom: 100,
     },
     descriptionContainer: {
         flexDirection: 'row',
-        marginBottom: 14,
+        marginBottom: 40,
     },
     titleName: {
         marginRight: 4,
@@ -48,6 +48,7 @@ export const glancePostStyles = StyleSheet.create({
     descriptionText: {
         fontSize: 16,
         color: 'white',
+        justifyContent: 'space-evenly'
     },
     buttonWithTextContainer: {
         flexDirection: 'row',
@@ -70,7 +71,8 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 8,
+        marginTop: 20,
+        marginBottom: 25,
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -89,15 +91,14 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 12,
+        top: 32,
         width: 32,
         height: 32,
         backgroundColor: 'rgba(0,0,0,0.25)',
         borderRadius: 16,
     },
     progressBarContainer: {
-        position: 'absolute',
-        bottom: 0,
+        bottom: 100,
         left: 0,
         right: 0,
         height: 4,

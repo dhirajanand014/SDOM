@@ -1,34 +1,33 @@
-import React, { useContext, useCallback } from 'react';
-import { SDOMCategoryContext } from '../App';
 import axios from 'axios'
-
+import { urlConstants } from '../constants/sdomConstants';
 import data from '../data/data.json'
 import categoryData from '../data/category.json'
 
-export const fetchData = () => {
-    // async () => {
-    //     const response = axios.get('/data/data.json');
-    //     console.log(response, "re");
-    //     return response.data;
-    // }
-    return data;
-}
-
 export const fetchCategoryData = async () => {
-    // async () => {
-    //     const response = axios.get('/data/data.json');
-    //     console.log(response, "re");
-    //     return response.data;
-    // }
-    return await categoryData;
+    const responseData = await axios.get(urlConstants.fetchCategories);
+    return responseData.data.categories;
 }
 
 export const fetchAndUpdateCategoryState = async (category, setCategory) => {
-    debugger;
+    try {
+        const responseCategoryData = await fetchCategoryData();
+        responseCategoryData.map((category) => category.isSelected = false);
+        setCategory({ ...category, categories: responseCategoryData });
+    } catch (error) {
+        setCategory({ ...category, categories: [] });
+    }
+}
 
-};
+export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) => {
+    try {
+        const responseData = await axios.get(urlConstants.fetchPosts);
+        const responsePostsData = responseData.data.posts;
+        setSdomDatastate({ ...sdomDatastate, posts: responsePostsData });
+    } catch (error) {
+        setSdomDatastate({ ...sdomDatastate, posts: [] });
+    }
+}
 
 export const isSaveButtonEnabled = async (category) => {
-    debugger
-    return category && category.categories.length && category.categories.some((item) => { return item.isSelected });
+    return category.categories.length && category.categories.some((item) => { return item.isSelected });
 }
