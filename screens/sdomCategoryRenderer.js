@@ -1,8 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, ImageBackground } from 'react-native';
 import { flatListItemStyles } from '../styles/sdomStyles';
-import { Text, Surface } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Surface, Text } from 'react-native-paper';
 
 export const sdomCategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover, categoryTitle } = item;

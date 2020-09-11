@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { FlatList, View, ImageBackground, Dimensions, StatusBar, Text } from 'react-native';
 import { SDOMCategoryContext } from '../App';
-import { categoryViewStyles } from '../styles/sdomStyles';
+import { categoryViewStyles, headerStyles } from '../styles/sdomStyles';
+import { saveCategoryIdsToStorage } from '../helper/SDOMHelper'
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
-import ViewPager from '@react-native-community/viewpager';
 
 export function SDOMCategory({ navigation }) {
 
@@ -12,6 +13,25 @@ export function SDOMCategory({ navigation }) {
     const [category, setCategory] = useState({
         categories: []
     });
+
+    category.categories.some(item => item.isSelected) && navigation.setOptions({
+        headerRight: () =>
+            <TouchableOpacity style={headerStyles.headerSave}
+                onPress={async () => {
+                    const categoryIds = category.categories.filter(item => item.isSelected).map(selectedCategory => {
+                        return selectedCategory.categoryId
+                    });
+                    const jsonCategoryIds = JSON.stringify(categoryIds);
+                    await saveCategoryIdsToStorage(jsonCategoryIds);
+
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Glance" }],
+                    });
+                }}>
+                <Text style={headerStyles.textSave}>Save</Text>
+            </TouchableOpacity>
+    })
 
     useEffect(() => {
         fetchCategories(category, setCategory);
