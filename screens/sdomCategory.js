@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { FlatList, View, ImageBackground, Dimensions, StatusBar, Text } from 'react-native';
+import { FlatList, View, ImageBackground, Dimensions, StatusBar, Text, TouchableOpacity } from 'react-native';
 import { SDOMCategoryContext } from '../App';
 import { categoryViewStyles, headerStyles } from '../styles/sdomStyles';
 import { saveCategoryIdsToStorage } from '../helper/SDOMHelper'

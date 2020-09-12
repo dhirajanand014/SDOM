@@ -38,10 +38,6 @@ export const glancePostStyles = StyleSheet.create({
         display: 'flex',
         color: 'white',
     },
-    titleText: {
-        fontSize: 16,
-        color: 'white',
-    },
     descriptionContainer: {
         marginBottom: 12,
     },
@@ -61,11 +57,6 @@ export const glancePostStyles = StyleSheet.create({
     },
     icon: {
         tintColor: 'white',
-    },
-    linkButtonText: {
-        fontSize: 12,
-        fontWeight: '600',
-        color: 'rgba(255,255,255,0.5)',
     },
     smallButtonsContainer: {
         flexDirection: 'row',
@@ -103,6 +94,9 @@ export const glancePostStyles = StyleSheet.create({
         right: 0,
         height: 4,
         backgroundColor: 'rgba(255,255,255,0.2)',
+    },
+    glanceTopIcons: {
+        padding: 15
     },
     progressBar: {
         ...StyleSheet.absoluteFillObject,
@@ -204,22 +198,7 @@ export const headerStyles = StyleSheet.create({
         top: 2
     },
     textSave: {
-        color: "black",
+        color: "#fff",
         fontWeight: "bold"
-    }
-});
-
-export const drawerStyles = StyleSheet.create({
-    drawerContent: {
-        flex: 1
-    },
-    drawerSection: {
-        paddingLeft: 20
-    },
-    bottomDrawerSection: {
-        marginBottom: 15,
-        flex: 1,
-        borderTopColor: '#f4f4f4',
-        borderTopWidth: 1
     }
 });

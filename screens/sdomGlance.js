@@ -1,14 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Animated, Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar } from 'react-native';
-import {
-    ParallaxSwiper,
-    ParallaxSwiperPage
-} from "react-native-parallax-swiper";
 import ViewPager from '@react-native-community/viewpager';
-import { fetchPostsAndSaveToState } from '../helper/SDOMHelper';
-import { categoryViewStyles, glancePostStyles } from '../styles/sdomStyles';
-import Icon from 'react-native-vector-icons/AntDesign'
+import { fetchPostsAndSaveToState, setCurrentImageAsWallPaper } from '../helper/SDOMHelper';
+import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 
 const smallRetweetIcon = require('../assets/retweet.png');
@@ -35,7 +30,7 @@ export function sdomGlance({ navigation }) {
         <View>
             <TouchableOpacity style={{ alignItems: "flex-end", position: "absolute", zIndex: 100, top: 50, left: 10, padding: 10 }}
                 onPress={() => navigation.navigate("Category")}>
-                <Icon size={25} color="black" name="bars" />
+                <Text>Select</Text>
             </TouchableOpacity>
 
             <ViewPager style={{ width: width, height: height }} orientation={"vertical"} transitionStyle={"scroll"}
@@ -73,12 +68,14 @@ export function sdomGlance({ navigation }) {
                                 </View>
 
                                 <View key={`2_${index}_${item.categoryId}`} style={[glancePostStyles.largeButtonContainer, { right: 64 }]}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity style={glancePostStyles.glanceTopIcons}>
                                         <Image style={glancePostStyles.icon} source={heartIcon} />
                                     </TouchableOpacity>
                                 </View>
                                 <View key={`3_${index}_${item.categoryId}`} style={[glancePostStyles.largeButtonContainer, { right: 12 }]}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity style={glancePostStyles.glanceTopIcons} onPress={async () => {
+                                        await setCurrentImageAsWallPaper(item.postImage, item.postTitle)
+                                    }}>
                                         <Image style={glancePostStyles.icon} source={shareIcon} />
                                     </TouchableOpacity>
                                 </View>
@@ -106,90 +103,6 @@ export function sdomGlance({ navigation }) {
                         )
                     })}
             </ViewPager>
-
-
-            {/* <ParallaxSwiper
-                speed={0.75}
-                animatedValue={myCustomAnimatedValue}
-                dividerWidth={6}
-                vertical={true}
-                dividerColor="black"
-                onMomentumScrollEnd={activePageIndex => console.log(activePageIndex)}
-                progressBarBackgroundColor="rgba(0,0,0,0.25)"
-                progressBarValueBackgroundColor="white">
-                {
-                    sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
-                        return (
-                            <ParallaxSwiperPage key={item.postId}
-                                BackgroundComponent={
-                                    <FastImage source={{ uri: item.postImage }} priority={FastImage.priority.low}
-                                        cache={FastImage.cacheControl.immutable} style={{ width, height: height }} />
-                                }
-                                ForegroundComponent={
-                                    <View style={glancePostStyles.innerContainer} colors={['transparent', 'black']}>
-                                        <View style={glancePostStyles.titleContainer}>
-                                            <Text style={glancePostStyles.titleName}>
-                                                {item.postTitle}
-                                            </Text>
-                                        </View>
-                                        <View style={glancePostStyles.descriptionContainer}>
-                                            <Text style={glancePostStyles.descriptionText}>
-                                                {item.postDescription}
-                                            </Text>
-                                        </View>
-                                        <View style={glancePostStyles.smallButtonsContainer}>
-                                            <View style={glancePostStyles.bottomIconsContainer}>
-                                                <View style={[glancePostStyles.buttonWithTextContainer]}>
-                                                    <View
-                                                        style={[
-                                                            glancePostStyles.smallButtonContainer,
-                                                            glancePostStyles.smallButtonWithTextIconContainer,
-                                                        ]} >
-                                                        <TouchableOpacity onPress={() => Linking.openURL(item.postLink)}>
-                                                            <Text style={{ color: 'white' }}>
-                                                                Read more
-                                                            </Text>
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                            <Image style={glancePostStyles.icon} source={smallEllipsesIcon} />
-                                        </View>
-                                    </View>
-                                } />
-                        )
-                    })
-                }
-            </ParallaxSwiper>
-
-            <View style={[glancePostStyles.largeButtonContainer, { right: 64 }]}>
-                <TouchableOpacity>
-                    <Image style={glancePostStyles.icon} source={heartIcon} />
-                </TouchableOpacity>
-            </View>
-            <View style={[glancePostStyles.largeButtonContainer, { right: 12 }]}>
-                <TouchableOpacity>
-                    <Image style={glancePostStyles.icon} source={shareIcon} />
-                </TouchableOpacity>
-            </View>
-            <View style={glancePostStyles.progressBarContainer}>
-                <Animated.View
-                    style={[
-                        glancePostStyles.progressBar,
-                        {
-                            transform: [
-                                {
-                                    translateX: myCustomAnimatedValue.interpolate({
-                                        inputRange: [0, (width + 6) * (data.length - 1)],
-                                        outputRange: [-width, 0],
-                                        extrapolate: 'clamp',
-                                    }),
-                                },
-                            ],
-                        },
-                    ]}
-                />
-            </View> */}
         </View >
     );
 }

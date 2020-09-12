@@ -1,7 +1,6 @@
 import React from 'react'
-import { TouchableOpacity, ImageBackground } from 'react-native';
+import { TouchableOpacity, ImageBackground, View } from 'react-native';
 import { flatListItemStyles } from '../styles/sdomStyles';
-import { Surface, Text } from 'react-native-paper';
 
 export const sdomCategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover, categoryTitle } = item;
@@ -11,11 +10,11 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                 category.categories[index].isSelected = !category.categories[index].isSelected;
                 setCategory({ ...category });
             }}>
-            <Surface style={flatListItemStyles.cardSurface}>
+            <View style={flatListItemStyles.cardSurface}>
                 <ImageBackground source={{ uri: categoryCover }}
                     style={category.categories[index].isSelected ? flatListItemStyles.checkBoxSelected : flatListItemStyles.imageBackGround}>
                 </ImageBackground>
-            </Surface>
+            </View>
         </TouchableOpacity>
     )
 }

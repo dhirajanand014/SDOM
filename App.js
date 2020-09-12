@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton, CardStyleInterpolators } from '@react-navigation/stack';
 import { sdomGlance } from './screens/sdomGlance';
 import { SDOMCategory } from './screens/SDOMCategory';
 import { headerStyles } from './styles/sdomStyles';
@@ -19,7 +19,8 @@ export default function App() {
     return (
         <SDOMCategoryContext.Provider value={{ fetchCategories }}>
             <NavigationContainer>
-                <SDOMStack.Navigator initialRouteName="Glance" screenOptions={{ gestureEnabled: true, gestureDirection: 'vertical' }} animation="fade">
+                <SDOMStack.Navigator initialRouteName="Glance" screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+                    headerMode='float' animation="fade">
                     <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
                     <SDOMStack.Screen name="Category" component={SDOMCategory} options={{
                         headerShown: true,
