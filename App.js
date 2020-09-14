@@ -9,33 +9,36 @@ import { fetchAndUpdateCategoryState } from './helper/SDOMHelper.js';
 
 export const SDOMCategoryContext = React.createContext();
 
-export default function App() {
-    const SDOMStack = createStackNavigator();
+export default class App extends React.PureComponent {
 
-    const fetchCategories = (category, setCategory) => {
-        fetchAndUpdateCategoryState(category, setCategory);
+    render() {
+        const SDOMStack = createStackNavigator();
+
+        const fetchCategories = (category, setCategory) => {
+            fetchAndUpdateCategoryState(category, setCategory);
+        }
+
+        return (
+            <SDOMCategoryContext.Provider value={{ fetchCategories }}>
+                <NavigationContainer>
+                    <SDOMStack.Navigator initialRouteName={this.props.navigationRoute} screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+                        headerMode='float' animation="fade">
+                        <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
+                        <SDOMStack.Screen name="Category" component={SDOMCategory} options={{
+                            headerShown: true,
+                            headerTitle: 'Select Categories',
+                            headerStyle: { backgroundColor: '#3d3d3d' },
+                            headerTintColor: '#fff',
+                            headerTitleAlign: 'center',
+                            headerTitleStyle: headerStyles.headerText,
+                            navigationOptions: ({ navigation }) => ({
+                                headerLeft: (<HeaderBackButton tintColor='#fff' onPress={() => { navigation.goBack() }} />)
+                            })
+                        }}>
+                        </SDOMStack.Screen>
+                    </SDOMStack.Navigator>
+                </NavigationContainer >
+            </SDOMCategoryContext.Provider>
+        )
     }
-
-    return (
-        <SDOMCategoryContext.Provider value={{ fetchCategories }}>
-            <NavigationContainer>
-                <SDOMStack.Navigator initialRouteName="Glance" screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
-                    headerMode='float' animation="fade">
-                    <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
-                    <SDOMStack.Screen name="Category" component={SDOMCategory} options={{
-                        headerShown: true,
-                        headerTitle: 'Select Categories',
-                        headerStyle: { backgroundColor: '#3d3d3d' },
-                        headerTintColor: '#fff',
-                        headerTitleAlign: 'center',
-                        headerTitleStyle: headerStyles.headerText,
-                        navigationOptions: ({ navigation }) => ({
-                            headerLeft: (<HeaderBackButton tintColor='#fff' onPress={() => { navigation.goBack() }} />)
-                        })
-                    }}>
-                    </SDOMStack.Screen>
-                </SDOMStack.Navigator>
-            </NavigationContainer >
-        </SDOMCategoryContext.Provider>
-    )
 }

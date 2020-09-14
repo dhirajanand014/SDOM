@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { urlConstants, asyncStorageKeys } from '../constants/sdomConstants';
+import { NativeModules } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import data from '../data/data.json'
-import categoryData from '../data/category.json'
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
@@ -14,7 +13,7 @@ export const fetchAndUpdateCategoryState = async (category, setCategory) => {
         const responseCategoryData = await fetchCategoryData();
         if (responseCategoryData) {
             const categoryIds = await getCategoryIdsFromStorage();
-            const parsedCategoryIds = JSON.parse(categoryIds);
+            const parsedCategoryIds = categoryIds.length && JSON.parse(categoryIds) || [];
             responseCategoryData.map((category) =>
                 category.isSelected = parsedCategoryIds.some(categoryId => categoryId == category.categoryId));
         }
@@ -34,7 +33,11 @@ export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) 
             const categoryIds = await getCategoryIdsFromStorage();
             const parsedCategoryIds = JSON.parse(categoryIds);
             categoryPostsData = parsedCategoryIds && parsedCategoryIds.length &&
-                responsePostsData.filter(post => parsedCategoryIds.includes(post.categoryId)) || responsePostsData;
+                responsePostsData.filter(post => parsedCategoryIds.includes(post.categoryId)).sort((datePost1, datePost2) => {
+                    return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
+                }) || responsePostsData.sort((datePost1, datePost2) => {
+                    return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
+                });
         }
         setSdomDatastate({ ...sdomDatastate, posts: categoryPostsData });
     } catch (error) {
@@ -56,5 +59,13 @@ export const getCategoryIdsFromStorage = async () => {
         return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_ID) || "";
     } catch (error) {
         console.log('Cannot fetch the categoryIds from the storage', error);
+    }
+}
+
+export const setCurrentImageAsWallPaper = async (postUrl, postTitle) => {
+    try {
+        NativeModules.SdomApi.setPostAsWallPaper(postUrl, postTitle);
+    } catch (error) {
+        console.log("Cannot set current image as wallpaper", error);
     }
 }

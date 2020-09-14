@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SDOM</string>
+    <string name="splash_screen_image_view_no_content">StarDom Splash Screen</string>
 </resources>

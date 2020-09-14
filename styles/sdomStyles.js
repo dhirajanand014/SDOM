@@ -82,7 +82,7 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 32,
+        top: 45,
         width: 32,
         height: 32,
         backgroundColor: 'rgba(0,0,0,0.25)',

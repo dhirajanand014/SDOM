@@ -5,12 +5,13 @@ import ViewPager from '@react-native-community/viewpager';
 import { fetchPostsAndSaveToState, setCurrentImageAsWallPaper } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
+import { ImageBackground } from 'react-native';
 
 const smallRetweetIcon = require('../assets/retweet.png');
 const smallHeartIcon = require('../assets/heart-small.png');
 const smallEllipsesIcon = require('../assets/ellipses.png');
-const xIcon = require('../assets/x.png');
 const heartIcon = require('../assets/heart-big.png');
+const categoryIcon = require('../assets/category_selection_icon.png');
 const shareIcon = require('../assets/share.png');
 
 export function sdomGlance({ navigation }) {
@@ -30,7 +31,7 @@ export function sdomGlance({ navigation }) {
         <View>
             <TouchableOpacity style={{ alignItems: "flex-end", position: "absolute", zIndex: 100, top: 50, left: 10, padding: 10 }}
                 onPress={() => navigation.navigate("Category")}>
-                <Text>Select</Text>
+                <Image source={categoryIcon} style={{ width: 25, height: 25 }} />
             </TouchableOpacity>
 
             <ViewPager style={{ width: width, height: height }} orientation={"vertical"} transitionStyle={"scroll"}
@@ -40,7 +41,11 @@ export function sdomGlance({ navigation }) {
                         return (
                             <View>
                                 <View key={`1_${index}_${item.categoryId}`}>
-                                    <Image source={{ uri: item.postImage }} style={{ width, height: height }} />
+                                    <FastImage source={{
+                                        uri: item.postImage,
+                                        priority: FastImage.priority.normal,
+                                        cache: FastImage.cacheControl.immutable
+                                    }} style={{ width, height: height }} />
                                     <View style={glancePostStyles.innerContainer} colors={['transparent', 'black']}>
                                         <Text style={glancePostStyles.titleName}>
                                             {item.postTitle}
