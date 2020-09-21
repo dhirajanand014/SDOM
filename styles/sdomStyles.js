@@ -34,7 +34,7 @@ export const glancePostStyles = StyleSheet.create({
     titleName: {
         marginRight: 4,
         fontSize: 24,
-        fontWeight: '700',
+        fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
     },
@@ -42,8 +42,20 @@ export const glancePostStyles = StyleSheet.create({
         marginBottom: 12,
     },
     descriptionText: {
-        fontSize: 16,
+        fontSize: 14,
         color: 'white',
+    },
+    category_selection: {
+        alignItems: "flex-end",
+        position: "absolute",
+        zIndex: 100,
+        top: 10,
+        left: 5,
+        padding: 10
+    },
+    category_selection_image: {
+        width: 25,
+        height: 25
     },
     buttonWithTextContainer: {
         flexDirection: 'row',
@@ -55,7 +67,7 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     icon_post_like: {
-        marginTop: 30,
+        marginTop: 20,
         width: 32,
         height: 32
     },
@@ -109,7 +121,7 @@ export const glancePostStyles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         position: 'absolute',
-        top: 60,
+        top: 10,
         width: 32,
         right: 70,
         height: 32,
@@ -119,7 +131,7 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 177,
+        top: 125,
         width: 32,
         right: 10,
         height: 32,
@@ -150,7 +162,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     modalHideText: {
         color: "white",
-        fontWeight: "bold",
+        fontFamily: 'sdom_roman_font',
         textAlign: "center"
     },
     modalButton: {

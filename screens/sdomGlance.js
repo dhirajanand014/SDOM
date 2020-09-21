@@ -35,10 +35,10 @@ export function sdomGlance({ navigation }) {
 
     console.log(sdomDatastate)
     return (
-        <View style={{ flex: 1 }}>
-            <TouchableOpacity style={{ alignItems: "flex-end", position: "absolute", zIndex: 100, top: 50, left: 10, padding: 10 }}
+        <View>
+            <TouchableOpacity style={glancePostStyles.category_selection}
                 onPress={() => navigation.navigate("Category")}>
-                <Image source={category_selection} style={{ width: 25, height: 25 }} />
+                <Image source={category_selection} style={glancePostStyles.category_selection_image} />
             </TouchableOpacity>
 
             <ViewPager style={{ width: width, height: height }} orientation={"vertical"} transitionStyle={"scroll"}

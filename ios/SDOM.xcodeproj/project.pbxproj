@@ -16,6 +16,9 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* SDOMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
+		1B1FE2F83F8E4390A69B22B6 /* sdom_bold_fonts_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */; };
+		C4033F5CD159472DAFD4D084 /* sdom_roman_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9250657F54C2C88677228 /* sdom_roman_font.ttf */; };
+		E62CA786CF334991B859CCB6 /* sdom_bold_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		2D02E4901E0B4A5D006451C7 /* SDOM-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SDOM-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */ = {isa = PBXFileReference; name = "sdom_bold_fonts_.ttf"; path = "../assets/fonts/sdom_bold_fonts_.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		29E9250657F54C2C88677228 /* sdom_roman_font.ttf */ = {isa = PBXFileReference; name = "sdom_roman_font.ttf"; path = "../assets/fonts/sdom_roman_font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */ = {isa = PBXFileReference; name = "sdom_bold_font.ttf"; path = "../assets/fonts/sdom_bold_font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,9 @@
 		C90FBE61E32C4DD28511E72E /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
+				6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */,
+				29E9250657F54C2C88677228 /* sdom_roman_font.ttf */,
+				A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -302,6 +311,9 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				1B1FE2F83F8E4390A69B22B6 /* sdom_bold_fonts_.ttf in Resources */,
+				C4033F5CD159472DAFD4D084 /* sdom_roman_font.ttf in Resources */,
+				E62CA786CF334991B859CCB6 /* sdom_bold_font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
