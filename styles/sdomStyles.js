@@ -44,7 +44,6 @@ export const glancePostStyles = StyleSheet.create({
     descriptionText: {
         fontSize: 16,
         color: 'white',
-        justifyContent: 'space-evenly'
     },
     buttonWithTextContainer: {
         flexDirection: 'row',
@@ -55,15 +54,42 @@ export const glancePostStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
     },
-    icon: {
-        tintColor: 'white',
+    icon_post_like: {
+        marginTop: 30,
+        width: 32,
+        height: 32
+    },
+    icon_post_search: {
+        width: 26,
+        height: 26
+    },
+    icon_post_description: {
+        width: 32,
+        height: 32
+    },
+    icon_post_wallpaper: {
+        width: 32,
+        height: 32
+    },
+    icon_post_download: {
+        width: 32,
+        height: 32
+    },
+    icon_external_link: {
+        width: 32,
+        height: 32
     },
     smallButtonsContainer: {
         flexDirection: 'row',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 20,
-        marginBottom: 25,
+        marginBottom: 30,
+    },
+    scrollViewDescription: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginBottom: 90,
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -78,29 +104,69 @@ export const glancePostStyles = StyleSheet.create({
     smallButtonWithTextIconContainer: {
         marginRight: 12,
     },
+    searchIconContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        position: 'absolute',
+        top: 60,
+        width: 32,
+        right: 70,
+        height: 32,
+    },
     largeButtonContainer: {
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 45,
+        top: 177,
         width: 32,
+        right: 10,
         height: 32,
-        backgroundColor: 'rgba(0,0,0,0.25)',
-        borderRadius: 16,
     },
-    progressBarContainer: {
-        bottom: 100,
-        left: 0,
-        right: 0,
-        height: 4,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+    modalContainer: {
+        flex: 1,
+        alignItems: 'flex-end',
+        margin: 40
+    },
+    modalView: {
+        marginRight: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 20,
+        maxHeight: 250,
+        width: 250,
+        top: 30,
+        justifyContent: 'space-evenly',
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
+    modalHideText: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalButton: {
+        borderRadius: 20,
+        marginTop: 20,
+        padding: 10,
+        elevation: 2
     },
     glanceTopIcons: {
-        padding: 15
+        paddingTop: 12,
+        paddingLeft: 2,
+        paddingBottom: 2,
+        paddingRight: 2
     },
-    progressBar: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'white',
+    glanceTopIconInfo: {
+        padding: 1
     }
 });
 
