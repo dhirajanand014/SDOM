@@ -42,7 +42,11 @@ export function SDOMCategory({ navigation }) {
                 category.initialCategory == 'saveButton' &&
                 <TouchableOpacity onPress={async () => {
                     const categoryIds = category.categories.filter(item => item.isSelected).map(selectedCategory => {
-                        return selectedCategory.categoryId
+                        const categoryJson = {
+                            selectedCategoryId: selectedCategory.categoryId,
+                            selectedCategoryTitle: selectedCategory.categoryTitle
+                        }
+                        return categoryJson;
                     });
                     const jsonCategoryIds = JSON.stringify(categoryIds);
                     await saveCategoryIdsToStorage(jsonCategoryIds);

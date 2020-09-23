@@ -38,6 +38,20 @@ export const glancePostStyles = StyleSheet.create({
         display: 'flex',
         color: 'white',
     },
+    postType: {
+        marginRight: 4,
+        fontSize: 18,
+        fontFamily: 'sdom_bold_font',
+        display: 'flex',
+        color: 'white',
+    },
+    categoryTitleType: {
+        marginRight: 4,
+        fontSize: 18,
+        fontFamily: 'sdom_roman_font',
+        display: 'flex',
+        color: 'white',
+    },
     descriptionContainer: {
         marginBottom: 12,
     },
@@ -95,8 +109,8 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 30,
+        marginTop: 10,
+        marginBottom: 20,
     },
     scrollViewDescription: {
         flexDirection: 'row',

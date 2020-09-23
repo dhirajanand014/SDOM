@@ -59,6 +59,10 @@ export function sdomGlance({ navigation }) {
                                                 <Image style={glancePostStyles.icon_external_link} source={post_external_link} />
                                             </TouchableOpacity>
                                         </View>
+                                        <View style={glancePostStyles.smallButtonsContainer}>
+                                            <Text style={glancePostStyles.postType}>ksndfksdjnf</Text>
+
+                                        </View>
                                         <View style={glancePostStyles.scrollViewDescription}>
                                             <ScrollView style={{ height: 80 }} showsHorizontalScrollIndicator={false} scrollEnabled
                                                 persistentScrollbar bounces pagingEnabled >
