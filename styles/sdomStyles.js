@@ -43,7 +43,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     descriptionText: {
         fontSize: 14,
-        color: 'white',
+        color: 'black',
     },
     category_selection: {
         alignItems: "flex-end",
@@ -123,7 +123,7 @@ export const glancePostStyles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         width: 32,
-        right: 70,
+        right: 50,
         height: 32,
     },
     largeButtonContainer: {
@@ -131,7 +131,7 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 125,
+        top: 123,
         width: 32,
         right: 10,
         height: 32,
@@ -192,8 +192,32 @@ export const categoryViewStyles = StyleSheet.create({
         alignItems: "center"
     },
     categoryView: {
+        flex: 1,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#3d3d3d'
+    },
+    saveButtonContainer: {
+        marginVertical: 20,
+        height: 50,
+        width: 150,
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        left: 100,
+        marginHorizontal: 20,
+        justifyContent: 'center',
+        backgroundColor: "#fcc200",
+        borderColor: '#e3ddda',
+        alignItems: 'center',
+        elevation: 3,
+        borderRadius: 30,
+        borderWidth: 3
+    },
+    textSave: {
+        color: "#fff",
+        fontSize: 18,
+        fontFamily: 'sdom_bold_font',
     }
 })
 
@@ -210,7 +234,7 @@ export const flatListItemStyles = StyleSheet.create({
         fontWeight: "bold"
     },
     GridViewContainer: {
-        flex: 1,
+        flex: 1 / 2,
         justifyContent: 'space-between',
     },
     GridViewTextLayout: {
@@ -243,6 +267,7 @@ export const flatListItemStyles = StyleSheet.create({
         overflow: 'hidden',
         shadowColor: '#fcc200',
         shadowRadius: 18,
+        borderRadius: 8,
         shadowOpacity: .7,
         overflow: 'hidden'
     },
@@ -274,9 +299,5 @@ export const headerStyles = StyleSheet.create({
     headerSave: {
         padding: 15,
         top: 2
-    },
-    textSave: {
-        color: "#fff",
-        fontWeight: "bold"
     }
 });

@@ -17,9 +17,10 @@ export default class App extends React.PureComponent {
         const fetchCategories = (category, setCategory) => {
             fetchAndUpdateCategoryState(category, setCategory);
         }
+        const initialCategorySelection = this.props.initialCategorySelection || false;
 
         return (
-            <SDOMCategoryContext.Provider value={{ fetchCategories }}>
+            <SDOMCategoryContext.Provider value={{ fetchCategories, initialCategorySelection }}>
                 <NavigationContainer>
                     <SDOMStack.Navigator initialRouteName={this.props.navigationRoute} screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
                         headerMode='float' animation="fade">

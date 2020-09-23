@@ -23,6 +23,7 @@ public class MainActivity extends ReactActivity {
 
     public static class NavigationScreenDelegate extends ReactActivityDelegate {
         private static final String NAVIGATION_ROUTE = "navigationRoute";
+        private static final String INITIAL_CATEGORY_SELECTION = "initialCategorySelection";
         private Bundle mInitialProps = null;
         private final @Nullable
         Activity mActivity;
@@ -41,6 +42,9 @@ public class MainActivity extends ReactActivity {
                     mInitialProps = new Bundle();
                     // put any initialProps here
                     mInitialProps.putString(NAVIGATION_ROUTE, bundle.getString(NAVIGATION_ROUTE));
+                    if ("Category".equalsIgnoreCase(bundle.getString(NAVIGATION_ROUTE))) {
+                        mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
+                    }
                 }
                 super.onCreate(savedInstanceState);
             }
@@ -48,10 +52,11 @@ public class MainActivity extends ReactActivity {
 
         @Override
         protected Bundle getLaunchOptions() {
-            Toast.makeText(this.getContext(),mInitialProps.get(NAVIGATION_ROUTE).toString(), Toast.LENGTH_SHORT);
+            Toast.makeText(this.getContext(), mInitialProps.get(NAVIGATION_ROUTE).toString(), Toast.LENGTH_SHORT);
             return mInitialProps;
         }
     }
+
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() {
         return new NavigationScreenDelegate(this, getMainComponentName());

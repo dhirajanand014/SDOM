@@ -1,14 +1,19 @@
 import React from 'react'
 import { TouchableOpacity, ImageBackground, View } from 'react-native';
+import { getCategoryButtonType } from '../helper/SDOMHelper';
 import { flatListItemStyles } from '../styles/sdomStyles';
 
 export const sdomCategoryRenderer = (item, index, category, setCategory) => {
-    const { categoryCover, categoryTitle } = item;
+    const { categoryCover } = item;
     return (
         <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}
-            onPress={() => {
+            onPress={async () => {
                 category.categories[index].isSelected = !category.categories[index].isSelected;
-                setCategory({ ...category });
+
+                const initialCategoryFromStorage = await getCategoryButtonType();
+                const initialCategory = ((!initialCategoryFromStorage == "" && initialCategoryFromStorage == 'saveButton')
+                    || category.categories.some((item) => { return true == item.isSelected })) && 'saveButton' || 'skipButton';
+                setCategory({ ...category, initialCategory: initialCategory });
             }}>
             <View style={flatListItemStyles.cardSurface}>
                 <ImageBackground source={{ uri: categoryCover }}

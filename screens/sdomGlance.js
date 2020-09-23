@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, Modal, Alert } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
-import { fetchPostsAndSaveToState, setCurrentImageAsWallPaper } from '../helper/SDOMHelper';
+import { postCountTypes } from '../constants/sdomConstants';
+import { fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const post_like = require('../assets/post_likes_heart_arrow_icon.png');
+const post_like_selected = require('../assets/post_likes_heart_arrow_icon_selected.png');
 const post_external_link = require('../assets/post_external_link_icon.png')
 const post_description = require('../assets/post_description_icon.png');
 const post_wallpaper = require('../assets/post_set_wallpaper_icon.png');
@@ -21,9 +23,6 @@ export function sdomGlance({ navigation }) {
     const [optionsState, setOptionsState] = useState({
         descriptionModal: false,
         descriptionText: "",
-        postLikesCount: 0,
-        postDownloadsCount: 0,
-        postWallPapersSetCount: 0
     })
 
     useEffect(() => {
@@ -86,34 +85,29 @@ export function sdomGlance({ navigation }) {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity>
-                                            <Image style={glancePostStyles.icon_post_like} source={post_like} />
+                                        <TouchableOpacity onPress={async () => {
+                                            await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_LIKES);
+                                        }}>
+                                            <Image style={glancePostStyles.icon_post_like} source={item.postLikes == 0 ?
+                                                post_like : post_like_selected} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{optionsState.postLikesCount}</Text>
+                                        <Text style={glancePostStyles.modalHideText}>{item.postLikes}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={() => {
-                                            Alert.alert(
-                                                "Confirm",
-                                                "Do you want to set the current image as wallpaper and lockscreen?",
-                                                [
-                                                    {
-                                                        text: "Cancel", style: "cancel"
-                                                    },
-                                                    { text: "OK", onPress: async () => await setCurrentImageAsWallPaper(item.postImage, item.postTitle) }
-                                                ],
-                                                { cancelable: false }
-                                            );
+                                        <TouchableOpacity onPress={async () => {
+                                            await postWallPaperAlert(item, sdomDatastate, setSdomDatastate);
                                         }}>
                                             <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{optionsState.postWallPapersSetCount}</Text>
+                                        <Text style={glancePostStyles.modalHideText}>{item.postWallPapers}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={async () => {
+                                            await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_DOWNLOADS);
+                                        }}>
                                             <Image style={glancePostStyles.icon_post_download} source={post_download} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{optionsState.postDownloadsCount}</Text>
+                                        <Text style={glancePostStyles.modalHideText}>{item.postDownloads}</Text>
                                     </View>
                                 </View>
                             </View>

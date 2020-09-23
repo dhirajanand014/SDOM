@@ -1,51 +1,61 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FlatList, View, ImageBackground, Dimensions, StatusBar, Text, TouchableOpacity } from 'react-native';
+import { FlatList, View, Dimensions, StatusBar, Text, TouchableOpacity } from 'react-native';
 import { SDOMCategoryContext } from '../App';
-import { categoryViewStyles, headerStyles } from '../styles/sdomStyles';
-import { saveCategoryIdsToStorage } from '../helper/SDOMHelper'
+import { categoryViewStyles } from '../styles/sdomStyles';
+import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/SDOMHelper'
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
 
 export function SDOMCategory({ navigation }) {
 
-    const { fetchCategories } = useContext(SDOMCategoryContext);
+    const { fetchCategories, initialCategorySelection } = useContext(SDOMCategoryContext);
 
     const [category, setCategory] = useState({
-        categories: []
+        categories: [],
+        initialCategory: ''
     });
 
-    category.categories.some(item => item.isSelected) && navigation.setOptions({
-        headerRight: () =>
-            <TouchableOpacity style={headerStyles.headerSave}
-                onPress={async () => {
-                    const categoryIds = category.categories.filter(item => item.isSelected).map(selectedCategory => {
-                        return selectedCategory.categoryId
-                    });
-                    const jsonCategoryIds = JSON.stringify(categoryIds);
-                    await saveCategoryIdsToStorage(jsonCategoryIds);
-
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: "Glance" }],
-                    });
-                }}>
-                <Text style={headerStyles.textSave}>Save</Text>
-            </TouchableOpacity>
-    })
-
     useEffect(() => {
-        fetchCategories(category, setCategory);
+        fetchCategories(category, setCategory, initialCategorySelection);
     }, []);
 
     let { height } = Dimensions.get("window");
     height += StatusBar.currentHeight;
 
     return (
-        <View>
-            <ImageBackground style={categoryViewStyles.categoryView} style={{ backgroundColor: '#3d3d3d' }}>
-                <FlatList data={category.categories} style={{ height: height }}
-                    renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={2}
-                    keyExtractor={(item, index) => item.categoryId} />
-            </ImageBackground>
-        </View>
+        <View style={categoryViewStyles.categoryView} >
+            <FlatList data={category.categories} style={{ height: height - 150 }}
+                renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={2}
+                keyExtractor={(item, index) => item.categoryId} />
+            {
+                category.initialCategory == 'skipButton' &&
+                <TouchableOpacity onPress={async () => {
+                    await saveCategoryButtonType('saveButton');
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Glance" }],
+                    });
+                }} style={categoryViewStyles.saveButtonContainer}>
+                    <Text style={categoryViewStyles.textSave}>{`Skip >>`}</Text>
+                </TouchableOpacity>
+            }
+            {
+                category.initialCategory == 'saveButton' &&
+                <TouchableOpacity onPress={async () => {
+                    const categoryIds = category.categories.filter(item => item.isSelected).map(selectedCategory => {
+                        return selectedCategory.categoryId
+                    });
+                    const jsonCategoryIds = JSON.stringify(categoryIds);
+                    await saveCategoryIdsToStorage(jsonCategoryIds);
+                    await saveCategoryButtonType('saveButton');
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Glance" }],
+                    });
+                }} style={categoryViewStyles.saveButtonContainer}>
+                    <Text style={categoryViewStyles.textSave}>Save</Text>
+                </TouchableOpacity>
+            }
+
+        </View >
     )
 }
