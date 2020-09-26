@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, Modal, Alert } from 'react-native';
+import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, Modal } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import { postCountTypes } from '../constants/sdomConstants';
-import { fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts } from '../helper/SDOMHelper';
+import { fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts, downloadImageFromURL } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -61,7 +61,6 @@ export function sdomGlance({ navigation }) {
                                         </View>
                                         <View style={glancePostStyles.smallButtonsContainer}>
                                             <Text style={glancePostStyles.postType}>ksndfksdjnf</Text>
-
                                         </View>
                                         <View style={glancePostStyles.scrollViewDescription}>
                                             <ScrollView style={{ height: 80 }} showsHorizontalScrollIndicator={false} scrollEnabled
@@ -80,7 +79,7 @@ export function sdomGlance({ navigation }) {
                                 </View>
                                 <View key={`3_${index}_${item.categoryId}`} style={glancePostStyles.largeButtonContainer}>
                                     <View style={glancePostStyles.glanceTopIconInfo}>
-                                        <TouchableOpacity onPress={() => setOptionsState({
+                                        <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() => setOptionsState({
                                             ...optionsState,
                                             descriptionModal: true,
                                             descriptionText: item.postDescription
@@ -88,17 +87,17 @@ export function sdomGlance({ navigation }) {
                                             <Image style={glancePostStyles.icon_post_description} source={post_description} />
                                         </TouchableOpacity>
                                     </View>
-                                    <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={async () => {
+                                    <View style={glancePostStyles.glanceTopIconLike}>
+                                        <TouchableOpacity style={glancePostStyles.backgroundRoundColor} disabled={item.likeDisabled} onPress={async () => {
                                             await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_LIKES);
                                         }}>
-                                            <Image style={glancePostStyles.icon_post_like} source={item.postLikes == 0 ?
-                                                post_like : post_like_selected} />
+                                            <Image style={glancePostStyles.icon_post_like} source={item.likeDisabled && post_like_selected
+                                                || post_like} />
                                         </TouchableOpacity>
                                         <Text style={glancePostStyles.modalHideText}>{item.postLikes}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={async () => {
+                                        <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () => {
                                             await postWallPaperAlert(item, sdomDatastate, setSdomDatastate);
                                         }}>
                                             <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
@@ -106,8 +105,8 @@ export function sdomGlance({ navigation }) {
                                         <Text style={glancePostStyles.modalHideText}>{item.postWallPapers}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={async () => {
-                                            await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_DOWNLOADS);
+                                        <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () => {
+                                            await downloadImageFromURL(item, sdomDatastate, setSdomDatastate);
                                         }}>
                                             <Image style={glancePostStyles.icon_post_download} source={post_download} />
                                         </TouchableOpacity>

@@ -81,7 +81,8 @@ public class SDOMSplashScreen extends AppCompatActivity implements Observer {
                     String value = null;
                     SQLiteDatabase readableDatabase = ReactDatabaseSupplier.getInstance(this).getReadableDatabase();
 
-                    boolean isCategoryEmpty = TextUtils.isEmpty(AsyncLocalStorageUtil.getItemImpl(readableDatabase, "@save_category_id"));
+                    boolean isCategoryEmpty = TextUtils.isEmpty(AsyncLocalStorageUtil.getItemImpl(readableDatabase, "@save_category_id")) &&
+                            TextUtils.isEmpty(AsyncLocalStorageUtil.getItemImpl(readableDatabase, "@save_category_button_type")) ;
 
                     readableDatabase.close();
 

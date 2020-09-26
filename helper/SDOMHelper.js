@@ -1,21 +1,28 @@
 import axios from 'axios'
-import { urlConstants, asyncStorageKeys, postCountTypes, postCountRequestKeys } from '../constants/sdomConstants';
-import { Alert, NativeModules, ToastAndroid } from 'react-native';
+import {
+    urlConstants, asyncStorageKeys,
+    postCountTypes, postCountRequestKeys,
+    savePostCountKeys, setPostImages,
+    permissionsButtons, permissionMessages
+} from '../constants/sdomConstants';
+import data from '../cat.json'
+import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
-    return responseData.data.categories;
+    return data.categories;
 }
 
 export const fetchAndUpdateCategoryState = async (category, setCategory) => {
     try {
         const responseCategoryData = await fetchCategoryData();
         if (responseCategoryData) {
-            const categoryIds = await getCategoryIdsFromStorage();
-            const parsedCategoryIds = categoryIds.length && JSON.parse(categoryIds) || [];
+            const selectedCategories = await getSelectedCategoryIdsFromStorage();
+            const parsedSelectedCategoryIds = selectedCategories.length && JSON.parse(selectedCategories) || [];
             responseCategoryData.map((category) =>
-                category.isSelected = parsedCategoryIds.some(categoryId => categoryId == category.categoryId));
+                category.isSelected = parsedSelectedCategoryIds.some(selectedCategory =>
+                    category.categoryId == selectedCategory.selectedCategoryId));
         }
 
         let initialCategory = await getCategoryButtonType();
@@ -34,16 +41,27 @@ export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) 
         const responseData = await axios.get(urlConstants.fetchPosts);
         if (responseData) {
             const responsePostsData = responseData.data.posts;
-            const categoryIds = await getCategoryIdsFromStorage();
-            const parsedCategoryIds = categoryIds && JSON.parse(categoryIds) || categoryPostsData;
+            const selectedCategories = await getSelectedCategoryIdsFromStorage();
+
+            const fetchedPostCounts = await getPostCounts();
+
+            const postCounts = fetchedPostCounts && JSON.parse(fetchedPostCounts) || [];
+
+            const parsedCategoryIds = selectedCategories && JSON.parse(selectedCategories) || categoryPostsData;
             categoryPostsData = parsedCategoryIds && parsedCategoryIds.length &&
-                responsePostsData.filter(post => parsedCategoryIds.some((categoryId) =>
-                    post.categoryIds[0].split(',').includes(categoryId)))
-                    .sort((datePost1, datePost2) => {
+                responsePostsData.filter(post => parsedCategoryIds.some((selectedCategory) =>
+                    post.categoryIds[0].split(',').includes(selectedCategory.selectedCategoryId))).sort((datePost1, datePost2) => {
                         return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
                     }) || responsePostsData.sort((datePost1, datePost2) => {
                         return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
                     });
+
+            categoryPostsData.map(postItem => {
+                const postHasLikes = postCounts && postCounts[savePostCountKeys.SELECTED_POST_LIKES] &&
+                    postCounts[savePostCountKeys.SELECTED_POST_LIKES].some(postId => postItem.postId == postId);
+                if (postHasLikes)
+                    postItem.likeDisabled = postHasLikes;
+            });
         }
         setSdomDatastate({ ...sdomDatastate, posts: categoryPostsData, });
     } catch (error) {
@@ -60,7 +78,7 @@ export const saveCategoryIdsToStorage = async (categoryIds) => {
     }
 }
 
-export const getCategoryIdsFromStorage = async () => {
+export const getSelectedCategoryIdsFromStorage = async () => {
     try {
         return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_ID) || "";
     } catch (error) {
@@ -70,28 +88,17 @@ export const getCategoryIdsFromStorage = async () => {
 
 export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatastate, postCountType) => {
     try {
-        let postCountRequest;
         if (postCountType == postCountTypes.POST_LIKES) {
-            const postLikeCount = ++post.postLikes;
-            sdomDatastate.posts.find(item => item.postId == post.postId).postLikes = postLikeCount;
-            postCountRequest = {
-                [postCountRequestKeys.POST_ID_KEY]: parseInt(post.postId),
-                [postCountRequestKeys.POST_LIKES_KEY]: postLikeCount || 0
-            }
+            sdomDatastate.posts.find(item => item.postId == post.postId).postLikes = ++post.postLikes;
         } else if (postCountType == postCountTypes.POST_DOWNLOADS) {
-            const postDownloadCount = ++post.postDownloads;
-            sdomDatastate.posts.find(item => item.postId == post.postId).postDownloads = postDownloadCount;
-            postCountRequest = {
-                [postCountRequestKeys.POST_ID_KEY]: parseInt(post.postId),
-                [postCountRequestKeys.POST_DOWNLOADS_KEY]: postDownloadCount || 0
-            }
+            sdomDatastate.posts.find(item => item.postId == post.postId).postDownloads = ++post.postDownloads;
         } else if (postCountType == postCountTypes.POST_WALLPAPERS) {
-            const postWallPaperCount = ++post.postWallPapers;
-            sdomDatastate.posts.find(item => item.postId == post.postId).postWallPapers = postDownloadCount;
-            postCountRequest = {
-                [postCountRequestKeys.POST_ID_KEY]: parseInt(post.postId),
-                [postCountRequestKeys.POST_DOWNLOADS_KEY]: postWallPaperCount || 0
-            }
+            sdomDatastate.posts.find(item => item.postId == post.postId).postWallPapers = ++post.postWallPapers;
+        }
+
+        const postCountRequest = {
+            [postCountRequestKeys.POST_ID_KEY]: parseInt(post.postId),
+            [postCountRequestKeys.POST_COUNT_TYPE_KEY]: postCountType
         }
 
         setSdomDatastate({ ...sdomDatastate });
@@ -99,10 +106,12 @@ export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatas
         if (postCountRequest) {
             const response = await axios.post(urlConstants.setPostCounts, postCountRequest);
             if (response && response.data == "Success") {
-                postCountRequestKeys.POST_LIKES_KEY in postCountRequest && ToastAndroid.show(`You have liked the post : ${post.postTitle}`,
-                    ToastAndroid.SHORT);
-                postCountRequestKeys.POST_DOWNLOADS_KEY in postCountRequest && ToastAndroid.show(`You have downloaded the post : ${post.postTitle}`,
-                    ToastAndroid.SHORT);
+                if (postCountType == postCountTypes.POST_LIKES) {
+                    ToastAndroid.show(`You have liked the post : ${post.postTitle}`, ToastAndroid.SHORT);
+                    await savePostCounts(post.postId, savePostCountKeys.SELECTED_POST_LIKES, sdomDatastate, setSdomDatastate);
+                }
+                postCountType == postCountTypes.POST_DOWNLOADS &&
+                    ToastAndroid.show(`You have downloaded the post : ${post.postTitle}`, ToastAndroid.SHORT);
             }
         }
     } catch (error) {
@@ -110,11 +119,56 @@ export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatas
     }
 }
 
-export const setCurrentImageAsWallPaper = async (postUrl, postTitle) => {
+export const savePostCounts = async (postId, postIdForSelectedCountType, sdomDatastate, setSdomDatastate) => {
     try {
-        NativeModules.SdomApi.setPostAsWallPaper(postUrl, postTitle);
+        const getPostIdOfPostForCount = await getPostCounts(asyncStorageKeys.SAVE_POST_COUNTS);
+        let postCounts, postIds = [], postIdsJson;
+        if (getPostIdOfPostForCount) {
+            postCounts = JSON.parse(getPostIdOfPostForCount) || "";
+        }
+        if (postIdForSelectedCountType == savePostCountKeys.SELECTED_POST_LIKES) {
+            if (postCounts) {
+                postIds = postCounts[savePostCountKeys.SELECTED_POST_LIKES];
+                !postIds.includes(postId) && postIds.push(postId);
+            }
+            else {
+                postIds.push(postId);
+                postCounts = {
+                    [savePostCountKeys.SELECTED_POST_LIKES]: postIds
+                }
+            }
+            sdomDatastate.posts.filter(post => post.postId == postId).map(item => item.likeDisabled = true);
+            setSdomDatastate({ ...sdomDatastate });
+            postIdsJson = JSON.stringify(postCounts);
+            await AsyncStorage.setItem(asyncStorageKeys.SAVE_POST_COUNTS, postIdsJson)
+        }
+    } catch (error) {
+        console.log(`Cannot save the post counts for the post id ${postId}`, error);
+    }
+}
+
+export const getPostCounts = async () => {
+    try {
+        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_POST_COUNTS);
+    } catch (error) {
+        console.log(`Cannot fetch the post ids from the selected post counts for type: ${postIdForSelectedCountType}`,
+            error);
+    }
+}
+
+export const setCurrentImageAsWallPaper = async (postUrl, postTitle, postType) => {
+    try {
+        NativeModules.SdomApi.setPostAsWallPaper(postUrl, postTitle, postType);
     } catch (error) {
         console.log("Cannot set current image as wallpaper", error);
+    }
+}
+
+export const downloadCurrentImage = async (postUrl, postTitle, postType) => {
+    try {
+        NativeModules.SdomApi.downloadPostImage(postUrl, postTitle, postType);
+    } catch (error) {
+        console.log("Cannot download the current image", error);
     }
 }
 
@@ -130,9 +184,10 @@ export const getCategoryButtonType = async () => {
     try {
         return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_BUTTON_TYPE) || "";
     } catch (error) {
-        console.log('Cannot fetch the save vutton type from the storage', error);
+        console.log('Cannot fetch the save button type from the storage', error);
     }
 }
+
 export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) => {
     try {
         return (
@@ -145,7 +200,7 @@ export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) 
                     },
                     {
                         text: "OK", onPress: async () => {
-                            await setCurrentImageAsWallPaper(item.postImage, item.postTitle);
+                            await setCurrentImageAsWallPaper(item.postImage, item.postTitle, setPostImages.SET_POST_WALLPAPER);
                             await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_WALLPAPERS);
                         }
                     }
@@ -154,5 +209,37 @@ export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) 
             ));
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const downloadImageFromURL = async (item, sdomDatastate, setSdomDatastate) => {
+    const write_granted = await accessAndGrantPermssionsToSDOM(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
+        permissionMessages.READ_WRITE_EXTERNAL_STORAGE_MESSAGE, PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+
+    const read_granted = await accessAndGrantPermssionsToSDOM(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
+        permissionMessages.READ_WRITE_EXTERNAL_STORAGE_MESSAGE, PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
+
+    if (PermissionsAndroid.RESULTS.GRANTED == write_granted && PermissionsAndroid.RESULTS.GRANTED === read_granted) {
+        await downloadCurrentImage(item.postImage, item.postTitle, setPostImages.SET_POST_DOWNLOAD);
+        await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_DOWNLOADS);
+    } else {
+        ToastAndroid.show(`External Storage Permission Denited`, ToastAndroid.SHORT);
+    }
+}
+
+export const accessAndGrantPermssionsToSDOM = async (permissionTitie, permissionMessage, permissionType) => {
+    try {
+        return await PermissionsAndroid.request(permissionType,
+            {
+                title: permissionTitie,
+                message:
+                    permissionMessage,
+                buttonNeutral: permissionsButtons.ASK_ME_LATER,
+                buttonNegative: permissionsButtons.CANCEL,
+                buttonPositive: permissionsButtons.OK
+            }
+        );
+    } catch (error) {
+        console.log(`Error accessing permissions for ${permissionType}`, error);
     }
 }

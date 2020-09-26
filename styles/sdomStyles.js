@@ -38,6 +38,20 @@ export const glancePostStyles = StyleSheet.create({
         display: 'flex',
         color: 'white',
     },
+    backgroundRoundColor: {
+        paddingRight: 1,
+        paddingTop: 3,
+        alignItems: 'center',
+        width: 30,
+        height: 30,
+        backgroundColor: 'rgba(0,0,0,0.25)',
+        borderRadius: 16,
+    },
+    backgroundIconSpacing: {
+        paddingRight: 1,
+        paddingTop: 3,
+        alignItems: 'center'
+    },
     postType: {
         marginRight: 4,
         fontSize: 18,
@@ -81,25 +95,24 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     icon_post_like: {
-        marginTop: 20,
-        width: 32,
-        height: 32
+        width: 25,
+        height: 25
     },
     icon_post_search: {
-        width: 26,
-        height: 26
+        width: 25,
+        height: 25
     },
     icon_post_description: {
-        width: 32,
-        height: 32
+        width: 25,
+        height: 25
     },
     icon_post_wallpaper: {
-        width: 32,
-        height: 32
+        width: 25,
+        height: 25
     },
     icon_post_download: {
-        width: 32,
-        height: 32
+        width: 25,
+        height: 25
     },
     icon_external_link: {
         width: 32,
@@ -125,7 +138,6 @@ export const glancePostStyles = StyleSheet.create({
         paddingRight: 10,
         color: 'white',
         height: 24,
-        backgroundColor: 'rgba(255,255,255,0.2)',
     },
     smallButtonWithTextIconContainer: {
         marginRight: 12,
@@ -141,11 +153,12 @@ export const glancePostStyles = StyleSheet.create({
         height: 32,
     },
     largeButtonContainer: {
+        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 123,
+        top: 95,
         width: 32,
         right: 10,
         height: 32,
@@ -177,7 +190,8 @@ export const glancePostStyles = StyleSheet.create({
     modalHideText: {
         color: "white",
         fontFamily: 'sdom_roman_font',
-        textAlign: "center"
+        textAlign: "center",
+        fontSize: 10
     },
     modalButton: {
         borderRadius: 20,
@@ -185,10 +199,17 @@ export const glancePostStyles = StyleSheet.create({
         padding: 10,
         elevation: 2
     },
-    glanceTopIcons: {
-        paddingTop: 12,
+    glanceTopIconLike: {
+        marginTop: 20,
+        paddingTop: 4,
         paddingLeft: 2,
-        paddingBottom: 2,
+        paddingBottom: 1,
+        paddingRight: 2
+    },
+    glanceTopIcons: {
+        paddingTop: 4,
+        paddingLeft: 2,
+        paddingBottom: 1,
         paddingRight: 2
     },
     glanceTopIconInfo: {
@@ -212,14 +233,14 @@ export const categoryViewStyles = StyleSheet.create({
         backgroundColor: '#3d3d3d'
     },
     saveButtonContainer: {
-        marginVertical: 20,
-        height: 50,
-        width: 150,
+        marginVertical: 10,
+        height: 45,
+        width: 140,
         position: 'absolute',
         right: 0,
         bottom: 0,
         left: 100,
-        marginHorizontal: 20,
+        marginHorizontal: 30,
         justifyContent: 'center',
         backgroundColor: "#fcc200",
         borderColor: '#e3ddda',
@@ -227,6 +248,10 @@ export const categoryViewStyles = StyleSheet.create({
         elevation: 3,
         borderRadius: 30,
         borderWidth: 3
+    },
+    bottomButtonLayout: {
+        height: 63,
+        backgroundColor: '#3d3d3d'
     },
     textSave: {
         color: "#fff",
