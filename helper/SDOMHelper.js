@@ -5,13 +5,12 @@ import {
     savePostCountKeys, setPostImages,
     permissionsButtons, permissionMessages
 } from '../constants/sdomConstants';
-import data from '../cat.json'
 import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
-    return data.categories;
+    return responseData.data.categories;
 }
 
 export const fetchAndUpdateCategoryState = async (category, setCategory) => {

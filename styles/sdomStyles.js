@@ -200,7 +200,7 @@ export const glancePostStyles = StyleSheet.create({
         elevation: 2
     },
     glanceTopIconLike: {
-        marginTop: 20,
+        marginTop: 15,
         paddingTop: 4,
         paddingLeft: 2,
         paddingBottom: 1,
