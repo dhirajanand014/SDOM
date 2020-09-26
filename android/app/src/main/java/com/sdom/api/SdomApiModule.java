@@ -194,7 +194,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             if (SdomConstants.POST_WALLPAPER_SET.equals(inResult)) {
                 message = "Wallpaper set for " + mPostTitle + "!";
             } else if (SdomConstants.POST_IMAGE_DOWNLOAD.equals(inResult)) {
-                message = "Error setting wallpaper for " + mPostTitle + "!";
+                message = "Downloaded file for " + mPostTitle + "!";
             }
             if (!TextUtils.isEmpty(message))
                 Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();

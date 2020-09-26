@@ -20,7 +20,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        paddingLeft: 10,
+        paddingLeft: 20,
         justifyContent: 'flex-end',
     },
     titleContainer: {
@@ -33,7 +33,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleName: {
         marginRight: 4,
-        fontSize: 24,
+        fontSize: 22,
         fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
@@ -54,7 +54,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     postType: {
         marginRight: 4,
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'sdom_bold_font',
         display: 'flex',
         color: 'white',
@@ -95,12 +95,13 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     icon_post_like: {
-        width: 25,
-        height: 25
+        borderColor: 'red',
+        width: 26,
+        height: 26
     },
     icon_post_search: {
-        width: 25,
-        height: 25
+        width: 22,
+        height: 22
     },
     icon_post_description: {
         width: 25,
@@ -115,20 +116,18 @@ export const glancePostStyles = StyleSheet.create({
         height: 25
     },
     icon_external_link: {
-        width: 32,
-        height: 32
+        width: 28,
+        height: 28
     },
     smallButtonsContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 10,
-        marginBottom: 20,
+        marginBottom: 15,
     },
-    scrollViewDescription: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginBottom: 90,
+    postTitleAndProfileStyle: {
+        marginBottom: 70,
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -158,7 +157,7 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        top: 95,
+        top: 92,
         width: 32,
         right: 10,
         height: 32,
@@ -174,7 +173,7 @@ export const glancePostStyles = StyleSheet.create({
         borderRadius: 20,
         padding: 20,
         maxHeight: 250,
-        width: 250,
+        width: 300,
         top: 30,
         justifyContent: 'space-evenly',
         alignItems: "center",
@@ -188,6 +187,12 @@ export const glancePostStyles = StyleSheet.create({
         elevation: 5
     },
     modalHideText: {
+        color: "white",
+        fontFamily: 'sdom_roman_font',
+        textAlign: "center",
+        fontSize: 15
+    },
+    icon_count_text: {
         color: "white",
         fontFamily: 'sdom_roman_font',
         textAlign: "center",

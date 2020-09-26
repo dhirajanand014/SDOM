@@ -59,14 +59,8 @@ export function sdomGlance({ navigation }) {
                                                 <Image style={glancePostStyles.icon_external_link} source={post_external_link} />
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={glancePostStyles.smallButtonsContainer}>
-                                            <Text style={glancePostStyles.postType}>ksndfksdjnf</Text>
-                                        </View>
-                                        <View style={glancePostStyles.scrollViewDescription}>
-                                            <ScrollView style={{ height: 80 }} showsHorizontalScrollIndicator={false} scrollEnabled
-                                                persistentScrollbar bounces pagingEnabled >
-                                                <Text style={glancePostStyles.descriptionText}>{item.postDescription}</Text>
-                                            </ScrollView>
+                                        <View style={glancePostStyles.postTitleAndProfileStyle}>
+                                            <Text style={glancePostStyles.postType}>{item.profileName.toUpperCase()}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -94,7 +88,7 @@ export function sdomGlance({ navigation }) {
                                             <Image style={glancePostStyles.icon_post_like} source={item.likeDisabled && post_like_selected
                                                 || post_like} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{item.postLikes}</Text>
+                                        <Text style={glancePostStyles.icon_count_text}>{item.postLikes}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
                                         <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () => {
@@ -102,7 +96,7 @@ export function sdomGlance({ navigation }) {
                                         }}>
                                             <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{item.postWallPapers}</Text>
+                                        <Text style={glancePostStyles.icon_count_text}>{item.postWallPapers}</Text>
                                     </View>
                                     <View style={glancePostStyles.glanceTopIcons}>
                                         <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () => {
@@ -110,7 +104,7 @@ export function sdomGlance({ navigation }) {
                                         }}>
                                             <Image style={glancePostStyles.icon_post_download} source={post_download} />
                                         </TouchableOpacity>
-                                        <Text style={glancePostStyles.modalHideText}>{item.postDownloads}</Text>
+                                        <Text style={glancePostStyles.icon_count_text}>{item.postDownloads}</Text>
                                     </View>
                                 </View>
                             </View>
