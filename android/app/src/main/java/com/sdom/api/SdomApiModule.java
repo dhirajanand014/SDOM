@@ -74,7 +74,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
     /**
      * Get the URL and the Post category title to set the wallpaper or the lock Screen image.
      */
-    private class AsyncSetImage extends AsyncTask<String, Void, Boolean> {
+    private class AsyncSetImage extends AsyncTask<String, Void, String> {
 
         private ReactApplicationContext mContext;
         private String mPostTitle;
@@ -98,7 +98,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        protected Boolean doInBackground(String... inParameters) {
+        protected String doInBackground(String... inParameters) {
             try {
                 Bitmap bitmapImage = getBitmapFromURL(inParameters[0]);
                 mPostTitle = inParameters[1];
@@ -106,7 +106,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                     WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                     wallpaperManager.setBitmap(bitmapImage, null, true,
                             WallpaperManager.FLAG_LOCK | WallpaperManager.FLAG_SYSTEM);
-                    return true;
+                    return SdomConstants.POST_WALLPAPER_SET;
                 } else if (inParameters[2].equals(SdomConstants.POST_IMAGE_DOWNLOAD)) {
                     return downloadImage(bitmapImage);
                 }
@@ -114,7 +114,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                 Toast.makeText(reactContext, "Cannot set image " + mPostTitle +
                         " as wallpaper or the lockScreen", Toast.LENGTH_SHORT).show();
             }
-            return false;
+            return SdomConstants.EMPTY;
         }
 
         /**
@@ -124,7 +124,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
          * @return
          * @throws IOException
          */
-        private boolean downloadImage(Bitmap bitmapImage) throws IOException {
+        private String downloadImage(Bitmap bitmapImage) throws IOException {
             OutputStream fileOutputStream;
             boolean result = false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -156,7 +156,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                     reactContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 }
             }
-            return result;
+            return result ? SdomConstants.POST_IMAGE_DOWNLOAD : "";
         }
 
         /**
@@ -168,7 +168,6 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
             values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
-            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
             return values;
         }
 
@@ -190,8 +189,15 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        protected void onPostExecute(Boolean inResult) {
-            Toast.makeText(mContext, (inResult ? "Wallpaper set for " : "Error setting wallpaper for ") + mPostTitle + " !", Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(String inResult) {
+            String message = SdomConstants.EMPTY;
+            if (SdomConstants.POST_WALLPAPER_SET.equals(inResult)) {
+                message = "Wallpaper set for " + mPostTitle + "!";
+            } else if (SdomConstants.POST_IMAGE_DOWNLOAD.equals(inResult)) {
+                message = "Error setting wallpaper for " + mPostTitle + "!";
+            }
+            if (!TextUtils.isEmpty(message))
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         }
     }
 }
