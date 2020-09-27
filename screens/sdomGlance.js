@@ -4,12 +4,14 @@ import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, Mo
 import ViewPager from '@react-native-community/viewpager';
 import { postCountTypes, stringConstants } from '../constants/sdomConstants';
 import {
-    fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts,
-    downloadImageFromURL, resetOptionsState, setOptionsStateForDescription
+    fetchPostsAndSaveToState, postWallPaperAlert,
+    increaseAndSetPostCounts,
+    downloadImageFromURL, setOptionsStateForDescription
 } from '../helper/SDOMHelper';
+import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
+import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const post_like = require('../assets/post_likes_heart_arrow_icon.png');
 const post_like_selected = require('../assets/post_likes_heart_arrow_icon_selected.png');
@@ -26,7 +28,9 @@ export function sdomGlance({ navigation }) {
     const [sdomDatastate, setSdomDatastate] = useState([]);
     const [optionsState, setOptionsState] = useState({
         descriptionModal: false,
+        reportAbuseModal: false,
         descriptionText: stringConstants.EMPTY,
+        selectedReportAbuse: stringConstants.EMPTY
     })
 
     useEffect(() => {
@@ -117,24 +121,11 @@ export function sdomGlance({ navigation }) {
                             </View>
                         )
                     })}
-                <Modal animationType="fade" transparent={true} visible={optionsState.descriptionModal}
-                    presentationStyle="fullScreen" onRequestClose={() => resetOptionsState(optionsState, setOptionsState)}>
-                    <View style={glancePostStyles.modalContainer}>
-                        <View style={glancePostStyles.modalView}>
-                            <ScrollView persistentScrollbar={true} bounces={true}>
-                                <Text style={glancePostStyles.descriptionText}>{optionsState.descriptionText}</Text>
-                            </ScrollView>
-                            <TouchableOpacity style={glancePostStyles.postReportAbuse}>
-                                <Image style={glancePostStyles.icon_post_report_abuse} source={post_report_abuse} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={glancePostStyles.postDescriptionModalButton}
-                                onPress={() => resetOptionsState(optionsState, setOptionsState)} >
-                                <Text style={glancePostStyles.modalHideText}>Close</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
             </ViewPager>
+            <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
+                reportAbuseIcon={post_report_abuse} />
+            <SDOMPostReportAbuseModal sdomDatastate={sdomDatastate} optionsState={optionsState}
+                setOptionsState={setOptionsState} />
         </View >
     );
 }

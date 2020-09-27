@@ -48,3 +48,19 @@ export const stringConstants = {
     SPACE: ` `,
     PIPELINE_JOIN: ` | `
 }
+
+export const modalTextConstants = {
+    REPORT_ABUSE_TITLE: `Report this post`,
+    CANCEL_BUTTON: `Cancel`,
+    CLOSE_BUTTON: `Close`,
+    SUBMIT_BUTTON: `Submit`
+}
+
+export const alertTextMessages = {
+    CONFIRM_TITLE: `Confirm`,
+    POST_WALLPAPER_TEXT: `Do you want to set the current image as wallpaper and lockscreen?`
+}
+
+export const reportAbuseOptions = [
+    `Sexual Content`, `Graphic Violence`, `Graphic Violence`, `Graphic Violence`, `Hateful or abusive content`, `Improper Content`, `Copycat or impersonation`
+]

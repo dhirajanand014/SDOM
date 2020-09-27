@@ -3,7 +3,8 @@ import {
     urlConstants, asyncStorageKeys,
     postCountTypes, postCountRequestKeys,
     savePostCountKeys, setPostImages,
-    permissionsButtons, permissionMessages, stringConstants
+    permissionsButtons, permissionMessages,
+    stringConstants, alertTextMessages
 } from '../constants/sdomConstants';
 import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -193,14 +194,14 @@ export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) 
     try {
         return (
             Alert.alert(
-                "Confirm",
-                "Do you want to set the current image as wallpaper and lockscreen?",
+                alertTextMessages.CONFIRM_TITLE,
+                alertTextMessages.POST_WALLPAPER_TEXT,
                 [
                     {
-                        text: "Cancel", style: "cancel"
+                        text: permissionsButtons.CANCEL, style: "cancel"
                     },
                     {
-                        text: "OK", onPress: async () => {
+                        text: permissionsButtons.OK, onPress: async () => {
                             await setCurrentImageAsWallPaper(item.postImage, item.postTitle, setPostImages.SET_POST_WALLPAPER);
                             await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_WALLPAPERS);
                         }
@@ -261,6 +262,7 @@ export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
     }
     return names.join(stringConstants.PIPELINE_JOIN) || stringConstants.EMPTY;
 }
+
 export const setOptionsStateForDescription = (optionsState, setOptionsState, description) => {
     setOptionsState({
         ...optionsState,
@@ -269,10 +271,32 @@ export const setOptionsStateForDescription = (optionsState, setOptionsState, des
     })
 }
 
-export const resetOptionsState = (optionsState, setOptionsState) => {
+export const setReportAbuseSelectedOption = async (optionsState, setOptionsState, selectedOption) => {
+    await setOptionsState({
+        ...optionsState,
+        selectedReportAbuse: selectedOption
+    })
+}
+
+export const setOptionsStateRadioOptions = (optionsState, setOptionsState) => {
+    setOptionsState({
+        ...optionsState,
+        reportAbuseModal: true
+    });
+}
+
+export const resetOptionsState = (optionsState, setOptionsState, isReportAbuse) => {
     setOptionsState({
         ...optionsState,
         descriptionModal: false,
-        descriptionText: '',
+        descriptionText: stringConstants.EMPTY
+    });
+}
+
+export const resetOptionsStateReportAbuse = (optionsState, setOptionsState) => {
+    setOptionsState({
+        ...optionsState,
+        reportAbuseModal: false,
+        descriptionText: stringConstants.EMPTY
     });
 }

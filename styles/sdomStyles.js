@@ -199,11 +199,51 @@ export const glancePostStyles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5
     },
+    radioButtonModalView: {
+        marginRight: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 15,
+        maxHeight: 400,
+        width: 300,
+        display: 'flex',
+        top: 30,
+        flexDirection: 'column',
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
     modalHideText: {
         color: "white",
         fontFamily: 'sdom_roman_font',
         textAlign: "center",
         fontSize: 15
+    },
+    reportAbuseCancelText: {
+        fontSize: 12,
+        textDecorationLine: 'underline',
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    reportAbuseModalHeader: {
+        alignItems: 'center'
+    },
+    reportAbuseModalTitle: {
+        fontFamily: 'sdom_bold_font',
+        fontSize: 20,
+        padding: 10
+    },
+    reportAbuseModalTitleDivider: {
+        width: 230,
+        height: 1,
+        backgroundColor: "lightgray"
     },
     icon_count_text: {
         color: "white",
@@ -234,9 +274,17 @@ export const glancePostStyles = StyleSheet.create({
         padding: 1
     },
     postDescriptionModalButton: {
-        borderRadius: 16,
+        borderRadius: 18,
         marginTop: 10,
         padding: 10,
+        elevation: 3,
+        backgroundColor: "#fcc200"
+    },
+    reportAbuseSubmitButton: {
+        borderRadius: 18,
+        marginTop: 10,
+        padding: 10,
+        alignSelf: 'flex-end',
         elevation: 3,
         backgroundColor: "#fcc200"
     },
@@ -246,7 +294,42 @@ export const glancePostStyles = StyleSheet.create({
         bottom: 25,
         marginTop: 15,
         elevation: 3,
-    }
+    },
+    cancelReportAbuse: {
+        position: 'absolute',
+        right: 40,
+        bottom: 25,
+        marginTop: 15,
+        elevation: 3,
+    },
+    reportAbuseModalContainer: {
+        marginBottom: 30,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    reportAbuseRadioText: {
+        marginRight: 35,
+        fontSize: 14,
+        fontFamily: 'sdom_roman_font'
+    },
+    reportAbuseRadioCircle: {
+        height: 20,
+        width: 20,
+        padding: 7,
+        borderRadius: 20,
+        marginRight: 10,
+        borderWidth: 2,
+        borderColor: '#3740ff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    reportAbuseSelectedRb: {
+        width: 10,
+        height: 10,
+        borderRadius: 40,
+        backgroundColor: '#3740ff',
+    },
 });
 
 export const categoryViewStyles = StyleSheet.create({
