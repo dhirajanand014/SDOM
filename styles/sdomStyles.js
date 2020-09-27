@@ -52,10 +52,18 @@ export const glancePostStyles = StyleSheet.create({
         paddingTop: 3,
         alignItems: 'center'
     },
-    postType: {
+    postProfileName: {
         marginRight: 4,
-        fontSize: 16,
+        justifyContent: 'center',
+        fontSize: 12,
         fontFamily: 'sdom_bold_font',
+        display: 'flex',
+        color: 'white',
+    },
+    postCategoriesIn: {
+        fontSize: 12,
+        justifyContent: 'center',
+        fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
     },
@@ -104,8 +112,8 @@ export const glancePostStyles = StyleSheet.create({
         height: 22
     },
     icon_post_description: {
-        width: 25,
-        height: 25
+        width: 28,
+        height: 28
     },
     icon_post_wallpaper: {
         width: 25,
@@ -119,15 +127,21 @@ export const glancePostStyles = StyleSheet.create({
         width: 28,
         height: 28
     },
+    icon_post_report_abuse: {
+        width: 22,
+        height: 22
+    },
     smallButtonsContainer: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 15,
     },
     postTitleAndProfileStyle: {
-        marginBottom: 70,
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        marginBottom: 65
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -175,7 +189,6 @@ export const glancePostStyles = StyleSheet.create({
         maxHeight: 250,
         width: 300,
         top: 30,
-        justifyContent: 'space-evenly',
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -219,6 +232,20 @@ export const glancePostStyles = StyleSheet.create({
     },
     glanceTopIconInfo: {
         padding: 1
+    },
+    postDescriptionModalButton: {
+        borderRadius: 16,
+        marginTop: 10,
+        padding: 10,
+        elevation: 3,
+        backgroundColor: "#fcc200"
+    },
+    postReportAbuse: {
+        position: 'absolute',
+        left: 20,
+        bottom: 25,
+        marginTop: 15,
+        elevation: 3,
     }
 });
 

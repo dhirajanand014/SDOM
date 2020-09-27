@@ -3,7 +3,7 @@ import {
     urlConstants, asyncStorageKeys,
     postCountTypes, postCountRequestKeys,
     savePostCountKeys, setPostImages,
-    permissionsButtons, permissionMessages
+    permissionsButtons, permissionMessages, stringConstants
 } from '../constants/sdomConstants';
 import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -58,8 +58,10 @@ export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) 
             categoryPostsData.map(postItem => {
                 const postHasLikes = postCounts && postCounts[savePostCountKeys.SELECTED_POST_LIKES] &&
                     postCounts[savePostCountKeys.SELECTED_POST_LIKES].some(postId => postItem.postId == postId);
-                if (postHasLikes)
+                if (postHasLikes) {
                     postItem.likeDisabled = postHasLikes;
+                }
+                postItem.postCategoriesIn = fetchAndDisplayNamesAndCategoryTitles(postItem);
             });
         }
         setSdomDatastate({ ...sdomDatastate, posts: categoryPostsData, });
@@ -79,7 +81,7 @@ export const saveCategoryIdsToStorage = async (categoryIds) => {
 
 export const getSelectedCategoryIdsFromStorage = async () => {
     try {
-        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_ID) || "";
+        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_ID) || stringConstants.EMPTY;
     } catch (error) {
         console.log('Cannot fetch the categoryIds from the storage', error);
     }
@@ -123,7 +125,7 @@ export const savePostCounts = async (postId, postIdForSelectedCountType, sdomDat
         const getPostIdOfPostForCount = await getPostCounts(asyncStorageKeys.SAVE_POST_COUNTS);
         let postCounts, postIds = [], postIdsJson;
         if (getPostIdOfPostForCount) {
-            postCounts = JSON.parse(getPostIdOfPostForCount) || "";
+            postCounts = JSON.parse(getPostIdOfPostForCount) || stringConstants.EMPTY;
         }
         if (postIdForSelectedCountType == savePostCountKeys.SELECTED_POST_LIKES) {
             if (postCounts) {
@@ -181,7 +183,7 @@ export const saveCategoryButtonType = async (inCategoryButtonType) => {
 
 export const getCategoryButtonType = async () => {
     try {
-        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_BUTTON_TYPE) || "";
+        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_CATEGORY_BUTTON_TYPE) || stringConstants.EMPTY;
     } catch (error) {
         console.log('Cannot fetch the save button type from the storage', error);
     }
@@ -241,4 +243,36 @@ export const accessAndGrantPermssionsToSDOM = async (permissionTitie, permission
     } catch (error) {
         console.log(`Error accessing permissions for ${permissionType}`, error);
     }
+}
+
+export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
+    let names = [];
+    if (post.categoryTitles) {
+        const categoryTitlesArray = post.categoryTitles.split(stringConstants.COMMA);
+        const displayTitles = categoryTitlesArray && categoryTitlesArray.slice(0, 2) || stringConstants.EMPTY;
+        const concatinatedDisplayName = displayTitles.map(title => title.toUpperCase()).
+            join(stringConstants.PIPELINE_JOIN);
+        if (categoryTitlesArray.length > 2) {
+            names.push(concatinatedDisplayName.
+                concat(stringConstants.PLUS.concat(categoryTitlesArray.length - displayTitles.length)));
+        } else {
+            names.push(concatinatedDisplayName);
+        }
+    }
+    return names.join(stringConstants.PIPELINE_JOIN) || stringConstants.EMPTY;
+}
+export const setOptionsStateForDescription = (optionsState, setOptionsState, description) => {
+    setOptionsState({
+        ...optionsState,
+        descriptionModal: true,
+        descriptionText: description
+    })
+}
+
+export const resetOptionsState = (optionsState, setOptionsState) => {
+    setOptionsState({
+        ...optionsState,
+        descriptionModal: false,
+        descriptionText: '',
+    });
 }

@@ -2,8 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, Modal } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
-import { postCountTypes } from '../constants/sdomConstants';
-import { fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts, downloadImageFromURL } from '../helper/SDOMHelper';
+import { postCountTypes, stringConstants } from '../constants/sdomConstants';
+import {
+    fetchPostsAndSaveToState, postWallPaperAlert, increaseAndSetPostCounts,
+    downloadImageFromURL, resetOptionsState, setOptionsStateForDescription
+} from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -16,13 +19,14 @@ const post_wallpaper = require('../assets/post_set_wallpaper_icon.png');
 const category_selection = require('../assets/category_selection_icon.png');
 const post_download = require('../assets/post_download_icon.png');
 const post_search = require('../assets/post_search_icon.png');
+const post_report_abuse = require('../assets/post_report_abuse_icon.png');
 
 export function sdomGlance({ navigation }) {
 
     const [sdomDatastate, setSdomDatastate] = useState([]);
     const [optionsState, setOptionsState] = useState({
         descriptionModal: false,
-        descriptionText: "",
+        descriptionText: stringConstants.EMPTY,
     })
 
     useEffect(() => {
@@ -55,12 +59,18 @@ export function sdomGlance({ navigation }) {
                                     <View style={glancePostStyles.innerContainer}>
                                         <View style={glancePostStyles.smallButtonsContainer}>
                                             <Text style={glancePostStyles.titleName}>{item.postTitle}</Text>
-                                            <TouchableOpacity onPress={() => Linking.openURL(item.postLink)}>
+                                            <TouchableOpacity style={{ width: 35 }} onPress={() => Linking.openURL(item.postLink)}>
                                                 <Image style={glancePostStyles.icon_external_link} source={post_external_link} />
                                             </TouchableOpacity>
                                         </View>
                                         <View style={glancePostStyles.postTitleAndProfileStyle}>
-                                            <Text style={glancePostStyles.postType}>{item.profileName.toUpperCase()}</Text>
+                                            <Text style={item.profileName && glancePostStyles.postProfileName}>
+                                                {item.profileName && item.profileName.toUpperCase()}
+                                            </Text>
+                                            <Text style={glancePostStyles.postCategoriesIn}>{
+                                                item.profileName && item.postCategoriesIn && stringConstants.PIPELINE_JOIN.
+                                                    concat(item.postCategoriesIn) || item.postCategoriesIn}
+                                            </Text>
                                         </View>
                                     </View>
                                 </View>
@@ -73,11 +83,8 @@ export function sdomGlance({ navigation }) {
                                 </View>
                                 <View key={`3_${index}_${item.categoryId}`} style={glancePostStyles.largeButtonContainer}>
                                     <View style={glancePostStyles.glanceTopIconInfo}>
-                                        <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() => setOptionsState({
-                                            ...optionsState,
-                                            descriptionModal: true,
-                                            descriptionText: item.postDescription
-                                        })}>
+                                        <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() =>
+                                            setOptionsStateForDescription(optionsState, setOptionsState, item.postDescription)}>
                                             <Image style={glancePostStyles.icon_post_description} source={post_description} />
                                         </TouchableOpacity>
                                     </View>
@@ -111,30 +118,18 @@ export function sdomGlance({ navigation }) {
                         )
                     })}
                 <Modal animationType="fade" transparent={true} visible={optionsState.descriptionModal}
-                    onRequestClose={() => {
-                        setOptionsState({
-                            ...optionsState,
-                            descriptionModal: false,
-                            descriptionText: '',
-                        });
-                    }}>
+                    presentationStyle="fullScreen" onRequestClose={() => resetOptionsState(optionsState, setOptionsState)}>
                     <View style={glancePostStyles.modalContainer}>
                         <View style={glancePostStyles.modalView}>
                             <ScrollView persistentScrollbar={true} bounces={true}>
                                 <Text style={glancePostStyles.descriptionText}>{optionsState.descriptionText}</Text>
                             </ScrollView>
-                            <TouchableOpacity style={{
-                                ...glancePostStyles.modalButton,
-                                backgroundColor: "#fcc200"
-                            }}
-                                onPress={() => {
-                                    setOptionsState({
-                                        ...optionsState,
-                                        descriptionModal: false,
-                                        descriptionText: '',
-                                    });
-                                }}>
-                                <Text style={glancePostStyles.modalHideText}>Hide Modal</Text>
+                            <TouchableOpacity style={glancePostStyles.postReportAbuse}>
+                                <Image style={glancePostStyles.icon_post_report_abuse} source={post_report_abuse} />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={glancePostStyles.postDescriptionModalButton}
+                                onPress={() => resetOptionsState(optionsState, setOptionsState)} >
+                                <Text style={glancePostStyles.modalHideText}>Close</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
