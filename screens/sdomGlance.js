@@ -29,7 +29,7 @@ export function sdomGlance({ navigation }) {
     const [optionsState, setOptionsState] = useState({
         descriptionModal: false,
         reportAbuseModal: false,
-        descriptionText: stringConstants.EMPTY,
+        selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: stringConstants.EMPTY
     })
 
@@ -88,7 +88,7 @@ export function sdomGlance({ navigation }) {
                                 <View key={`3_${index}_${item.categoryId}`} style={glancePostStyles.largeButtonContainer}>
                                     <View style={glancePostStyles.glanceTopIconInfo}>
                                         <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() =>
-                                            setOptionsStateForDescription(optionsState, setOptionsState, item.postDescription)}>
+                                            setOptionsStateForDescription(optionsState, setOptionsState, item)}>
                                             <Image style={glancePostStyles.icon_post_description} source={post_description} />
                                         </TouchableOpacity>
                                     </View>
@@ -124,8 +124,7 @@ export function sdomGlance({ navigation }) {
             </ViewPager>
             <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
                 reportAbuseIcon={post_report_abuse} />
-            <SDOMPostReportAbuseModal sdomDatastate={sdomDatastate} optionsState={optionsState}
-                setOptionsState={setOptionsState} />
+            <SDOMPostReportAbuseModal optionsState={optionsState} setOptionsState={setOptionsState} />
         </View >
     );
 }

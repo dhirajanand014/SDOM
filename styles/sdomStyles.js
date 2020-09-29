@@ -204,7 +204,7 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         padding: 15,
-        maxHeight: 400,
+        maxHeight: 700,
         width: 300,
         display: 'flex',
         top: 30,
@@ -226,11 +226,9 @@ export const glancePostStyles = StyleSheet.create({
         fontSize: 15
     },
     reportAbuseCancelText: {
-        fontSize: 12,
+        fontSize: 14,
         textDecorationLine: 'underline',
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
+        fontFamily: 'sdom_roman_font'
     },
     reportAbuseModalHeader: {
         alignItems: 'center'
@@ -283,7 +281,16 @@ export const glancePostStyles = StyleSheet.create({
     reportAbuseSubmitButton: {
         borderRadius: 18,
         marginTop: 10,
-        padding: 10,
+        padding: 8,
+        alignSelf: 'flex-end',
+        elevation: 3,
+        backgroundColor: "#fcc200"
+    },
+    reportAbuseSubmitButtonDisabled: {
+        opacity: .4,
+        borderRadius: 18,
+        marginTop: 10,
+        padding: 8,
         alignSelf: 'flex-end',
         elevation: 3,
         backgroundColor: "#fcc200"
@@ -297,7 +304,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     cancelReportAbuse: {
         position: 'absolute',
-        right: 40,
+        right: 100,
         bottom: 25,
         marginTop: 15,
         elevation: 3,
@@ -316,11 +323,11 @@ export const glancePostStyles = StyleSheet.create({
     reportAbuseRadioCircle: {
         height: 20,
         width: 20,
-        padding: 7,
+        padding: 8,
         borderRadius: 20,
         marginRight: 10,
         borderWidth: 2,
-        borderColor: '#3740ff',
+        borderColor: 'black',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -328,7 +335,7 @@ export const glancePostStyles = StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: 40,
-        backgroundColor: '#3740ff',
+        backgroundColor: 'black',
     },
 });
 

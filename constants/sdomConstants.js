@@ -62,5 +62,5 @@ export const alertTextMessages = {
 }
 
 export const reportAbuseOptions = [
-    `Sexual Content`, `Graphic Violence`, `Graphic Violence`, `Graphic Violence`, `Hateful or abusive content`, `Improper Content`, `Copycat or impersonation`
+    `Sexual Content`, `Graphic Violence`, `Hateful or abusive content`, `Improper Content`, `Copycat or impersonation`
 ]

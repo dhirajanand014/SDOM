@@ -11,12 +11,14 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.sdom.constants.SdomConstants;
+import com.sdom.email.AsyncSendMail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,6 +70,11 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             Toast.makeText(reactContext, "Cannot download image for "
                     + inCategoryTitle, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @ReactMethod
+    public void sendEmailToSupportGroup(String inPostId, String inPostTitle, String inSelectedReportAbuseOption) {
+
     }
 
 

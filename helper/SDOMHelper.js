@@ -263,16 +263,16 @@ export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
     return names.join(stringConstants.PIPELINE_JOIN) || stringConstants.EMPTY;
 }
 
-export const setOptionsStateForDescription = (optionsState, setOptionsState, description) => {
+export const setOptionsStateForDescription = (optionsState, setOptionsState, item) => {
     setOptionsState({
         ...optionsState,
         descriptionModal: true,
-        descriptionText: description
+        selectedPost: item
     })
 }
 
-export const setReportAbuseSelectedOption = async (optionsState, setOptionsState, selectedOption) => {
-    await setOptionsState({
+export const setReportAbuseSelectedOption = (optionsState, setOptionsState, selectedOption) => {
+    setOptionsState({
         ...optionsState,
         selectedReportAbuse: selectedOption
     })
@@ -285,11 +285,11 @@ export const setOptionsStateRadioOptions = (optionsState, setOptionsState) => {
     });
 }
 
-export const resetOptionsState = (optionsState, setOptionsState, isReportAbuse) => {
+export const resetOptionsState = (optionsState, setOptionsState) => {
     setOptionsState({
         ...optionsState,
         descriptionModal: false,
-        descriptionText: stringConstants.EMPTY
+        selectedPost: stringConstants.EMPTY
     });
 }
 
@@ -297,6 +297,20 @@ export const resetOptionsStateReportAbuse = (optionsState, setOptionsState) => {
     setOptionsState({
         ...optionsState,
         reportAbuseModal: false,
-        descriptionText: stringConstants.EMPTY
+        selectedPost: stringConstants.EMPTY
     });
+}
+
+export const sendEmailToSupportGroup = (optionsState, setOptionsState) => {
+    try {
+        const { selectedPost, selectedReportAbuse } = optionsState;
+        const { postId, postTitle } = selectedPost;
+        NativeModules.SdomApi.sendEmailToSupportGroup(postId, postTitle, selectedReportAbuse);
+        setOptionsState({
+            ...optionsState,
+            reportAbuseModal: false
+        })
+    } catch (error) {
+        console.log("Cannot set current image as wallpaper", error);
+    }
 }
