@@ -1,20 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import { postCountTypes, stringConstants } from '../constants/sdomConstants';
 import {
     fetchPostsAndSaveToState, postWallPaperAlert,
     increaseAndSetPostCounts,
-    downloadImageFromURL, setOptionsStateForDescription
+    downloadImageFromURL, setOptionsStateForDescription,
+    togglePostSearchBox
 } from '../helper/SDOMHelper';
 import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
 import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
 import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 import { SDOMPostSearch } from '../components/SDOMPostSearch';
-import Animated, { Easing } from 'react-native-reanimated';
-const { Value, timing } = Animated;
+import Animated from 'react-native-reanimated';
+const { Value } = Animated;
 
 const post_like = require('../assets/post_likes_heart_arrow_icon.png');
 const post_like_selected = require('../assets/post_likes_heart_arrow_icon_selected.png');
@@ -26,33 +27,6 @@ const post_download = require('../assets/post_download_icon.png');
 const post_search = require('../assets/post_search_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
 
-let input_search_box_translate_x;
-let content_translate_y;
-let content_opacity;
-
-const showInputBox = () => {
-
-    const input_text_translate_x_config = {
-        duration: 200,
-        toValue: 1,
-        easing: Easing.inOut(Easing.ease)
-    }
-    const content_translate_y_config = {
-        duration: 100,
-        toValue: 0,
-        easing: Easing.inOut(Easing.ease)
-    }
-    const content_opacity_config = {
-        duration: 200,
-        toValue: 1,
-        easing: Easing.inOut(Easing.ease)
-    }
-
-    timing(input_search_box_translate_x, input_text_translate_x_config).start();
-    timing(content_translate_y, content_translate_y_config).start();
-    timing(content_opacity, content_opacity_config).start();
-}
-
 export function sdomGlance({ navigation }) {
 
     const [sdomDatastate, setSdomDatastate] = useState([]);
@@ -63,7 +37,6 @@ export function sdomGlance({ navigation }) {
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: stringConstants.EMPTY
     })
-
     useEffect(() => {
         fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate, optionsState, setOptionsState);
     }, []);
@@ -71,9 +44,9 @@ export function sdomGlance({ navigation }) {
     let { width, height } = Dimensions.get("window");
     height += StatusBar.currentHeight;
 
-    input_search_box_translate_x = new Value(width);
-    content_translate_y = new Value(height);
-    content_opacity = new Value(0);
+    const input_search_box_translate_x = new Value(width);
+    const content_translate_y = new Value(height);
+    const content_opacity = new Value(0);
 
     console.log(sdomDatastate)
     return (
@@ -84,7 +57,7 @@ export function sdomGlance({ navigation }) {
             </TouchableOpacity>
 
             <ViewPager style={{ width: width, height: height }} orientation="vertical" transitionStyle="scroll"
-                initialPage={5}>
+                initialPage={0}>
                 {
                     sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
                         return (
@@ -115,7 +88,8 @@ export function sdomGlance({ navigation }) {
                                 </View>
                                 <View key={`2_${index}_${item.categoryId}_search_icon`} style={glancePostStyles.searchIconContainer}>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={() => showInputBox()}>
+                                        <TouchableOpacity onPress={() => togglePostSearchBox(input_search_box_translate_x,
+                                            content_translate_y, content_opacity, width, height, true)}>
                                             <Image style={glancePostStyles.icon_post_search} source={post_search} />
                                         </TouchableOpacity>
                                     </View>

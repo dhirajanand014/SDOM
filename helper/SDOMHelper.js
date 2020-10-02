@@ -8,6 +8,8 @@ import {
 } from '../constants/sdomConstants';
 import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Animated, { Easing } from 'react-native-reanimated';
+const { timing } = Animated;
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
@@ -314,4 +316,28 @@ export const sendEmailToSupportGroup = (optionsState, setOptionsState) => {
     } catch (error) {
         console.log("Cannot set current image as wallpaper", error);
     }
+}
+
+export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y, content_opacity,
+    width, height, isShowInputBox) => {
+
+    const input_text_translate_x_config = {
+        duration: 200,
+        toValue: isShowInputBox && 1 || width,
+        easing: Easing.inOut(Easing.ease)
+    }
+    const content_translate_y_config = {
+        duration: 300,
+        toValue: isShowInputBox && 1 || height,
+        easing: Easing.inOut(Easing.ease)
+    }
+    const content_opacity_config = {
+        duration: 200,
+        toValue: isShowInputBox && 1 || 0,
+        easing: Easing.inOut(Easing.ease)
+    }
+
+    timing(input_search_box_translate_x, input_text_translate_x_config).start();
+    timing(content_translate_y, content_translate_y_config).start();
+    timing(content_opacity, content_opacity_config).start();
 }

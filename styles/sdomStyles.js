@@ -141,6 +141,31 @@ export const glancePostStyles = StyleSheet.create({
         zIndex: 999,
         elevation: 4
     },
+    search_content_view: {
+        flex: 1,
+        backgroundColor: 'white',
+        borderRadius: 16
+    },
+    search_content_separator: {
+        flex: 1,
+        paddingTop: 2
+    },
+    search_content_post_selection: {
+        flexDirection: 'row',
+        height: 35,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#e6e4eb',
+        borderBottomStartRadius: 16,
+        borderBottomEndRadius: 16
+    },
+    search_content_post_title: {
+        fontFamily: 'sdom_roman_font'
+    },
+    search_content_post_index: {
+        fontFamily: 'sdom_bold_font',
+        marginLeft: 16
+    },
     search_input_text: {
         flex: 1,
         height: 40,
