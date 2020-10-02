@@ -36,7 +36,11 @@ export function sdomGlance({ navigation }) {
         showSearch: false,
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: stringConstants.EMPTY
-    })
+    });
+
+    const inputTextRef = useRef(null);
+    const viewPagerRef = useRef(null);
+
     useEffect(() => {
         fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate, optionsState, setOptionsState);
     }, []);
@@ -56,7 +60,7 @@ export function sdomGlance({ navigation }) {
                 <Image source={category_selection} style={glancePostStyles.category_selection_image} />
             </TouchableOpacity>
 
-            <ViewPager style={{ width: width, height: height }} orientation="vertical" transitionStyle="scroll"
+            <ViewPager ref={viewPagerRef} peekEnabled style={{ width: width, height: height }} orientation="vertical" transitionStyle="scroll"
                 initialPage={0}>
                 {
                     sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
@@ -89,7 +93,7 @@ export function sdomGlance({ navigation }) {
                                 <View key={`2_${index}_${item.categoryId}_search_icon`} style={glancePostStyles.searchIconContainer}>
                                     <View style={glancePostStyles.glanceTopIcons}>
                                         <TouchableOpacity onPress={() => togglePostSearchBox(input_search_box_translate_x,
-                                            content_translate_y, content_opacity, width, height, true)}>
+                                            content_translate_y, content_opacity, width, height, true, inputTextRef)}>
                                             <Image style={glancePostStyles.icon_post_search} source={post_search} />
                                         </TouchableOpacity>
                                     </View>
@@ -97,7 +101,7 @@ export function sdomGlance({ navigation }) {
                                         optionsState.showSearch &&
                                         <SDOMPostSearch sdomDatastate={sdomDatastate} screenWidth={width} screenHeight={height}
                                             inputBoxTranslateX={input_search_box_translate_x} contentTranslateY={content_translate_y}
-                                            contentOpacity={content_opacity} />
+                                            contentOpacity={content_opacity} inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} />
                                     }
                                 </View>
                                 <View key={`3_${index}_${item.categoryId}`} style={glancePostStyles.largeButtonContainer}>

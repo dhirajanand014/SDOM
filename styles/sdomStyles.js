@@ -152,7 +152,8 @@ export const glancePostStyles = StyleSheet.create({
     },
     search_content_post_selection: {
         flexDirection: 'row',
-        height: 35,
+        height: 30,
+        padding: 20,
         alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: '#e6e4eb',

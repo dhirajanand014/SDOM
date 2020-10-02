@@ -319,7 +319,7 @@ export const sendEmailToSupportGroup = (optionsState, setOptionsState) => {
 }
 
 export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y, content_opacity,
-    width, height, isShowInputBox) => {
+    width, height, isShowInputBox, inputTextRef, setSearchValue) => {
 
     const input_text_translate_x_config = {
         duration: 200,
@@ -335,6 +335,14 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
         duration: 200,
         toValue: isShowInputBox && 1 || 0,
         easing: Easing.inOut(Easing.ease)
+    }
+
+    if (!isShowInputBox) {
+        inputTextRef.current.clear();
+        inputTextRef.current.blur();
+        setSearchValue(stringConstants.EMPTY);
+    } else {
+        inputTextRef.current.focus();
     }
 
     timing(input_search_box_translate_x, input_text_translate_x_config).start();
