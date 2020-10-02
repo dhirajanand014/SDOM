@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FlatList, View, Dimensions, StatusBar, Text, TouchableOpacity } from 'react-native';
 import { SDOMCategoryContext } from '../App';
-import { categoryViewStyles, glancePostStyles } from '../styles/sdomStyles';
+import { categoryViewStyles } from '../styles/sdomStyles';
 import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/SDOMHelper'
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
 

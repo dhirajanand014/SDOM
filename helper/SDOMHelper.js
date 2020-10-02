@@ -35,7 +35,7 @@ export const fetchAndUpdateCategoryState = async (category, setCategory) => {
     }
 }
 
-export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) => {
+export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate, optionsState, setOptionsState) => {
     try {
         let categoryPostsData = [];
         const responseData = await axios.get(urlConstants.fetchPosts);
@@ -66,6 +66,7 @@ export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate) 
             });
         }
         setSdomDatastate({ ...sdomDatastate, posts: categoryPostsData, });
+        setOptionsState({ ...optionsState, showSearch: true });
     } catch (error) {
         console.log(error);
         setSdomDatastate({ ...sdomDatastate, posts: [] });

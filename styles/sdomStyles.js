@@ -111,6 +111,45 @@ export const glancePostStyles = StyleSheet.create({
         width: 22,
         height: 22
     },
+    searchInputBox: {
+        flex: 1,
+        flexDirection: 'row',
+        height: 40,
+        alignItems: 'center',
+        position: 'absolute',
+        justifyContent: 'center',
+        top: 0,
+        right: -20,
+    },
+    close_button_search_input: {
+        justifyContent: 'center',
+        backgroundColor: '#e4e6eb',
+        alignItems: 'center',
+        flexDirection: 'row',
+        right: 30,
+    },
+    search_input_close_input_icon: {
+        width: 20,
+        height: 20
+    },
+    search_content: {
+        width: 290,
+        height: 250,
+        position: 'absolute',
+        top: 25,
+        right: 0,
+        zIndex: 999,
+        elevation: 4
+    },
+    search_input_text: {
+        flex: 1,
+        height: 40,
+        backgroundColor: '#e4e6eb',
+        borderRadius: 20,
+        paddingHorizontal: 20,
+        fontFamily: 'sdom_roman_font',
+        fontSize: 15
+    },
     icon_post_description: {
         width: 28,
         height: 28
@@ -156,6 +195,7 @@ export const glancePostStyles = StyleSheet.create({
         marginRight: 12,
     },
     searchIconContainer: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -337,6 +377,20 @@ export const glancePostStyles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: 'black',
     },
+    search_input_safe_area: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    content_item_separator: {
+        paddingTop: 50,
+        marginTop: 5,
+        height: 1,
+        backgroundColor: '#e6e4eb'
+    },
+    search_items: {
+        padding: 16,
+        alignItems: 'center',
+    }
 });
 
 export const categoryViewStyles = StyleSheet.create({
