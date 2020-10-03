@@ -4,7 +4,8 @@ import {
     postCountTypes, postCountRequestKeys,
     savePostCountKeys, setPostImages,
     permissionsButtons, permissionMessages,
-    stringConstants, alertTextMessages
+    stringConstants, alertTextMessages,
+    reportAbuseRequestPayloadKeys, responseStringData
 } from '../constants/sdomConstants';
 import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -110,7 +111,7 @@ export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatas
 
         if (postCountRequest) {
             const response = await axios.post(urlConstants.setPostCounts, postCountRequest);
-            if (response && response.data == "Success") {
+            if (response && response.data == responseStringData.SUCCESS) {
                 if (postCountType == postCountTypes.POST_LIKES) {
                     ToastAndroid.show(`You have liked the post : ${post.postTitle}`, ToastAndroid.SHORT);
                     await savePostCounts(post.postId, savePostCountKeys.SELECTED_POST_LIKES, sdomDatastate, setSdomDatastate);
@@ -274,10 +275,14 @@ export const setOptionsStateForDescription = (optionsState, setOptionsState, ite
     })
 }
 
-export const setReportAbuseSelectedOption = (optionsState, setOptionsState, selectedOption) => {
+export const setReportAbuseSelectedOption = (optionsState, setOptionsState, selectedReportAbuseId) => {
     setOptionsState({
         ...optionsState,
-        selectedReportAbuse: selectedOption
+        selectedReportAbuse: {
+            [reportAbuseRequestPayloadKeys.POST_ID]: optionsState.selectedPost.postId,
+            [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_ID]: selectedReportAbuseId,
+            [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED]: false
+        }
     })
 }
 
@@ -304,22 +309,32 @@ export const resetOptionsStateReportAbuse = (optionsState, setOptionsState) => {
     });
 }
 
-export const sendEmailToSupportGroup = (optionsState, setOptionsState) => {
+export const setReportIdForPost = async (optionsState, setOptionsState) => {
+    const { selectedPost, selectedReportAbuse } = optionsState;
+    const { postId, postTitle } = selectedPost;
     try {
-        const { selectedPost, selectedReportAbuse } = optionsState;
-        const { postId, postTitle } = selectedPost;
-        NativeModules.SdomApi.sendEmailToSupportGroup(postId, postTitle, selectedReportAbuse);
+        const requestReportAbusePayload = {
+            [reportAbuseRequestPayloadKeys.POST_ID]: postId,
+            [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_ID]: selectedReportAbuse.postReportAbuseId
+        }
+        const responseReportAbuseSet = await axios.post(urlConstants.setReportAbuseIdWithPostId,
+            requestReportAbusePayload);
+
+        if (responseReportAbuseSet && responseReportAbuseSet.data == responseStringData.SUCCESS) {
+            requestReportAbusePayload[reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED] = true;
+            optionsState.selectedReportAbuse = requestReportAbusePayload;
+        }
         setOptionsState({
             ...optionsState,
             reportAbuseModal: false
         })
     } catch (error) {
-        console.log("Cannot set current image as wallpaper", error);
+        console.log(`Cannot set report abuse id for ${postTitle}`, error);
     }
 }
 
-export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y, content_opacity,
-    width, height, isShowInputBox, inputTextRef, setSearchValue) => {
+export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y,
+    content_opacity, width, height, isShowInputBox, inputTextRef, viewPagerRef, setSearchValue) => {
 
     const input_text_translate_x_config = {
         duration: 200,
@@ -341,11 +356,25 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
         inputTextRef.current.clear();
         inputTextRef.current.blur();
         setSearchValue(stringConstants.EMPTY);
+        viewPagerRef.current.setScrollEnabled(true);
     } else {
         inputTextRef.current.focus();
+        viewPagerRef.current.setScrollEnabled(false);
     }
 
     timing(input_search_box_translate_x, input_text_translate_x_config).start();
     timing(content_translate_y, content_translate_y_config).start();
     timing(content_opacity, content_opacity_config).start();
+}
+
+export const fetchReportAbuseValues = async (optionsState, setOptionsState) => {
+    try {
+        const responseReportAbuses = await axios.get(urlConstants.fetchReportAbuses);
+        setOptionsState({
+            ...optionsState,
+            reportAbuses: responseReportAbuses && responseReportAbuses.data.reports || []
+        })
+    } catch (error) {
+        console.log("Cannot fetch report abuses", error);
+    }
 }

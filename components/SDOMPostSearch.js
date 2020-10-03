@@ -26,8 +26,8 @@ export function SDOMPostSearch(props) {
                     textAlignVertical="center" value={searchValue} focusable={true}
                     onChangeText={(value) => setSearchValue(value)} style={glancePostStyles.search_input_text}>
                 </TextInput>
-                <TouchableOpacity style={glancePostStyles.close_button_search_input} onPress={() => togglePostSearchBox(inputBoxTranslateX,
-                    contentTranslateY, contentOpacity, screenWidth, screenHeight, false, inputTextRef, setSearchValue)}>
+                <TouchableOpacity style={glancePostStyles.close_button_search_input} onPress={() => togglePostSearchBox(inputBoxTranslateX, contentTranslateY,
+                    contentOpacity, screenWidth, screenHeight, false, inputTextRef, viewPagerRef, setSearchValue)}>
                     <Image style={glancePostStyles.search_input_close_input_icon} source={post_search_input_close} />
                 </TouchableOpacity>
             </Animated.View>
@@ -46,16 +46,16 @@ export function SDOMPostSearch(props) {
                                     showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                                     {
                                         searchValue !== undefined && posts && posts.filter((postFilter) => postFilter.postTitle.includes(searchValue)).
-                                            map((post, index) => {
-                                                const postIndex = posts.indexOf(post) + 1;
+                                            map((post) => {
+                                                const postIndex = posts.indexOf(post);
                                                 return (
                                                     <TouchableOpacity key={`0_${post.postId}`} style={glancePostStyles.search_content_post_selection}
                                                         onPress={() => {
-                                                            viewPagerRef.current.setPageWithoutAnimation(index);
-                                                            togglePostSearchBox(inputBoxTranslateX,
-                                                                contentTranslateY, contentOpacity, screenWidth, screenHeight, false, inputTextRef, setSearchValue);
+                                                            viewPagerRef.current.setPageWithoutAnimation(postIndex);
+                                                            togglePostSearchBox(inputBoxTranslateX, contentTranslateY, contentOpacity, screenWidth,
+                                                                screenHeight, false, inputTextRef, viewPagerRef, setSearchValue);
                                                         }}>
-                                                        <Text style={glancePostStyles.search_content_post_index}>{postIndex}</Text>
+                                                        <Text style={glancePostStyles.search_content_post_index}>{postIndex + 1}</Text>
                                                         <Text style={glancePostStyles.search_content_post_title}>{` - ${post.postTitle}`}</Text>
                                                     </TouchableOpacity>
                                                 )

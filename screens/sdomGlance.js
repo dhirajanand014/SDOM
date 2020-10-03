@@ -35,7 +35,8 @@ export function sdomGlance({ navigation }) {
         reportAbuseModal: false,
         showSearch: false,
         selectedPost: stringConstants.EMPTY,
-        selectedReportAbuse: stringConstants.EMPTY
+        selectedReportAbuse: {},
+        reportAbuses: []
     });
 
     const inputTextRef = useRef(null);
@@ -92,8 +93,8 @@ export function sdomGlance({ navigation }) {
                                 </View>
                                 <View key={`2_${index}_${item.categoryId}_search_icon`} style={glancePostStyles.searchIconContainer}>
                                     <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={() => togglePostSearchBox(input_search_box_translate_x,
-                                            content_translate_y, content_opacity, width, height, true, inputTextRef)}>
+                                        <TouchableOpacity onPress={() => togglePostSearchBox(input_search_box_translate_x, content_translate_y,
+                                            content_opacity, width, height, true, inputTextRef, viewPagerRef)}>
                                             <Image style={glancePostStyles.icon_post_search} source={post_search} />
                                         </TouchableOpacity>
                                     </View>

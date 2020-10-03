@@ -134,7 +134,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     search_content: {
         width: 290,
-        height: 250,
+        height: 280,
         position: 'absolute',
         top: 25,
         right: 0,
@@ -152,8 +152,8 @@ export const glancePostStyles = StyleSheet.create({
     },
     search_content_post_selection: {
         flexDirection: 'row',
-        height: 30,
-        padding: 20,
+        paddingVertical: 18,
+        paddingRight: 50,
         alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: '#e6e4eb',
@@ -346,7 +346,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     reportAbuseSubmitButton: {
         borderRadius: 18,
-        marginTop: 10,
+        marginTop: 15,
         padding: 8,
         alignSelf: 'flex-end',
         elevation: 3,
@@ -355,7 +355,7 @@ export const glancePostStyles = StyleSheet.create({
     reportAbuseSubmitButtonDisabled: {
         opacity: .4,
         borderRadius: 18,
-        marginTop: 10,
+        marginTop: 15,
         padding: 8,
         alignSelf: 'flex-end',
         elevation: 3,
@@ -385,6 +385,12 @@ export const glancePostStyles = StyleSheet.create({
         marginRight: 35,
         fontSize: 14,
         fontFamily: 'sdom_roman_font'
+    },
+    reportAbusesFetchLoading: {
+        alignItems: 'center',
+        marginBottom: 25,
+        justifyContent: 'center',
+        padding: 8
     },
     reportAbuseRadioCircle: {
         height: 20,

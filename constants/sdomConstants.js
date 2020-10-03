@@ -1,7 +1,9 @@
 export const urlConstants = {
     fetchCategories: `https://sdom.zevcore.in/4RhvfbEGwnsmxcat.php`,
     fetchPosts: `https://sdom.zevcore.in/4RhvfbEGwnsmxcpst.php`,
-    setPostCounts: `https://sdom.zevcore.in/4RhvfbEGwnsmxliks.php`
+    setPostCounts: `https://sdom.zevcore.in/4RhvfbEGwnsmxliks.php`,
+    fetchReportAbuses: `https://sdom.zevcore.in/4RhvfbEGwnsmxrpts.php`,
+    setReportAbuseIdWithPostId: `https://sdom.zevcore.in/4RhvfbEGwnsmxrptlist.php`
 }
 
 export const asyncStorageKeys = {
@@ -61,6 +63,12 @@ export const alertTextMessages = {
     POST_WALLPAPER_TEXT: `Do you want to set the current image as wallpaper and lockscreen?`
 }
 
-export const reportAbuseOptions = [
-    `Sexual Content`, `Graphic Violence`, `Hateful or abusive content`, `Improper Content`, `Copycat or impersonation`
-]
+export const reportAbuseRequestPayloadKeys = {
+    POST_ID: `postId`,
+    POST_REPORT_ABUSE_ID: `postReportAbuseId`,
+    POST_REPORT_ABUSE_SUBMITTED: `reportAbuseSubmitted`
+}
+
+export const responseStringData = {
+    SUCCESS: `Success`
+}
