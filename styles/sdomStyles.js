@@ -135,7 +135,7 @@ export const glancePostStyles = StyleSheet.create({
     search_content: {
         height: 280,
         position: 'absolute',
-        width: 300,
+        width: 500,
         top: 25,
         right: 0,
         zIndex: 999,
@@ -531,7 +531,6 @@ export const flatListItemStyles = StyleSheet.create({
         overflow: 'hidden'
     },
     cardSurface: {
-        elevation: 8,
         height: 180,
         width: 180,
         overflow: 'hidden',
@@ -540,6 +539,28 @@ export const flatListItemStyles = StyleSheet.create({
         marginHorizontal: 8,
         marginVertical: 5,
         borderRadius: 8,
+    },
+    textsView: {
+        flex: 1,
+        flexDirection: 'column',
+        top: 2,
+        paddingTop: 2,
+        left: 4
+    },
+    textCategoryTitle: {
+        fontFamily: 'sdom_bold_font',
+        color: "#3d3d3d",
+        fontSize: 20,
+        justifyContent: 'center',
+        alignItems: "center"
+    },
+    textCategoryCity: {
+        fontFamily: 'sdom_roman_font',
+        color: "#3d3d3d",
+        padding: 1,
+        fontSize: 16,
+        justifyContent: 'center',
+        alignItems: "center"
     }
 });
 

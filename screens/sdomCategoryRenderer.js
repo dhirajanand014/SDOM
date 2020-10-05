@@ -1,5 +1,6 @@
 import React from 'react'
-import { TouchableOpacity, ImageBackground, View } from 'react-native';
+import { TouchableOpacity, ImageBackground, View, Text } from 'react-native';
+import Shimmer from 'react-native-shimmer';
 import { stringConstants } from '../constants/sdomConstants';
 import { getCategoryButtonType } from '../helper/SDOMHelper';
 import { flatListItemStyles } from '../styles/sdomStyles';
@@ -18,7 +19,16 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
             }}>
             <View style={flatListItemStyles.cardSurface}>
                 <ImageBackground source={{ uri: categoryCover }}
-                    style={category.categories[index].isSelected ? flatListItemStyles.checkBoxSelected : flatListItemStyles.imageBackGround}>
+                    style={category.categories[index].isSelected && flatListItemStyles.checkBoxSelected ||
+                        flatListItemStyles.imageBackGround}>
+                    <View style={flatListItemStyles.textsView}>
+                        <Shimmer direction="right" duration={5000}>
+                            <Text style={flatListItemStyles.textCategoryTitle}>{item.categoryTitle}</Text>
+                        </Shimmer>
+                        <Shimmer direction="right" duration={5000}>
+                            <Text style={flatListItemStyles.textCategoryCity}>Bangalore</Text>
+                        </Shimmer>
+                    </View>
                 </ImageBackground>
             </View>
         </TouchableOpacity>
