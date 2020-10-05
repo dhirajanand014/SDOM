@@ -33,7 +33,7 @@ export function SDOMPostSearch(props) {
                 </TouchableOpacity>
             </Animated.View>
             <SDOMPostSearchContent screenWidth={screenWidth} contentOpacity={contentOpacity} contentTranslateY={contentTranslateY}
-                searchValue={setSearchValue} posts={posts} inputBoxTranslateX={inputBoxTranslateX} screenHeight={screenHeight}
+                searchValue={searchValue} posts={posts} inputBoxTranslateX={inputBoxTranslateX} screenHeight={screenHeight}
                 inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} setSearchValue={setSearchValue} />
         </React.Fragment>
     )
