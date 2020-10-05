@@ -36,7 +36,8 @@ export function sdomGlance({ navigation }) {
         showSearch: false,
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: {},
-        reportAbuses: []
+        reportAbuses: [],
+        reportAbuseSubmitDisabled: false
     });
 
     const inputTextRef = useRef(null);
@@ -60,7 +61,6 @@ export function sdomGlance({ navigation }) {
                 onPress={() => navigation.navigate("Category")}>
                 <Image source={category_selection} style={glancePostStyles.category_selection_image} />
             </TouchableOpacity>
-
             <ViewPager ref={viewPagerRef} peekEnabled style={{ width: width, height: height }} orientation="vertical" transitionStyle="scroll"
                 initialPage={0}>
                 {
@@ -145,6 +145,6 @@ export function sdomGlance({ navigation }) {
             <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
                 reportAbuseIcon={post_report_abuse} />
             <SDOMPostReportAbuseModal optionsState={optionsState} setOptionsState={setOptionsState} />
-        </View >
+        </View>
     );
 }

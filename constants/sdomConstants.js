@@ -10,6 +10,7 @@ export const asyncStorageKeys = {
     SAVE_CATEGORY_ID: `@save_category_id`,
     SAVE_CATEGORY_BUTTON_TYPE: `@save_category_button_type`,
     SAVE_POST_COUNTS: `@save_post_counts`,
+    SAVE_SELECTED_REPORT: `@save_selected_report`
 }
 
 export const savePostCountKeys = {
@@ -60,7 +61,8 @@ export const modalTextConstants = {
 
 export const alertTextMessages = {
     CONFIRM_TITLE: `Confirm`,
-    POST_WALLPAPER_TEXT: `Do you want to set the current image as wallpaper and lockscreen?`
+    POST_WALLPAPER_TEXT: `Do you want to set the current image as wallpaper and lockscreen?`,
+    POST_REPORT_ABUSED: `You have already submitted the report!`
 }
 
 export const reportAbuseRequestPayloadKeys = {

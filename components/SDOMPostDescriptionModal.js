@@ -12,7 +12,8 @@ export const SDOMPostDescriptionModal = (props) => {
             <View style={glancePostStyles.modalContainer}>
                 <View style={glancePostStyles.modalView}>
                     <ScrollView persistentScrollbar={true} bounces={true}>
-                        <Text style={glancePostStyles.descriptionText}>{optionsState.selectedPost && optionsState.selectedPost.postDescription
+                        <Text style={glancePostStyles.descriptionText}>{optionsState.selectedPost &&
+                            optionsState.selectedPost.postDescription
                             || `Not Available`}</Text>
                     </ScrollView>
                     <TouchableOpacity style={glancePostStyles.postReportAbuse} onPress={() =>

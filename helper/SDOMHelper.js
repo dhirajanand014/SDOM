@@ -283,7 +283,7 @@ export const setReportAbuseSelectedOption = (optionsState, setOptionsState, sele
             [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_ID]: selectedReportAbuseId,
             [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED]: false
         }
-    })
+    });
 }
 
 export const setOptionsStateRadioOptions = (optionsState, setOptionsState) => {
@@ -301,21 +301,14 @@ export const resetOptionsState = (optionsState, setOptionsState) => {
     });
 }
 
-export const resetOptionsStateReportAbuse = (optionsState, setOptionsState) => {
-    setOptionsState({
-        ...optionsState,
-        reportAbuseModal: false,
-        selectedPost: stringConstants.EMPTY
-    });
-}
-
 export const setReportIdForPost = async (optionsState, setOptionsState) => {
     const { selectedPost, selectedReportAbuse } = optionsState;
     const { postId, postTitle } = selectedPost;
     try {
+        optionsState.reportAbuseSubmitDisabled = true;
         const requestReportAbusePayload = {
-            [reportAbuseRequestPayloadKeys.POST_ID]: postId,
-            [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_ID]: selectedReportAbuse.postReportAbuseId
+            [reportAbuseRequestPayloadKeys.POST_ID]: parseInt(postId),
+            [reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_ID]: parseInt(selectedReportAbuse.postReportAbuseId)
         }
         const responseReportAbuseSet = await axios.post(urlConstants.setReportAbuseIdWithPostId,
             requestReportAbusePayload);
@@ -324,14 +317,47 @@ export const setReportIdForPost = async (optionsState, setOptionsState) => {
             requestReportAbusePayload[reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED] = true;
             optionsState.selectedReportAbuse = requestReportAbusePayload;
         }
-        setOptionsState({
-            ...optionsState,
-            reportAbuseModal: false
-        })
+
+        ToastAndroid.show(`Thank you for submitting the report!`, ToastAndroid.SHORT);
+
+        saveReportAbuseOptions(optionsState);
+        closeReportAbuseModal(optionsState, setOptionsState);
     } catch (error) {
         console.log(`Cannot set report abuse id for ${postTitle}`, error);
     }
 }
+
+export const closeReportAbuseModal = (optionsState, setOptionsState) => {
+    setOptionsState({
+        ...optionsState,
+        reportAbuseModal: false,
+        selectedReportAbuse: {},
+        reportAbuses: [],
+        reportAbuseSubmitDisabled: false
+    });
+}
+
+export const saveReportAbuseOptions = async (optionsState) => {
+    debugger
+    try {
+        var saveReportsArray = [], isReportAbuseAlreadySet = false;
+        const savedReportAbuses = await fetchSavedReportAbuseOptions();
+        if (savedReportAbuses) {
+            saveReportsArray = JSON.parse(savedReportAbuses);
+            isReportAbuseAlreadySet = saveReportsArray && saveReportsArray.some((item) => item.postId == optionsState.selectedReportAbuse.postId &&
+                optionsState.selectedReportAbuse[reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED]);
+        }
+        if (!isReportAbuseAlreadySet) {
+            saveReportsArray.push(optionsState.selectedReportAbuse);
+
+            const saveReportsJSON = JSON.stringify(saveReportsArray);
+            setReportAbuseOptions(saveReportsJSON);
+        }
+    } catch (error) {
+        console.log('Cannot save selected report abuse ', error);
+    }
+}
+
 
 export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y,
     content_opacity, width, height, isShowInputBox, inputTextRef, viewPagerRef, setSearchValue) => {
@@ -351,7 +377,6 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
         toValue: isShowInputBox && 1 || 0,
         easing: Easing.inOut(Easing.ease)
     }
-
     if (!isShowInputBox) {
         inputTextRef.current.clear();
         inputTextRef.current.blur();
@@ -369,12 +394,48 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
 
 export const fetchReportAbuseValues = async (optionsState, setOptionsState) => {
     try {
-        const responseReportAbuses = await axios.get(urlConstants.fetchReportAbuses);
+        const savedReportAbusesJSON = await fetchSavedReportAbuseOptions();
+
+        let reportAbusesData = savedReportAbusesJSON && JSON.parse(savedReportAbusesJSON) || stringConstants.EMPTY;
+
+        const reportAbuseForPostPresent = reportAbusesData && reportAbusesData.find((item) => item.postId == optionsState.selectedPost.postId &&
+            item.reportAbuseSubmitted) || {};
+
+        if (!Object.keys(reportAbuseForPostPresent).length) {
+
+            const responseReportAbuses = await axios.get(urlConstants.fetchReportAbuses);
+
+            if (responseReportAbuses && responseReportAbuses.data.reports) {
+                reportAbusesData = responseReportAbuses.data.reports;
+                reportAbusesData.map((item) => {
+                    item[reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED] = false;
+                    item.reportId = parseInt(item.reportId);
+                });
+            }
+        }
         setOptionsState({
             ...optionsState,
-            reportAbuses: responseReportAbuses && responseReportAbuses.data.reports || []
+            reportAbuses: reportAbusesData || [],
+            selectedReportAbuse: reportAbuseForPostPresent || {}
         })
     } catch (error) {
         console.log("Cannot fetch report abuses", error);
+    }
+}
+
+
+export const setReportAbuseOptions = async (saveReportsJSON) => {
+    try {
+        await AsyncStorage.setItem(asyncStorageKeys.SAVE_SELECTED_REPORT, saveReportsJSON);
+    } catch (error) {
+        console.log('Cannot set selected report abuse to the storage', error);
+    }
+}
+
+export const fetchSavedReportAbuseOptions = async () => {
+    try {
+        return await AsyncStorage.getItem(asyncStorageKeys.SAVE_SELECTED_REPORT) || stringConstants.EMPTY;
+    } catch (error) {
+        console.log('Cannot fetch selected saved report abuses from storage', error);
     }
 }

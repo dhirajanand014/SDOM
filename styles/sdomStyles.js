@@ -133,7 +133,6 @@ export const glancePostStyles = StyleSheet.create({
         height: 20
     },
     search_content: {
-        width: 290,
         height: 280,
         position: 'absolute',
         top: 25,
@@ -402,6 +401,13 @@ export const glancePostStyles = StyleSheet.create({
         borderColor: 'black',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    reportAbuseAlreadySelected: {
+        alignItems: 'center',
+        marginBottom: 25,
+        justifyContent: 'center',
+        padding: 8,
+        fontFamily: 'sdom_bold_font'
     },
     reportAbuseSelectedRb: {
         width: 10,
