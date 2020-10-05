@@ -135,6 +135,7 @@ export const glancePostStyles = StyleSheet.create({
     search_content: {
         height: 280,
         position: 'absolute',
+        width: 300,
         top: 25,
         right: 0,
         zIndex: 999,

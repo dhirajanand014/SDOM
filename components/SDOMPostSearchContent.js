@@ -22,7 +22,7 @@ export function SDOMPostSearchContent(props) {
                 width: screenWidth - 100
             }]}>
                 <View style={glancePostStyles.search_content_view}>
-                    <ScrollView bounces="true" decelerationRate="fast" scrollEnabled={true}
+                    <ScrollView keyboardShouldPersistTaps='always' bounces={true} decelerationRate="fast" scrollEnabled={true} alwaysBounceVertical={true}
                         showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                         {
                             searchValue !== undefined && posts && posts.filter((postFilter) => postFilter.postTitle.includes(searchValue)).
