@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TextInput, Image, TouchableOpacity, Text, ScrollView } from 'react-native'
+import { TextInput, Image, TouchableOpacity } from 'react-native'
 import Animated from 'react-native-reanimated';
 import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { stringConstants } from '../constants/sdomConstants';
@@ -24,6 +24,7 @@ export function SDOMPostSearch(props) {
                 }]
             }]}>
                 <TextInput ref={inputTextRef} placeholder="Search Posts" clearButtonMode="always"
+                    placeholderTextColor={"#3d3d3d"}
                     textAlignVertical="center" value={searchValue} focusable={true}
                     onChangeText={(value) => setSearchValue(value)} style={glancePostStyles.search_input_text}>
                 </TextInput>

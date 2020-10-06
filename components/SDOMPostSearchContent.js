@@ -24,8 +24,8 @@ export function SDOMPostSearchContent(props) {
                     <ScrollView keyboardShouldPersistTaps='always' bounces={true} decelerationRate="fast" scrollEnabled={true} alwaysBounceVertical={true}
                         showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                         {
-                            searchValue !== undefined && posts && posts.filter((postFilter) => postFilter.postTitle.includes(searchValue)).
-                                map((post) => {
+                            searchValue !== undefined && posts && posts.filter((postFilter) => postFilter.postTitle.toLowerCase()
+                                .includes(searchValue.toLowerCase())).map((post) => {
                                     const postIndex = posts.indexOf(post);
                                     return (
                                         <TouchableOpacity key={`0_${post.postId}`} style={glancePostStyles.search_content_post_selection}
