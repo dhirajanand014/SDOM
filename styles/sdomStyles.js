@@ -315,6 +315,12 @@ export const glancePostStyles = StyleSheet.create({
         textAlign: "center",
         fontSize: 10
     },
+    shimmerViewInit: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "white"
+    },
     modalButton: {
         borderRadius: 20,
         marginTop: 20,
@@ -558,7 +564,7 @@ export const flatListItemStyles = StyleSheet.create({
         fontFamily: 'sdom_roman_font',
         color: "#3d3d3d",
         padding: 1,
-        fontSize: 16,
+        fontSize: 14,
         justifyContent: 'center',
         alignItems: "center"
     }

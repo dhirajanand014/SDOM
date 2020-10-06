@@ -1,16 +1,19 @@
 package com.sdom;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
+import com.sdom.constants.SdomConstants;
 
 import androidx.annotation.Nullable;
 
 public class MainActivity extends ReactActivity {
+
 
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
@@ -46,14 +49,31 @@ public class MainActivity extends ReactActivity {
                         mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
                     }
                 }
+
+                createSdomNotificationChannel();
+
                 super.onCreate(savedInstanceState);
             }
         }
 
         @Override
         protected Bundle getLaunchOptions() {
-            Toast.makeText(this.getContext(), mInitialProps.get(NAVIGATION_ROUTE).toString(), Toast.LENGTH_SHORT);
             return mInitialProps;
+        }
+
+        /**
+         * Create notification channels for post button actions.
+         */
+        private void createSdomNotificationChannel() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID,
+                        SdomConstants.SDOM_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
+                notificationChannel.enableVibration(true);
+                notificationChannel.setDescription("Channel for displaying SDOM notifications for post actions");
+
+                NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
         }
     }
 

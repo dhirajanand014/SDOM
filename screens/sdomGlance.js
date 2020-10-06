@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar } from 'react-native';
+import { Text, View, Image, TouchableOpacity, Linking, Dimensions, StatusBar, ActivityIndicator } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import { postCountTypes, stringConstants } from '../constants/sdomConstants';
 import {
@@ -15,6 +15,7 @@ import { glancePostStyles } from '../styles/sdomStyles';
 import FastImage from 'react-native-fast-image';
 import { SDOMPostSearch } from '../components/SDOMPostSearch';
 import Animated from 'react-native-reanimated';
+import Shimmer from 'react-native-shimmer';
 const { Value } = Animated;
 
 const post_like = require('../assets/post_likes_heart_arrow_icon.png');
@@ -140,7 +141,13 @@ export function sdomGlance({ navigation }) {
                                 </View>
                             </View>
                         )
-                    })}
+                    }) ||
+                    <Shimmer duration={500} direction="up" tilt={45}>
+                        <View style={glancePostStyles.shimmerViewInit}>
+                            <ActivityIndicator color="#de4463" hidesWhenStopped size="small" />
+                        </View>
+                    </Shimmer>
+                }
             </ViewPager>
             <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
                 reportAbuseIcon={post_report_abuse} />

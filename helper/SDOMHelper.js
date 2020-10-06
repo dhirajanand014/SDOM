@@ -338,7 +338,6 @@ export const closeReportAbuseModal = (optionsState, setOptionsState) => {
 }
 
 export const saveReportAbuseOptions = async (optionsState) => {
-    debugger
     try {
         var saveReportsArray = [], isReportAbuseAlreadySet = false;
         const savedReportAbuses = await fetchSavedReportAbuseOptions();

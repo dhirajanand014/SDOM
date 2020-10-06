@@ -6,7 +6,6 @@ import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { glancePostStyles } from '../styles/sdomStyles'
 
 export function SDOMPostSearchContent(props) {
-    debugger
     const { screenWidth, contentOpacity, contentTranslateY, searchValue, posts, inputBoxTranslateX, screenHeight,
         inputTextRef, viewPagerRef, setSearchValue } = props;
 

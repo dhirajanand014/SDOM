@@ -26,7 +26,7 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                             <Text style={flatListItemStyles.textCategoryTitle}>{item.categoryTitle}</Text>
                         </Shimmer>
                         <Shimmer direction="right" duration={5000}>
-                            <Text style={flatListItemStyles.textCategoryCity}>Bangalore</Text>
+                            <Text style={flatListItemStyles.textCategoryCity}>{item.categoryOrigin}</Text>
                         </Shimmer>
                     </View>
                 </ImageBackground>
