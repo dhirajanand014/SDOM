@@ -24,8 +24,7 @@ export function SDOMPostSearch(props) {
                 }]
             }]}>
                 <TextInput ref={inputTextRef} placeholder="Search Posts" clearButtonMode="always"
-                    placeholderTextColor={"#3d3d3d"}
-                    textAlignVertical="center" value={searchValue} focusable={true}
+                    placeholderTextColor={"#3d3d3d"} textAlignVertical="center" value={searchValue}
                     onChangeText={(value) => setSearchValue(value)} style={glancePostStyles.search_input_text}>
                 </TextInput>
                 <TouchableOpacity style={glancePostStyles.close_button_search_input} onPress={() => togglePostSearchBox(inputBoxTranslateX, contentTranslateY,
