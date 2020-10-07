@@ -7,7 +7,7 @@ import {
     stringConstants, alertTextMessages,
     reportAbuseRequestPayloadKeys, responseStringData
 } from '../constants/sdomConstants';
-import { Alert, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
+import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Animated, { Easing } from 'react-native-reanimated';
 const { timing } = Animated;
@@ -376,17 +376,24 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
         toValue: isShowInputBox && 1 || 0,
         easing: Easing.inOut(Easing.ease)
     }
+    debugger
     if (!isShowInputBox) {
-        inputTextRef.current.clear();
-        inputTextRef.current.blur();
         setSearchValue(stringConstants.EMPTY);
         viewPagerRef.current.setScrollEnabled(true);
     } else {
-        inputTextRef.current.focus();
         viewPagerRef.current.setScrollEnabled(false);
     }
 
-    timing(input_search_box_translate_x, input_text_translate_x_config).start();
+    timing(input_search_box_translate_x, input_text_translate_x_config).start(() => {
+        InteractionManager.runAfterInteractions(() => {
+            if (!isShowInputBox) {
+                inputTextRef.current.clear();
+                inputTextRef.current.blur();
+            } else {
+                inputTextRef.current.focus();
+            }
+        });
+    });
     timing(content_translate_y, content_translate_y_config).start();
     timing(content_opacity, content_opacity_config).start();
 }
