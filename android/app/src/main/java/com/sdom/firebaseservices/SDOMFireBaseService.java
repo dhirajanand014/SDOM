@@ -1,0 +1,51 @@
+package com.sdom.firebaseservices;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+import com.sdom.R;
+import com.sdom.constants.SdomConstants;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+
+public class SDOMFireBaseService extends FirebaseMessagingService {
+    @Override
+    public void onNewToken(@NonNull String inToken) {
+        super.onNewToken(inToken);
+        Log.i("Token received OK : ", inToken);
+    }
+
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        try {
+            RemoteMessage.Notification notification = remoteMessage.getNotification();
+            if (null != notification) {
+                String title = remoteMessage.getNotification().getTitle();
+                NotificationCompat.Builder notificationBuilder =
+                        new NotificationCompat.Builder(this, SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_post_download)
+                                .setContentTitle(!TextUtils.isEmpty(title) ? title : "New Post")
+                                .setContentText(remoteMessage.getNotification().getBody())
+                                // .setLargeIcon(bitmapImage)
+                                .setStyle(new NotificationCompat.BigPictureStyle()
+                                        // .bigPicture(bitmapImage)
+                                        .bigLargeIcon(null))
+                                .setLocalOnly(true)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setCategory(Notification.CATEGORY_MESSAGE)
+                                .setAutoCancel(true)
+                                .setOnlyAlertOnce(true);
+                NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error displaying the notification of post!", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

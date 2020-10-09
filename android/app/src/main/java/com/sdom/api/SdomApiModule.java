@@ -86,7 +86,6 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
 
         private ReactApplicationContext mContext;
         private final Integer NOTIFICATION_PROGRESS_START = 0;
-        private final Integer NOTIFICATION_ID = 1;
         private final Integer NOTIFICATION_PROGRESS_COMPLETE = 100;
         private String mPostTitle;
         private NotificationManager notificationManager;
@@ -123,7 +122,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                 } else {
                     notificationBuilder.setProgress(NOTIFICATION_PROGRESS_COMPLETE, progressValue, false);
                 }
-                notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+                notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
             }
         }
 
@@ -183,7 +182,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                             .setOnlyAlertOnce(true)
                             .setOngoing(true).setProgress(NOTIFICATION_PROGRESS_COMPLETE, NOTIFICATION_PROGRESS_START, false);
             notificationManager = (NotificationManager) reactContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+            notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
         }
 
         /**

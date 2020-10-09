@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "714147421990",
+    "firebase_url": "https://sdom-e14ba.firebaseio.com",
+    "project_id": "sdom-e14ba",
+    "storage_bucket": "sdom-e14ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714147421990:android:c769bb2cf4505c7cf4abe7",
+        "android_client_info": {
+          "package_name": "com.sdom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714147421990-4v9jr5ee3hr9e8gt0921v6i238a5ii43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuB5EVV_wNIOJELob8H3Dyu4lhdD_6eMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714147421990-4v9jr5ee3hr9e8gt0921v6i238a5ii43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

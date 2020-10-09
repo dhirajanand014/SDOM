@@ -9,6 +9,7 @@ public class SdomConstants {
 
     public static final String SDOM_NOTIFICATION_CHANNEL_ID = "channel1";
     public static final String SDOM_NOTIFICATION_CHANNEL_NAME = "Channel_1";
+    public static final Integer NOTIFICATION_ID = 1;
 
 
     //Notification download progress values
