@@ -1,6 +1,7 @@
 package com.sdom;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
@@ -69,8 +70,9 @@ public class MainActivity extends ReactActivity {
                 NotificationChannel notificationChannel = new NotificationChannel(SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID,
                         SdomConstants.SDOM_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
                 notificationChannel.enableVibration(true);
+                notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    notificationChannel.canBubble();
+                    notificationChannel.setAllowBubbles(true);
                 }
                 notificationChannel.setDescription("Channel for displaying SDOM notifications for post actions");
 

@@ -32,7 +32,8 @@ public class SDOMFireBaseService extends FirebaseMessagingService {
             if (null != notification) {
                 String title = remoteMessage.getNotification().getTitle();
                 NotificationCompat.Builder notificationBuilder =
-                        new NotificationCompat.Builder(this, SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_post_download)
+                        new NotificationCompat.Builder(this, SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_post_download)
                                 .setContentTitle(!TextUtils.isEmpty(title) ? title : "New Post")
                                 .setContentText(remoteMessage.getNotification().getBody())
                                 // .setLargeIcon(bitmapImage)
@@ -40,7 +41,8 @@ public class SDOMFireBaseService extends FirebaseMessagingService {
                                         // .bigPicture(bitmapImage)
                                         .bigLargeIcon(null))
                                 .setLocalOnly(true)
-                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE) //Important for heads-up notification
+                                .setPriority(Notification.PRIORITY_MAX) //Important for heads-up notification
                                 .setCategory(Notification.CATEGORY_MESSAGE)
                                 .setAutoCancel(true)
                                 .setOnlyAlertOnce(true);
