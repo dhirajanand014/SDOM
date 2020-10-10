@@ -6,8 +6,7 @@ import { postCountTypes, stringConstants } from '../constants/sdomConstants';
 import {
     fetchPostsAndSaveToState, postWallPaperAlert,
     increaseAndSetPostCounts,
-    downloadImageFromURL, setOptionsStateForDescription,
-    togglePostSearchBox
+    downloadImageFromURL, setOptionsStateForDescription
 } from '../helper/SDOMHelper';
 import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
 import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
@@ -25,7 +24,6 @@ const post_description = require('../assets/post_description_icon.png');
 const post_wallpaper = require('../assets/post_set_wallpaper_icon.png');
 const category_selection = require('../assets/category_selection_icon.png');
 const post_download = require('../assets/post_download_icon.png');
-const post_search = require('../assets/post_search_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
 
 export function sdomGlance({ navigation }) {
@@ -93,17 +91,14 @@ export function sdomGlance({ navigation }) {
                                     </View>
                                 </View>
                                 <View key={`2_${index}_${item.categoryId}_search_icon`} style={glancePostStyles.searchIconContainer}>
-                                    <View style={glancePostStyles.glanceTopIcons}>
-                                        <TouchableOpacity onPress={() => togglePostSearchBox(input_search_box_translate_x, content_translate_y,
-                                            content_opacity, width, height, true, inputTextRef, viewPagerRef)}>
-                                            <Image style={glancePostStyles.icon_post_search} source={post_search} />
-                                        </TouchableOpacity>
-                                    </View>
                                     {
                                         optionsState.showSearch &&
                                         <SDOMPostSearch sdomDatastate={sdomDatastate} screenWidth={width} screenHeight={height}
+                                            optionsState={optionsState} setOptionsState={setOptionsState} content_opacity={content_opacity}
+                                            input_search_box_translate_x={input_search_box_translate_x} content_translate_y={content_translate_y}
                                             inputBoxTranslateX={input_search_box_translate_x} contentTranslateY={content_translate_y}
-                                            contentOpacity={content_opacity} inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} />
+                                            contentOpacity={content_opacity} inputTextRef={inputTextRef} viewPagerRef={viewPagerRef}
+                                            post={item} /> || <View />
                                     }
                                 </View>
                                 <View key={`3_${index}_${item.categoryId}`} style={glancePostStyles.largeButtonContainer}>
@@ -152,6 +147,6 @@ export function sdomGlance({ navigation }) {
             <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
                 reportAbuseIcon={post_report_abuse} />
             <SDOMPostReportAbuseModal optionsState={optionsState} setOptionsState={setOptionsState} />
-        </View>
+        </View >
     );
 }

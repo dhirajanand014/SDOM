@@ -358,8 +358,9 @@ export const saveReportAbuseOptions = async (optionsState) => {
 }
 
 
-export const togglePostSearchBox = (input_search_box_translate_x, content_translate_y,
-    content_opacity, width, height, isShowInputBox, inputTextRef, viewPagerRef, setSearchValue) => {
+export const togglePostSearchBox = (searchValues, setSearchValues, post,
+    input_search_box_translate_x, content_translate_y, content_opacity, width,
+    height, isShowInputBox, inputTextRef, viewPagerRef) => {
 
     const input_text_translate_x_config = {
         duration: 200,
@@ -376,9 +377,11 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
         toValue: isShowInputBox && 1 || 0,
         easing: Easing.inOut(Easing.ease)
     }
-    debugger
     if (!isShowInputBox) {
-        setSearchValue(stringConstants.EMPTY);
+        setSearchValues({
+            ...searchValues,
+            searchText: stringConstants.EMPTY
+        });
         viewPagerRef.current.setScrollEnabled(true);
     } else {
         viewPagerRef.current.setScrollEnabled(false);
@@ -394,7 +397,14 @@ export const togglePostSearchBox = (input_search_box_translate_x, content_transl
             }
         });
     });
-    timing(content_translate_y, content_translate_y_config).start();
+    timing(content_translate_y, content_translate_y_config).start(() => {
+        InteractionManager.runAfterInteractions(() => {
+            setSearchValues({
+                ...searchValues,
+                searchForPostId: post.postId
+            });
+        });
+    });
     timing(content_opacity, content_opacity_config).start();
 }
 

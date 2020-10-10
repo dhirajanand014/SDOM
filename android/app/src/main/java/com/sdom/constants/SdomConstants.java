@@ -11,6 +11,7 @@ public class SdomConstants {
     public static final String SDOM_NOTIFICATION_CHANNEL_NAME = "Channel_1";
     public static final Integer NOTIFICATION_ID = 1;
 
+    public static final String FIREBASE_MESSAGING_TOPIC_NEW_POST="sdomNewPostTopic";
 
     //Notification download progress values
     public static final Integer INT_TWENTY = 20;

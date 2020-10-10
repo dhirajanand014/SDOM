@@ -167,6 +167,11 @@ export const glancePostStyles = StyleSheet.create({
         fontFamily: 'sdom_bold_font',
         marginLeft: 16
     },
+    search_content_activity_indicator: {
+        alignItems: 'center',
+        paddingTop: 120,
+        justifyContent: 'center'
+    },
     search_input_text: {
         flex: 1,
         height: 40,

@@ -1,16 +1,15 @@
 import React from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated';
 import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { glancePostStyles } from '../styles/sdomStyles'
 
 export function SDOMPostSearchContent(props) {
-    const { screenWidth, contentOpacity, contentTranslateY, searchValue, posts, inputBoxTranslateX, screenHeight,
-        inputTextRef, viewPagerRef, setSearchValue } = props;
-
+    const { screenWidth, contentOpacity, contentTranslateY, searchValues, posts, inputBoxTranslateX, screenHeight,
+        inputTextRef, viewPagerRef, setSearchValues, postItem } = props;
     return (
-        searchValue !== undefined &&
+        searchValues !== undefined &&
         <Animated.View style={[glancePostStyles.search_content, {
             opacity: contentOpacity,
             transform: [{
@@ -24,21 +23,24 @@ export function SDOMPostSearchContent(props) {
                     <ScrollView keyboardShouldPersistTaps='always' bounces={true} decelerationRate="fast" scrollEnabled={true} alwaysBounceVertical={true}
                         showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                         {
-                            searchValue !== undefined && posts && posts.filter((postFilter) => postFilter.postTitle.toLowerCase()
-                                .includes(searchValue.toLowerCase())).map((post) => {
+                            searchValues !== undefined && searchValues.searchForPostId == postItem.postId && posts && posts
+                                .filter((postFilter) => postFilter.postTitle.toLowerCase().includes(searchValues.searchText.toLowerCase()))
+                                .map((post) => {
                                     const postIndex = posts.indexOf(post);
                                     return (
                                         <TouchableOpacity key={`0_${post.postId}`} style={glancePostStyles.search_content_post_selection}
                                             onPress={() => {
                                                 viewPagerRef.current.setPageWithoutAnimation(postIndex);
-                                                togglePostSearchBox(inputBoxTranslateX, contentTranslateY, contentOpacity, screenWidth,
-                                                    screenHeight, false, inputTextRef, viewPagerRef, setSearchValue);
+                                                togglePostSearchBox(searchValues, setSearchValues, postItem, inputBoxTranslateX,
+                                                    contentTranslateY, contentOpacity, screenWidth, screenHeight, false,
+                                                    inputTextRef, viewPagerRef);
                                             }}>
                                             <Text style={glancePostStyles.search_content_post_index}>{postIndex + 1}</Text>
                                             <Text style={glancePostStyles.search_content_post_title}>{` - ${post.postTitle}`}</Text>
                                         </TouchableOpacity>
                                     )
-                                })
+                                }) || <ActivityIndicator style={glancePostStyles.search_content_activity_indicator}
+                                    color="#3d3d3d" size="small" />
                         }
                     </ScrollView>
                 </View>

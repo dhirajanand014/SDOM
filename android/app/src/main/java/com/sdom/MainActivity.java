@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.sdom.constants.SdomConstants;
 
 import androidx.annotation.Nullable;
@@ -49,9 +50,8 @@ public class MainActivity extends ReactActivity {
                         mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
                     }
                 }
-
                 createSdomNotificationChannel();
-
+                subscribeToFireBaseTopic();
                 super.onCreate(savedInstanceState);
             }
         }
@@ -69,6 +69,9 @@ public class MainActivity extends ReactActivity {
                 NotificationChannel notificationChannel = new NotificationChannel(SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID,
                         SdomConstants.SDOM_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
                 notificationChannel.enableVibration(true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    notificationChannel.canBubble();
+                }
                 notificationChannel.setDescription("Channel for displaying SDOM notifications for post actions");
 
                 NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
@@ -81,4 +84,25 @@ public class MainActivity extends ReactActivity {
     protected ReactActivityDelegate createReactActivityDelegate() {
         return new NavigationScreenDelegate(this, getMainComponentName());
     }
+
+    @Override
+    protected void onDestroy() {
+        unSubscribeToFireBaseTopic();
+        super.onDestroy();
+    }
+
+    /**
+     * Allow device to subscribe to new post notifications to a specific topic.
+     */
+    private static void subscribeToFireBaseTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(SdomConstants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
+    }
+
+    /**
+     * Allow device to unsubscribe to new post notifications to a specific topic.
+     */
+    private void unSubscribeToFireBaseTopic() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(SdomConstants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
+    }
+
 }

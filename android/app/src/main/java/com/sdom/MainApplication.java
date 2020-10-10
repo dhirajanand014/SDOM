@@ -8,7 +8,6 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.sdom.api.SdomApiModule;
 import com.sdom.packages.SdomPackage;
 
 import java.lang.reflect.InvocationTargetException;
