@@ -60,9 +60,11 @@ export const modalTextConstants = {
 }
 
 export const alertTextMessages = {
-    CONFIRM_TITLE: `Confirm`,
-    POST_WALLPAPER_TEXT: `Do you want to set the current image as wallpaper and lockscreen?`,
-    POST_REPORT_ABUSED: `You have already submitted the report!`
+    CONFIRM_TITLE: `Set Wallpaper`,
+    POST_WALLPAPER_TEXT: `Do you want to set the current image as Home Screen and lockscreen?`,
+    POST_REPORT_ABUSED: `You have already submitted the report!`,
+    WALLPAPER_SET_SUCESS: `Success`,
+    WALLPAPER_SET_SUCCESS_TEXT: `Image successfully set as wallpaper`
 }
 
 export const reportAbuseRequestPayloadKeys = {

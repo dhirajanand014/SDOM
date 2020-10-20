@@ -1,9 +1,10 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, View, Modal, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { alertTextMessages, modalTextConstants, reportAbuseRequestPayloadKeys } from '../constants/sdomConstants';
 import { setReportAbuseSelectedOption, setReportIdForPost, fetchReportAbuseValues, closeReportAbuseModal } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
+
+const post_modal_close_icon = require('../assets/post_modal_close_icon.png');
 
 export const SDOMPostReportAbuseModal = (props) => {
     const { optionsState, setOptionsState } = props;
@@ -18,6 +19,10 @@ export const SDOMPostReportAbuseModal = (props) => {
                         <Text style={glancePostStyles.reportAbuseModalTitle}>{modalTextConstants.REPORT_ABUSE_TITLE}</Text>
                         <View style={glancePostStyles.reportAbuseModalTitleDivider}></View>
                     </View>
+                    <TouchableOpacity style={glancePostStyles.closeReportAbuseModal}
+                        onPress={() => closeReportAbuseModal(optionsState, setOptionsState)}>
+                        <Image style={glancePostStyles.icon_post_report_abuse_close} source={post_modal_close_icon} />
+                    </TouchableOpacity>
                     <ScrollView style={{ top: 25 }} persistentScrollbar={true} bounces={true}>
                         {
                             !selectedReportAbuse[reportAbuseRequestPayloadKeys.POST_REPORT_ABUSE_SUBMITTED] &&

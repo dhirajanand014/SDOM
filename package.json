@@ -24,8 +24,8 @@
     "react-native-shimmer": "^0.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/runtime": "^7.11.2",
+    "@babel/core": "^7.12.3",
+    "@babel/runtime": "^7.12.1",
     "@react-native-community/eslint-config": "^0.0.5",
     "metro-react-native-babel-preset": "^0.56.4"
   },

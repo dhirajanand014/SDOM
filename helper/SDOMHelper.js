@@ -23,9 +23,9 @@ export const fetchAndUpdateCategoryState = async (category, setCategory) => {
         if (responseCategoryData) {
             const selectedCategories = await getSelectedCategoryIdsFromStorage();
             const parsedSelectedCategoryIds = selectedCategories.length && JSON.parse(selectedCategories) || [];
-            responseCategoryData.map((category) =>
-                category.isSelected = parsedSelectedCategoryIds.some(selectedCategory =>
-                    category.categoryId == selectedCategory.selectedCategoryId));
+            responseCategoryData.sort((cat1, cat2) => cat1.categoryTitle.localeCompare(cat2.categoryTitle))
+                .map((category) => category.isSelected = parsedSelectedCategoryIds.some(selectedCategory =>
+                    category.categoryId == selectedCategory.selectedCategoryId))
         }
 
         let initialCategory = await getCategoryButtonType();
@@ -208,6 +208,7 @@ export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) 
                         text: permissionsButtons.OK, onPress: async () => {
                             await setCurrentImageAsWallPaper(item.postImage, item.postTitle, setPostImages.SET_POST_WALLPAPER);
                             await increaseAndSetPostCounts(item, sdomDatastate, setSdomDatastate, postCountTypes.POST_WALLPAPERS);
+                            displaySuccessAlert();
                         }
                     }
                 ],
@@ -216,6 +217,20 @@ export const postWallPaperAlert = async (item, sdomDatastate, setSdomDatastate) 
     } catch (error) {
         console.log(error);
     }
+}
+
+export const displaySuccessAlert = () => {
+    return (
+        Alert.alert(
+            alertTextMessages.WALLPAPER_SET_SUCESS,
+            alertTextMessages.WALLPAPER_SET_SUCCESS_TEXT,
+            [
+                {
+                    text: permissionsButtons.OK
+                }
+            ],
+            { cancelable: true }
+        ));
 }
 
 export const downloadImageFromURL = async (item, sdomDatastate, setSdomDatastate) => {
