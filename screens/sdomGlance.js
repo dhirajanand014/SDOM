@@ -63,7 +63,7 @@ export function sdomGlance({ navigation }) {
                 <Image source={category_selection} style={glancePostStyles.category_selection_image} />
             </TouchableOpacity>
             <ViewPager ref={viewPagerRef} peekEnabled style={{ width: width, height: height }} orientation="vertical"
-                transitionStyle="curl" overScrollMode="never" onPageScroll={(event) => {
+                transitionStyle="scroll" onPageScroll={(event) => {
                     if (sdomDatastate.posts && optionsState.lastPageScrolled &&
                         sdomDatastate.posts.length - 1 == optionsState.currentPageIndex) {
                         viewPagerRef.current.setPage(0);
