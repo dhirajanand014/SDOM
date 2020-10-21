@@ -32,7 +32,6 @@ export const glancePostStyles = StyleSheet.create({
         marginBottom: 40,
     },
     titleName: {
-        marginRight: 4,
         fontSize: 18,
         fontFamily: 'sdom_roman_font',
         display: 'flex',
@@ -200,8 +199,8 @@ export const glancePostStyles = StyleSheet.create({
         height: 25
     },
     icon_external_link: {
-        width: 28,
-        height: 28
+        width: 23,
+        height: 23
     },
     icon_post_report_abuse: {
         width: 22,
@@ -557,12 +556,13 @@ export const flatListItemStyles = StyleSheet.create({
         overflow: 'hidden'
     },
     cardSurface: {
-        height: 180,
+        height: 122,
         width: 122,
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 2,
+        left: 5,
+        right: 100,
         marginVertical: 5,
         borderRadius: 8,
     },
@@ -576,7 +576,7 @@ export const flatListItemStyles = StyleSheet.create({
     textCategoryTitle: {
         fontFamily: 'sdom_bold_font',
         color: "#3d3d3d",
-        fontSize: 16,
+        fontSize: 14,
         justifyContent: 'center',
         alignItems: "center"
     },

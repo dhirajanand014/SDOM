@@ -93,7 +93,7 @@ export function sdomGlance({ navigation }) {
                                     <View style={glancePostStyles.innerContainer}>
                                         <View style={glancePostStyles.smallButtonsContainer}>
                                             <Text style={glancePostStyles.titleName}>{item.postTitle}</Text>
-                                            <TouchableOpacity style={{ width: 35 }} onPress={() => Linking.openURL(item.postLink)}>
+                                            <TouchableOpacity style={{ width: 38 }} onPress={() => Linking.openURL(item.postLink)}>
                                                 <Image style={glancePostStyles.icon_external_link} source={post_external_link} />
                                             </TouchableOpacity>
                                         </View>

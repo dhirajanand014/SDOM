@@ -61,7 +61,7 @@ export const modalTextConstants = {
 
 export const alertTextMessages = {
     CONFIRM_TITLE: `Set Wallpaper`,
-    POST_WALLPAPER_TEXT: `Do you want to set the current image as Home Screen and lockscreen?`,
+    POST_WALLPAPER_TEXT: `Do you want to set the current image as Home Screen and Lock Screen?`,
     POST_REPORT_ABUSED: `You have already submitted the report!`,
     WALLPAPER_SET_SUCESS: `Success`,
     WALLPAPER_SET_SUCCESS_TEXT: `Image successfully set as wallpaper`
