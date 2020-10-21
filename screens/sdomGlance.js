@@ -33,6 +33,8 @@ export function sdomGlance({ navigation }) {
         descriptionModal: false,
         reportAbuseModal: false,
         showSearch: false,
+        lastPageScrolled: false,
+        currentPageIndex: 0,
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: {},
         reportAbuses: [],
@@ -60,8 +62,24 @@ export function sdomGlance({ navigation }) {
                 onPress={() => navigation.navigate("Category")}>
                 <Image source={category_selection} style={glancePostStyles.category_selection_image} />
             </TouchableOpacity>
-            <ViewPager ref={viewPagerRef} peekEnabled style={{ width: width, height: height }} orientation="vertical" transitionStyle="scroll"
-                initialPage={0}>
+            <ViewPager ref={viewPagerRef} peekEnabled style={{ width: width, height: height }} orientation="vertical"
+                transitionStyle="curl" overScrollMode="never" onPageScroll={(event) => {
+                    if (sdomDatastate.posts && optionsState.lastPageScrolled &&
+                        sdomDatastate.posts.length - 1 == optionsState.currentPageIndex) {
+                        viewPagerRef.current.setPage(0);
+                        optionsState.lastPageScrolled = false;
+                    }
+                    setOptionsState({ ...optionsState, currentPageIndex: event.nativeEvent.position });
+                }}
+                onPageScrollStateChanged={(event) => {
+                    optionsState.currentPageIndex == sdomDatastate.posts.length - 1 &&
+                        !optionsState.lastPageScrolled &&
+                        'idle' == event.nativeEvent.pageScrollState &&
+                        setOptionsState({
+                            ...optionsState,
+                            lastPageScrolled: true
+                        })
+                }}>
                 {
                     sdomDatastate.posts && sdomDatastate.posts.map((item, index) => {
                         return (

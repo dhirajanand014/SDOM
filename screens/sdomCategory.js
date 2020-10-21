@@ -24,7 +24,7 @@ export function SDOMCategory({ navigation }) {
     return (
         <View style={categoryViewStyles.categoryView} >
             <FlatList data={category.categories}
-                renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={2}
+                renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={3}
                 keyExtractor={(item, index) => item.categoryId} />
             {
                 category.initialCategory == 'skipButton' &&
