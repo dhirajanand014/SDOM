@@ -33,7 +33,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleName: {
         marginRight: 4,
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
@@ -55,13 +55,13 @@ export const glancePostStyles = StyleSheet.create({
     postProfileName: {
         marginRight: 4,
         justifyContent: 'center',
-        fontSize: 12,
+        fontSize: 9,
         fontFamily: 'sdom_bold_font',
         display: 'flex',
         color: 'white',
     },
     postCategoriesIn: {
-        fontSize: 12,
+        fontSize: 9,
         justifyContent: 'center',
         fontFamily: 'sdom_roman_font',
         display: 'flex',
@@ -79,6 +79,12 @@ export const glancePostStyles = StyleSheet.create({
     },
     descriptionText: {
         fontSize: 14,
+        textAlign: 'auto',
+        color: 'black',
+    },
+    descriptionTextNACenter: {
+        fontSize: 14,
+        textAlign: 'center',
         color: 'black',
     },
     category_selection: {
@@ -211,7 +217,7 @@ export const glancePostStyles = StyleSheet.create({
     postTitleAndProfileStyle: {
         alignItems: 'flex-start',
         flexDirection: 'row',
-        marginBottom: 65
+        marginBottom: 50
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -250,16 +256,15 @@ export const glancePostStyles = StyleSheet.create({
     modalContainer: {
         flex: 1,
         alignItems: 'flex-end',
-        margin: 40
+        margin: 45
     },
     modalView: {
         marginRight: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 20,
+        top: 30,
         maxHeight: 250,
         width: 300,
-        top: 30,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -339,6 +344,18 @@ export const glancePostStyles = StyleSheet.create({
         paddingBottom: 1,
         paddingRight: 2
     },
+    closeReportAbuseModal: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        marginHorizontal: 12,
+        marginVertical: 10,
+        elevation: 3,
+    },
+    icon_modal_close: {
+        height: 22,
+        width: 22
+    },
     glanceTopIcons: {
         paddingTop: 4,
         paddingLeft: 2,
@@ -349,11 +366,11 @@ export const glancePostStyles = StyleSheet.create({
         padding: 1
     },
     postDescriptionModalButton: {
-        borderRadius: 18,
-        marginTop: 10,
-        padding: 10,
+        top: 0,
+        right: 0,
+        marginHorizontal: 12,
+        marginVertical: 10,
         elevation: 3,
-        backgroundColor: "#fcc200"
     },
     reportAbuseSubmitButton: {
         borderRadius: 18,
@@ -373,10 +390,8 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: "#fcc200"
     },
     postReportAbuse: {
-        position: 'absolute',
-        left: 20,
-        bottom: 25,
-        marginTop: 15,
+        left: 12,
+        marginTop: 10,
         elevation: 3,
     },
     cancelReportAbuse: {
@@ -499,7 +514,7 @@ export const flatListItemStyles = StyleSheet.create({
         fontWeight: "bold"
     },
     GridViewContainer: {
-        flex: 1 / 2,
+        flex: 1 / 3,
         justifyContent: 'space-between',
     },
     GridViewTextLayout: {
@@ -543,11 +558,11 @@ export const flatListItemStyles = StyleSheet.create({
     },
     cardSurface: {
         height: 180,
-        width: 180,
+        width: 122,
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 8,
+        marginHorizontal: 2,
         marginVertical: 5,
         borderRadius: 8,
     },
@@ -561,7 +576,7 @@ export const flatListItemStyles = StyleSheet.create({
     textCategoryTitle: {
         fontFamily: 'sdom_bold_font',
         color: "#3d3d3d",
-        fontSize: 20,
+        fontSize: 16,
         justifyContent: 'center',
         alignItems: "center"
     },
@@ -569,7 +584,7 @@ export const flatListItemStyles = StyleSheet.create({
         fontFamily: 'sdom_roman_font',
         color: "#3d3d3d",
         padding: 1,
-        fontSize: 14,
+        fontSize: 12,
         justifyContent: 'center',
         alignItems: "center"
     }

@@ -21,7 +21,7 @@ export const SDOMPostReportAbuseModal = (props) => {
                     </View>
                     <TouchableOpacity style={glancePostStyles.closeReportAbuseModal}
                         onPress={() => closeReportAbuseModal(optionsState, setOptionsState)}>
-                        <Image style={glancePostStyles.icon_post_report_abuse_close} source={post_modal_close_icon} />
+                        <Image style={glancePostStyles.icon_modal_close} source={post_modal_close_icon} />
                     </TouchableOpacity>
                     <ScrollView style={{ top: 25 }} persistentScrollbar={true} bounces={true}>
                         {
