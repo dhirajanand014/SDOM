@@ -6,7 +6,6 @@ import { stringConstants } from '../constants/sdomConstants';
 import { glancePostStyles } from '../styles/sdomStyles'
 import { SDOMPostSearchContent } from './SDOMPostSearchContent';
 
-
 const post_search_input_close = require('../assets/post_search_input_close_icon.png');
 const post_search = require('../assets/post_search_icon.png');
 

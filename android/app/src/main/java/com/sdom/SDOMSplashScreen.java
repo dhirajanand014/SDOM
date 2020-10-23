@@ -86,7 +86,7 @@ public class SDOMSplashScreen extends AppCompatActivity implements Observer {
 
                     readableDatabase.close();
 
-                    mainIntent.putExtra("navigationRoute", isCategoryEmpty ? "Category" : "Glance");
+                    mainIntent.putExtra("navigationRoute", isCategoryEmpty ? "Intro" : "Glance");
                     startActivity(mainIntent);
                     animateSlideLeft(this);
                     finish();

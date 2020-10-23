@@ -6,6 +6,7 @@ import { sdomGlance } from './screens/sdomGlance';
 import { SDOMCategory } from './screens/SDOMCategory';
 import { headerStyles } from './styles/sdomStyles';
 import { fetchAndUpdateCategoryState } from './helper/SDOMHelper.js';
+import { SDOMIntro } from './screens/SDOMIntro';
 
 export const SDOMCategoryContext = React.createContext();
 
@@ -24,6 +25,7 @@ export default class App extends React.PureComponent {
                 <NavigationContainer>
                     <SDOMStack.Navigator initialRouteName={this.props.navigationRoute} screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
                         headerMode='float' animation="fade">
+                        <SDOMStack.Screen name="Intro" component={SDOMIntro} options={{ headerShown: false }} />
                         <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
                         <SDOMStack.Screen name="Category" component={SDOMCategory} options={{
                             headerShown: true,
