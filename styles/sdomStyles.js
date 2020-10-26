@@ -33,6 +33,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleName: {
         fontSize: 18,
+        letterSpacing: 0.41,
         fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',

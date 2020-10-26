@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, ActivityIndicator } from 'react-native'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated';
 import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { glancePostStyles } from '../styles/sdomStyles'
@@ -30,7 +30,7 @@ export function SDOMPostSearchContent(props) {
                                     return (
                                         <TouchableOpacity key={`0_${post.postId}`} style={glancePostStyles.search_content_post_selection}
                                             onPress={() => {
-                                                viewPagerRef.current.setPageWithoutAnimation(postIndex);
+                                                viewPagerRef.current.scrollTo(postIndex + 1);
                                                 togglePostSearchBox(searchValues, setSearchValues, postItem, inputBoxTranslateX,
                                                     contentTranslateY, contentOpacity, screenWidth, screenHeight, false,
                                                     inputTextRef, viewPagerRef);

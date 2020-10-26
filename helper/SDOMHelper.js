@@ -397,9 +397,10 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
             ...searchValues,
             searchText: stringConstants.EMPTY
         });
-        viewPagerRef.current.setScrollEnabled(true);
+        viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: true });
     } else {
-        viewPagerRef.current.setScrollEnabled(false);
+        debugger
+        viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: false });;
     }
 
     timing(input_search_box_translate_x, input_text_translate_x_config).start(() => {
