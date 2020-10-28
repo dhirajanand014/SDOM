@@ -56,9 +56,12 @@ export function sdomGlance({ navigation }) {
                 <View style={{ flex: 1 }}>
                     <Swiper ref={viewPagerRef} index={optionsState.currentPostIndex} horizontal={false} showsPagination={false}
                         bounces={true} loop onIndexChanged={(index) => animatePostTextDetails(textAnimationValue)}
-                        onMomentumScrollEnd={(event) => postDetailsRef.current.
-                            setPostIndex(Math.round(event.nativeEvent.contentOffset.y /
-                                event.nativeEvent.layoutMeasurement.height) - 1)}>
+                        onMomentumScrollBegin={(event) => {
+                            postDetailsRef.current && postDetailsRef.current.setPostAnimationVisible(true);
+                        }}
+                        onMomentumScrollEnd={(event) =>
+                            postDetailsRef.current && postDetailsRef.current.setPostIndex(
+                                Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1)}>
                         {
                             sdomDatastate.posts.map((item, index) => {
                                 return <View key={index}>

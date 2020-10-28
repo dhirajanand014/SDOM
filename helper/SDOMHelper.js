@@ -92,8 +92,12 @@ export const getSelectedCategoryIdsFromStorage = async () => {
     }
 }
 
-export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatastate, postCountType) => {
+export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatastate, postCountType,
+    postDetailsState, setPostDetailsState) => {
     try {
+
+        setAnimationVisible(postDetailsState, setPostDetailsState, false);
+
         if (postCountType == postCountTypes.POST_LIKES) {
             sdomDatastate.posts.find(item => item.postId == post.postId).postLikes = ++post.postLikes;
         } else if (postCountType == postCountTypes.POST_DOWNLOADS) {
@@ -282,7 +286,10 @@ export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
     return names.join(stringConstants.PIPELINE_JOIN) || stringConstants.EMPTY;
 }
 
-export const setOptionsStateForDescription = (optionsState, setOptionsState, item) => {
+export const setOptionsStateForDescription = (optionsState, setOptionsState, item,
+    postDetailsState, setPostDetailsState) => {
+
+    setAnimationVisible(postDetailsState, setPostDetailsState, false);
     setOptionsState({
         ...optionsState,
         descriptionModal: true,
@@ -484,10 +491,18 @@ export const getFadeInAnimation = (textAnimationValue) =>
     }]
 
 export const animatePostTextDetails = (textAnimationValue) => {
+    debugger
     Animated.timing(textAnimationValue, {
         toValue: 1,
         duration: 500,
         useNativeDriver: true,
         easing: Easing.bounce
     }).start(textAnimationValue.setValue(0));
+}
+
+export const setAnimationVisible = (postDetailsState, setPostDetailsState, isVisible) => {
+    setPostDetailsState({
+        ...postDetailsState,
+        animationVisible: isVisible
+    });
 }

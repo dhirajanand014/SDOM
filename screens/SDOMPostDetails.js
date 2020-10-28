@@ -34,8 +34,12 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
     useImperativeHandle(ref,
         () => ({
             setPostIndex(index) {
-                setPostDetailsState({ ...postDetailsState, currentPostIndex: index, animationVisible: true })
+                setPostDetailsState({ ...postDetailsState, currentPostIndex: index });
             },
+
+            setPostAnimationVisible(isVisible) {
+                setPostDetailsState({ ...postDetailsState, animationVisible: isVisible });
+            }
         }));
 
     const input_search_box_translate_x = new Value(width);
@@ -79,13 +83,15 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
             <View style={glancePostStyles.largeButtonContainer}>
                 <View style={glancePostStyles.glanceTopIconInfo}>
                     <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() =>
-                        setOptionsStateForDescription(optionsState, setOptionsState, posts[postDetailsState.currentPostIndex])}>
+                        setOptionsStateForDescription(optionsState, setOptionsState, posts[postDetailsState.currentPostIndex],
+                            postDetailsState, setPostDetailsState)}>
                         <Image style={glancePostStyles.icon_post_description} source={post_description} />
                     </TouchableOpacity>
                 </View>
                 <View style={glancePostStyles.glanceTopIconLike}>
                     <TouchableOpacity style={glancePostStyles.backgroundRoundColor} disabled={posts[postDetailsState.currentPostIndex].likeDisabled}
-                        onPress={async () => await increaseAndSetPostCounts(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate, postCountTypes.POST_LIKES)}>
+                        onPress={async () => await increaseAndSetPostCounts(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate,
+                            postCountTypes.POST_LIKES, postDetailsState, setPostDetailsState)}>
                         <Image style={glancePostStyles.icon_post_like} source={posts[postDetailsState.currentPostIndex].likeDisabled &&
                             post_like_selected || post_like} />
                     </TouchableOpacity>
