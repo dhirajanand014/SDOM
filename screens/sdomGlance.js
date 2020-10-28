@@ -59,9 +59,15 @@ export function sdomGlance({ navigation }) {
                         onMomentumScrollBegin={(event) => {
                             postDetailsRef.current && postDetailsRef.current.setPostAnimationVisible(true);
                         }}
-                        onMomentumScrollEnd={(event) =>
-                            postDetailsRef.current && postDetailsRef.current.setPostIndex(
-                                Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1)}>
+                        onMomentumScrollEnd={(event) => {
+                            var index = 0;
+                            if (event.position) {
+                                index = event.position;
+                            } else if (event.nativeEvent.layoutMeasurement) {
+                                index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
+                            }
+                            postDetailsRef.current && postDetailsRef.current.setPostIndex(index);
+                        }}>
                         {
                             sdomDatastate.posts.map((item, index) => {
                                 return <View key={index}>
