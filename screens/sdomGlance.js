@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Image, TouchableOpacity, Dimensions, StatusBar, ActivityIndicator } from 'react-native';
 import { stringConstants } from '../constants/sdomConstants';
-import { fetchPostsAndSaveToState } from '../helper/SDOMHelper';
+import { animatePostTextDetails, fetchPostsAndSaveToState } from '../helper/SDOMHelper';
 import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
 import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
 import { glancePostStyles } from '../styles/sdomStyles';
@@ -9,6 +9,7 @@ import Animated from 'react-native-reanimated';
 import Shimmer from 'react-native-shimmer';
 import Swiper from 'react-native-swiper';
 import { SDOMSwipeItem } from './SDOMSwipeItem'
+import { SDOMPostDetails } from './SDOMPostDetails';
 
 const { Value } = Animated;
 
@@ -22,8 +23,6 @@ export function sdomGlance({ navigation }) {
         descriptionModal: false,
         reportAbuseModal: false,
         showSearch: false,
-        lastPageScrolled: false,
-        currentPageIndex: 0,
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: {},
         reportAbuses: [],
@@ -33,6 +32,8 @@ export function sdomGlance({ navigation }) {
     const inputTextRef = useRef(null);
     const viewPagerRef = useRef(null);
 
+    const postDetailsRef = useRef(null);
+
     useEffect(() => {
         fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate, optionsState, setOptionsState);
     }, []);
@@ -40,9 +41,10 @@ export function sdomGlance({ navigation }) {
     let { width, height } = Dimensions.get("window");
     height += StatusBar.currentHeight;
 
-    const animatedValue = React.useRef(new Value(0)).current;
-    const verticalSpeed = Math.abs(height * 0.75 - height);
-    console.log(sdomDatastate)
+    const textAnimationValue = new Value(0);
+
+    console.log(sdomDatastate);
+
     return (
         <View style={{ flex: 1 }}>
             <TouchableOpacity style={glancePostStyles.category_selection}
@@ -51,22 +53,25 @@ export function sdomGlance({ navigation }) {
             </TouchableOpacity>
             {
                 sdomDatastate.posts && sdomDatastate.posts.length &&
-                <Swiper ref={viewPagerRef} horizontal={false} showsPagination={false} bounces={true}
-                    scrollEventThrottle={2} loop onScroll={(event) => {
-                        Animated.event([{
-                            nativeEvent: { contentOffset: { y: animatedValue } }
-                        }], { useNativeDriver: true })
-                    }}>
-                    {
-                        sdomDatastate.posts.map((item, index) => {
-                            return <View key={index}>
-                                <SDOMSwipeItem inputTextRef={inputTextRef} width={width} height={height}
-                                    item={item} index={index} sdomDatastate={sdomDatastate} setSdomDatastate={setSdomDatastate}
-                                    optionsState={optionsState} setOptionsState={setOptionsState} viewPagerRef={viewPagerRef}
-                                    animatedValue={animatedValue} verticalSpeed={verticalSpeed} />
-                            </View>
-                        })}
-                </Swiper> || <View>
+                <View style={{ flex: 1 }}>
+                    <Swiper ref={viewPagerRef} index={optionsState.currentPostIndex} horizontal={false} showsPagination={false}
+                        bounces={true} loop onIndexChanged={(index) => animatePostTextDetails(textAnimationValue)}
+                        onMomentumScrollEnd={(event) => postDetailsRef.current.
+                            setPostIndex(Math.round(event.nativeEvent.contentOffset.y /
+                                event.nativeEvent.layoutMeasurement.height) - 1)}>
+                        {
+                            sdomDatastate.posts.map((item, index) => {
+                                return <View key={index}>
+                                    <SDOMSwipeItem width={width} height={height} item={item} index={index} />
+                                </View>
+                            })}
+                    </Swiper>
+
+                    <SDOMPostDetails ref={postDetailsRef} posts={sdomDatastate.posts} textAnimationValue={textAnimationValue}
+                        width={width} height={height} optionsState={optionsState} setOptionsState={setOptionsState} inputTextRef={inputTextRef}
+                        sdomDatastate={sdomDatastate} setSdomDatastate={setSdomDatastate} optionsState={optionsState}
+                        setOptionsState={setOptionsState} viewPagerRef={viewPagerRef} textAnimationValue={textAnimationValue} />
+                </View> || <View>
                     <Shimmer style={{ width: width, height: height }} duration={500} direction="up" tilt={45}>
                         <View style={glancePostStyles.shimmerViewInit}>
                             <ActivityIndicator color="#de4463" hidesWhenStopped size="small" />

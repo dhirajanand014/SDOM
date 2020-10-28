@@ -471,3 +471,23 @@ export const fetchSavedReportAbuseOptions = async () => {
         console.log('Cannot fetch selected saved report abuses from storage', error);
     }
 }
+
+export const getFadeInAnimation = (textAnimationValue) =>
+    [{
+        opacity: textAnimationValue,
+        transform: [{
+            scale: textAnimationValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0.85, 1],
+            })
+        }]
+    }]
+
+export const animatePostTextDetails = (textAnimationValue) => {
+    Animated.timing(textAnimationValue, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+        easing: Easing.bounce
+    }).start(textAnimationValue.setValue(0));
+}

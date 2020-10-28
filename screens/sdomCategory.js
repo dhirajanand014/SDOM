@@ -4,10 +4,13 @@ import { SDOMCategoryContext } from '../App';
 import { categoryViewStyles } from '../styles/sdomStyles';
 import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/SDOMHelper'
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
+import { useTourGuideController } from 'rn-tourguide';
 
 export function SDOMCategory({ navigation }) {
 
     const { fetchCategories, initialCategorySelection } = useContext(SDOMCategoryContext);
+
+    const { canStart, start, stop, eventEmitter } = useTourGuideController();
 
     const [category, setCategory] = useState({
         categories: [],
@@ -18,6 +21,12 @@ export function SDOMCategory({ navigation }) {
         fetchCategories(category, setCategory, initialCategorySelection);
     }, []);
 
+    useEffect(() => {
+        if (canStart) {
+            start();
+        }
+    }, [canStart]);
+
     let { height } = Dimensions.get("window");
     height += StatusBar.currentHeight;
 
@@ -25,7 +34,7 @@ export function SDOMCategory({ navigation }) {
         <View style={categoryViewStyles.categoryView} >
             <FlatList data={category.categories}
                 renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={3}
-                keyExtractor={(item, index) => item.categoryId} />
+                keyExtractor={(item) => item.categoryId} />
             {
                 category.initialCategory == 'skipButton' &&
                 <View style={categoryViewStyles.bottomButtonLayout}>

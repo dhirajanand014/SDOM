@@ -20,7 +20,9 @@ export const glancePostStyles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        paddingLeft: 20,
+        position: 'absolute',
+        paddingLeft: 15,
+        bottom: 0,
         justifyContent: 'flex-end',
     },
     titleContainer: {
@@ -33,7 +35,6 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleName: {
         fontSize: 18,
-        letterSpacing: 0.41,
         fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
@@ -208,16 +209,15 @@ export const glancePostStyles = StyleSheet.create({
         height: 22
     },
     smallButtonsContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 10,
-        marginBottom: 15,
+        marginBottom: 10,
     },
     postTitleAndProfileStyle: {
         alignItems: 'flex-start',
         flexDirection: 'row',
-        marginBottom: 50
+        marginBottom: 10
     },
     smallButtonContainer: {
         alignItems: 'center',
@@ -240,7 +240,7 @@ export const glancePostStyles = StyleSheet.create({
         top: 10,
         width: 32,
         right: 50,
-        height: 32,
+        height: 32
     },
     largeButtonContainer: {
         flex: 1,
