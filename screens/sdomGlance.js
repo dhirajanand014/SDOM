@@ -55,9 +55,10 @@ export function sdomGlance({ navigation }) {
                 sdomDatastate.posts && sdomDatastate.posts.length &&
                 <View style={{ flex: 1 }}>
                     <Swiper ref={viewPagerRef} index={optionsState.currentPostIndex} horizontal={false} showsPagination={false}
-                        bounces={true} loop onIndexChanged={(index) => animatePostTextDetails(textAnimationValue)}
+                        bounces={true} loop onIndexChanged={(index) => animatePostTextDetails(textAnimationValue, true)}
                         onMomentumScrollBegin={(event) => {
                             postDetailsRef.current && postDetailsRef.current.setPostAnimationVisible(true);
+                            animatePostTextDetails(textAnimationValue, false);
                         }}
                         onMomentumScrollEnd={(event) => {
                             var index = 0;

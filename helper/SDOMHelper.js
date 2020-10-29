@@ -490,10 +490,10 @@ export const getFadeInAnimation = (textAnimationValue) =>
         }]
     }]
 
-export const animatePostTextDetails = (textAnimationValue) => {
+export const animatePostTextDetails = (textAnimationValue, isShow) => {
     debugger
     Animated.timing(textAnimationValue, {
-        toValue: 1,
+        toValue: isShow && 1 || 0,
         duration: 500,
         useNativeDriver: true,
         easing: Easing.bounce
