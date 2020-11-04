@@ -92,12 +92,8 @@ export const getSelectedCategoryIdsFromStorage = async () => {
     }
 }
 
-export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatastate, postCountType,
-    postDetailsState, setPostDetailsState) => {
+export const increaseAndSetPostCounts = async (post, sdomDatastate, setSdomDatastate, postCountType) => {
     try {
-
-        setAnimationVisible(postDetailsState, setPostDetailsState, false);
-
         if (postCountType == postCountTypes.POST_LIKES) {
             sdomDatastate.posts.find(item => item.postId == post.postId).postLikes = ++post.postLikes;
         } else if (postCountType == postCountTypes.POST_DOWNLOADS) {

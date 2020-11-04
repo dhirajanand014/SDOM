@@ -190,10 +190,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     icon_post_description: {
         width: 25,
-        height: 25,
-        paddingRight: 5,
-        paddingTop: 3,
-        alignItems: 'center',
+        height: 25
     },
     icon_post_wallpaper: {
         width: 25,
@@ -244,9 +241,6 @@ export const glancePostStyles = StyleSheet.create({
         width: 32,
         right: 50,
         height: 32
-    },
-    largeButtonContainer: {
-        flex: 1
     },
     modalContainer: {
         flex: 1,
@@ -315,32 +309,11 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: "lightgray"
     },
     icon_count_text: {
-        position: 'absolute',
-        top: 25,
-        color: 'white',
-        left: 42,
-        alignItems: 'center',
-        justifyContent: 'center',
+        color: "white",
         fontFamily: 'sdom_roman_font',
         textAlign: "center",
-        fontSize: 10
-    },
-    icon_count_text_gt_10: {
-        position: 'absolute',
-        top: 25,
-        color: 'white',
-        left: 38,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'sdom_roman_font',
-        textAlign: "center",
-        fontSize: 10
-    },
-    floatingActionButtonTextContainerStyle: {
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
-        width: null,
-        height: null
+        fontSize: 10,
+        top: 1
     },
     shimmerViewInit: {
         flex: 1,
