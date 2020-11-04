@@ -8,7 +8,7 @@ export const SDOMIntro = () => {
     const navigation = useNavigation();
 
     const doneBtnHandle = () => {
-        navigation.navigate('Category');
+        navigation.navigate('Category', { fromIntro: true });
     }
 
     return (

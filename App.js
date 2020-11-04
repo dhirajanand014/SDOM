@@ -7,7 +7,7 @@ import { SDOMCategory } from './screens/SDOMCategory';
 import { headerStyles } from './styles/sdomStyles';
 import { fetchAndUpdateCategoryState } from './helper/SDOMHelper.js';
 import { SDOMIntro } from './screens/SDOMIntro';
-import { TourGuideProvider } from 'rn-tourguide';
+import { TourGuideProvider, TourGuideZone } from 'rn-tourguide';
 
 export const SDOMCategoryContext = React.createContext();
 
@@ -19,13 +19,19 @@ export default class App extends React.PureComponent {
         const fetchCategories = (category, setCategory) => {
             fetchAndUpdateCategoryState(category, setCategory);
         }
+
         const initialCategorySelection = this.props.initialCategorySelection || false;
 
         return (
             <SDOMCategoryContext.Provider value={{ fetchCategories, initialCategorySelection }}>
-                <TourGuideProvider {...{ borderRadius: 16 }}>
+                <TourGuideProvider androidStatusBarVisible={true}
+                    backdropColor={this.props.initialCategorySelection == 'Intro' && `rgba(145, 63, 146, 0.6)`}>
                     <NavigationContainer>
-                        <SDOMStack.Navigator initialRouteName={this.props.navigationRoute} screenOptions={{ gestureEnabled: true, gestureDirection: 'horizontal', cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+                        <SDOMStack.Navigator initialRouteName={this.props.navigationRoute}
+                            screenOptions={{
+                                gestureEnabled: true, gestureDirection: 'horizontal',
+                                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+                            }}
                             headerMode='float' animation="fade">
                             <SDOMStack.Screen name="Intro" component={SDOMIntro} options={{ headerShown: false }} />
                             <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
@@ -38,7 +44,11 @@ export default class App extends React.PureComponent {
                                 headerTitleAlign: 'center',
                                 headerTitleStyle: headerStyles.headerText,
                                 navigationOptions: ({ navigation }) => ({
-                                    headerLeft: (<HeaderBackButton tintColor='#fff' onPress={() => { navigation.goBack() }} />)
+                                    headerLeft: (
+                                        <TourGuideZone zone={2} borderRadius={8} shape={`circle`} text={`Go back to posts Anytime !!`}>
+                                            <HeaderBackButton tintColor='#fff' onPress={() => { navigation.goBack() }} />
+                                        </TourGuideZone>
+                                    )
                                 })
                             }} />
                         </SDOMStack.Navigator>

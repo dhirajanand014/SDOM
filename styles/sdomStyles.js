@@ -189,8 +189,11 @@ export const glancePostStyles = StyleSheet.create({
         fontSize: 15
     },
     icon_post_description: {
-        width: 28,
-        height: 28
+        width: 25,
+        height: 25,
+        paddingRight: 5,
+        paddingTop: 3,
+        alignItems: 'center',
     },
     icon_post_wallpaper: {
         width: 25,
@@ -243,15 +246,7 @@ export const glancePostStyles = StyleSheet.create({
         height: 32
     },
     largeButtonContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 92,
-        width: 32,
-        right: 10,
-        height: 32,
+        flex: 1
     },
     modalContainer: {
         flex: 1,
@@ -320,10 +315,32 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: "lightgray"
     },
     icon_count_text: {
-        color: "white",
+        position: 'absolute',
+        top: 25,
+        color: 'white',
+        left: 42,
+        alignItems: 'center',
+        justifyContent: 'center',
         fontFamily: 'sdom_roman_font',
         textAlign: "center",
         fontSize: 10
+    },
+    icon_count_text_gt_10: {
+        position: 'absolute',
+        top: 25,
+        color: 'white',
+        left: 38,
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'sdom_roman_font',
+        textAlign: "center",
+        fontSize: 10
+    },
+    floatingActionButtonTextContainerStyle: {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        width: null,
+        height: null
     },
     shimmerViewInit: {
         flex: 1,
@@ -455,6 +472,10 @@ export const glancePostStyles = StyleSheet.create({
     search_items: {
         padding: 16,
         alignItems: 'center',
+    },
+    tourGuideStyle: {
+        width: 120,
+        height: 130
     }
 });
 
@@ -496,8 +517,13 @@ export const categoryViewStyles = StyleSheet.create({
     },
     textSave: {
         color: "#fff",
+        textAlign: 'center',
         fontSize: 18,
         fontFamily: 'sdom_bold_font',
+    },
+    skipTourZoneStyle: {
+        width: 95,
+        paddingVertical: 18
     }
 })
 

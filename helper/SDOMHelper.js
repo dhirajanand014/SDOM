@@ -406,7 +406,6 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
         });
         viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: true });
     } else {
-        debugger
         viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: false });;
     }
 
@@ -491,7 +490,6 @@ export const getFadeInAnimation = (textAnimationValue) =>
     }]
 
 export const animatePostTextDetails = (textAnimationValue, isShow) => {
-    debugger
     Animated.timing(textAnimationValue, {
         toValue: isShow && 1 || 0,
         duration: 500,

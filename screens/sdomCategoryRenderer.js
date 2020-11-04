@@ -1,10 +1,10 @@
 import React from 'react'
 import { TouchableOpacity, ImageBackground, View, Text } from 'react-native';
 import Shimmer from 'react-native-shimmer';
-import { TourGuideZone } from 'rn-tourguide';
 import { stringConstants } from '../constants/sdomConstants';
 import { getCategoryButtonType } from '../helper/SDOMHelper';
-import { flatListItemStyles } from '../styles/sdomStyles';
+import { flatListItemStyles, glancePostStyles } from '../styles/sdomStyles';
+import { TourGuideZone } from 'rn-tourguide';
 
 export const sdomCategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover } = item;
@@ -12,14 +12,30 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
         <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}
             onPress={async () => {
                 category.categories[index].isSelected = !category.categories[index].isSelected;
-
                 const initialCategoryFromStorage = await getCategoryButtonType();
                 const initialCategory = ((!initialCategoryFromStorage == stringConstants.EMPTY && initialCategoryFromStorage == 'saveButton')
                     || category.categories.some((item) => { return true == item.isSelected })) && 'saveButton' || 'skipButton';
                 setCategory({ ...category, initialCategory: initialCategory });
             }}>
-            <TourGuideZone zone={1} shape='rectangle_and_keep'>
-                <View style={flatListItemStyles.cardSurface}>
+            {
+                index == 0 && category.initialCategory == 'skipButton' &&
+                <TourGuideZone zone={1} borderRadius={8} shape={`rectangle`}
+                    style={glancePostStyles.tourGuideStyle} text={`Select a category`}>
+                    <View style={flatListItemStyles.cardSurface}>
+                        <ImageBackground source={{ uri: categoryCover }}
+                            style={category.categories[index].isSelected && flatListItemStyles.checkBoxSelected ||
+                                flatListItemStyles.imageBackGround}>
+                            <View style={flatListItemStyles.textsView}>
+                                <Shimmer direction="right" duration={5000}>
+                                    <Text style={flatListItemStyles.textCategoryTitle}>{item.categoryTitle}</Text>
+                                </Shimmer>
+                                <Shimmer direction="right" duration={5000}>
+                                    <Text style={flatListItemStyles.textCategoryCity}>{item.categoryOrigin}</Text>
+                                </Shimmer>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                </TourGuideZone> || <View style={flatListItemStyles.cardSurface}>
                     <ImageBackground source={{ uri: categoryCover }}
                         style={category.categories[index].isSelected && flatListItemStyles.checkBoxSelected ||
                             flatListItemStyles.imageBackGround}>
@@ -33,7 +49,7 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                         </View>
                     </ImageBackground>
                 </View>
-            </TourGuideZone>
+            }
         </TouchableOpacity>
     )
 }

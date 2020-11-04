@@ -47,7 +47,7 @@ public class MainActivity extends ReactActivity {
                     mInitialProps = new Bundle();
                     // put any initialProps here
                     mInitialProps.putString(NAVIGATION_ROUTE, bundle.getString(NAVIGATION_ROUTE));
-                    if ("Category".equalsIgnoreCase(bundle.getString(NAVIGATION_ROUTE))) {
+                    if ("Intro".equalsIgnoreCase(bundle.getString(NAVIGATION_ROUTE))) {
                         mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
                     }
                 }

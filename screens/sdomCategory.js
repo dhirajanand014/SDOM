@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FlatList, View, Dimensions, StatusBar, Text, TouchableOpacity } from 'react-native';
+import { FlatList, View, Dimensions, StatusBar, Text, TouchableOpacity, BackHandler } from 'react-native';
 import { SDOMCategoryContext } from '../App';
 import { categoryViewStyles } from '../styles/sdomStyles';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/SDOMHelper'
 import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
-import { useTourGuideController } from 'rn-tourguide';
+import { TourGuideZone, useTourGuideController } from 'rn-tourguide';
 
-export function SDOMCategory({ navigation }) {
+export function SDOMCategory() {
 
     const { fetchCategories, initialCategorySelection } = useContext(SDOMCategoryContext);
 
-    const { canStart, start, stop, eventEmitter } = useTourGuideController();
+    const navigation = useNavigation();
+    const route = useRoute();
+
+    const { canStart, start } = useTourGuideController();
 
     const [category, setCategory] = useState({
         categories: [],
@@ -19,6 +23,11 @@ export function SDOMCategory({ navigation }) {
 
     useEffect(() => {
         fetchCategories(category, setCategory, initialCategorySelection);
+        const backHandler = BackHandler.addEventListener(`hardwareBackPress`, () => {
+            route.params.fromIntro && BackHandler.exitApp();
+            return true;
+        });
+        return () => backHandler.remove();
     }, []);
 
     useEffect(() => {
@@ -45,7 +54,10 @@ export function SDOMCategory({ navigation }) {
                             routes: [{ name: "Glance" }],
                         });
                     }} style={categoryViewStyles.saveButtonContainer}>
-                        <Text style={categoryViewStyles.textSave}>{`Skip >>`}</Text>
+                        <TourGuideZone zone={3} borderRadius={30} shape={`rectangle`}
+                            style={categoryViewStyles.skipTourZoneStyle} text={`Skip or save categories to view posts!`}>
+                            <Text style={categoryViewStyles.textSave}>{`Skip >>`}</Text>
+                        </TourGuideZone>
                     </TouchableOpacity>
                 </View>
             }

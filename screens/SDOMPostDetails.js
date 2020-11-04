@@ -10,6 +10,7 @@ import {
     downloadImageFromURL, setOptionsStateForDescription
 } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
+import ActionButton from '@logvinme/react-native-action-button';
 
 const post_like = require('../assets/post_likes_heart_arrow_icon.png');
 const post_like_selected = require('../assets/post_likes_heart_arrow_icon_selected.png');
@@ -80,38 +81,30 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                         post={posts[postDetailsState.currentPostIndex]} />
                 }
             </View>
-            <View style={glancePostStyles.largeButtonContainer}>
-                <View style={glancePostStyles.glanceTopIconInfo}>
-                    <TouchableOpacity style={glancePostStyles.backgroundIconSpacing} onPress={() =>
-                        setOptionsStateForDescription(optionsState, setOptionsState, posts[postDetailsState.currentPostIndex],
-                            postDetailsState, setPostDetailsState)}>
-                        <Image style={glancePostStyles.icon_post_description} source={post_description} />
-                    </TouchableOpacity>
-                </View>
-                <View style={glancePostStyles.glanceTopIconLike}>
-                    <TouchableOpacity style={glancePostStyles.backgroundRoundColor} disabled={posts[postDetailsState.currentPostIndex].likeDisabled}
-                        onPress={async () => await increaseAndSetPostCounts(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate,
-                            postCountTypes.POST_LIKES, postDetailsState, setPostDetailsState)}>
-                        <Image style={glancePostStyles.icon_post_like} source={posts[postDetailsState.currentPostIndex].likeDisabled &&
-                            post_like_selected || post_like} />
-                    </TouchableOpacity>
-                    <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postLikes}</Text>
-                </View>
-                <View style={glancePostStyles.glanceTopIcons}>
-                    <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () => await
-                        postWallPaperAlert(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
-                        <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
-                    </TouchableOpacity>
-                    <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postWallPapers}</Text>
-                </View>
-                <View style={glancePostStyles.glanceTopIcons}>
-                    <TouchableOpacity style={glancePostStyles.backgroundRoundColor} onPress={async () =>
-                        await downloadImageFromURL(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
-                        <Image style={glancePostStyles.icon_post_download} source={post_download} />
-                    </TouchableOpacity>
-                    <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postDownloads}</Text>
-                </View>
-            </View>
-        </React.Fragment>
+            <ActionButton buttonColor="rgba(0, 0, 0, 0.1)" size={28} useNativeFeedback={false} verticalOrientation="down"
+                position="right" offsetX={10} offsetY={15} hideShadow={true} autoInactive={false}>
+                <ActionButton.Item buttonColor='rgba(0, 0, 0, 0.25)' hideLabelShadow={true}
+                    onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
+                        posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>
+                    <Image style={glancePostStyles.icon_post_description} source={post_description} />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='rgba(0, 0, 0, 0.25)' hideLabelShadow={true} title={posts[postDetailsState.currentPostIndex].postLikes}
+                    textStyle={glancePostStyles.icon_count_text} disabled={posts[postDetailsState.currentPostIndex].likeDisabled}
+                    onPress={async () => await increaseAndSetPostCounts(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate,
+                        postCountTypes.POST_LIKES, postDetailsState, setPostDetailsState)}>
+                    <Image style={glancePostStyles.icon_post_like} source={posts[postDetailsState.currentPostIndex].likeDisabled &&
+                        post_like_selected || post_like} />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='rgba(0, 0, 0, 0.25)' title={posts[postDetailsState.currentPostIndex].postWallPapers}
+                    textStyle={glancePostStyles.icon_count_text} onPress={async () => awaitpostWallPaperAlert(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
+                    <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='rgba(0, 0, 0, 0.25)' onPress={async () =>
+                    await downloadImageFromURL(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
+                    <Image style={glancePostStyles.icon_post_download} source={post_download} />
+                </ActionButton.Item>
+                <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postDownloads}</Text>
+            </ActionButton>
+        </React.Fragment >
     )
 });
