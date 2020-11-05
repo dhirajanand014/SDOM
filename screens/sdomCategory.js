@@ -14,7 +14,7 @@ export function SDOMCategory() {
     const navigation = useNavigation();
     const route = useRoute();
 
-    const { canStart, start } = useTourGuideController();
+    const { canStart, start, stop } = useTourGuideController();
 
     const [category, setCategory] = useState({
         categories: [],
@@ -53,6 +53,7 @@ export function SDOMCategory() {
                             index: 0,
                             routes: [{ name: "Glance" }],
                         });
+                        stop();
                     }} style={categoryViewStyles.saveButtonContainer}>
                         <TourGuideZone zone={3} borderRadius={30} shape={`rectangle`}
                             style={categoryViewStyles.skipTourZoneStyle} text={`Skip or save categories to view posts!`}>
@@ -79,6 +80,7 @@ export function SDOMCategory() {
                             index: 0,
                             routes: [{ name: "Glance" }],
                         });
+                        stop();
                     }} style={categoryViewStyles.saveButtonContainer}>
                         <Text style={categoryViewStyles.textSave}>Save</Text>
                     </TouchableOpacity>

@@ -36,7 +36,9 @@ export const postCountRequestKeys = {
 export const permissionsButtons = {
     OK: `OK`,
     CANCEL: `Cancel`,
-    ASK_ME_LATER: `Ask Me Later`
+    ASK_ME_LATER: `Ask Me Later`,
+    NONE: `none`,
+    AUTO: `auto`
 }
 
 export const permissionMessages = {
@@ -76,3 +78,16 @@ export const reportAbuseRequestPayloadKeys = {
 export const responseStringData = {
     SUCCESS: `Success`
 }
+
+export const postitionStringConstants = {
+    UP: `up`, RIGHT: `right`, DOWN: `down`, LEFT: `left`
+}
+
+export const colorConstants = {
+    TRANSPARENT_BUTTON: `rgba(0, 0, 0, 0.1)`
+}
+
+export const postDetailsButtonTitles = {
+    DESCRIPTION: `Description`, LIKES: `Likes`, SET_WALLPAPER: `Set Wallpaper`, DOWNLOAD_POST: `Download Post`
+}
+
