@@ -9,7 +9,7 @@ import {
 } from '../constants/sdomConstants';
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Animated, { Easing } from 'react-native-reanimated';
+import Animated, { EasingNode, runOnJS, withSpring } from 'react-native-reanimated';
 const { timing } = Animated;
 
 export const fetchCategoryData = async () => {
@@ -379,52 +379,64 @@ export const saveReportAbuseOptions = async (optionsState) => {
 export const togglePostSearchBox = (searchValues, setSearchValues, post,
     input_search_box_translate_x, content_translate_y, content_opacity, width,
     height, isShowInputBox, inputTextRef, viewPagerRef) => {
+    try {
+        const input_text_translate_x_config = {
+            damping: 20
+        }
+        const content_translate_y_config = {
+            damping: 20
+        }
+        const content_opacity_config = {
+            damping: 20
+        }
 
-    const input_text_translate_x_config = {
-        duration: 200,
-        toValue: isShowInputBox && 1 || width,
-        easing: Easing.inOut(Easing.ease)
-    }
-    const content_translate_y_config = {
-        duration: 300,
-        toValue: isShowInputBox && 1 || height,
-        easing: Easing.inOut(Easing.ease)
-    }
-    const content_opacity_config = {
-        duration: 200,
-        toValue: isShowInputBox && 1 || 0,
-        easing: Easing.inOut(Easing.ease)
-    }
-    if (!isShowInputBox) {
-        setSearchValues({
-            ...searchValues,
-            searchText: stringConstants.EMPTY
+        input_search_box_translate_x.value = withSpring(isShowInputBox && 1 || width, input_text_translate_x_config, (finished) => {
+            //runOnJS(() => focusAndBlurInputBox(isShowInputBox, inputTextRef))
+        })
+
+        content_translate_y.value = withSpring(isShowInputBox && 1 || height, content_translate_y_config, (finished) => {
+            //runOnJS(inputTextRef.current.focus());
         });
-        viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: true });
-    } else {
-        viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: false });;
-    }
 
-    timing(input_search_box_translate_x, input_text_translate_x_config).start(() => {
+        content_opacity.value = withSpring(isShowInputBox && 1 || 0, content_opacity_config);
+
         InteractionManager.runAfterInteractions(() => {
             if (!isShowInputBox) {
                 inputTextRef.current.clear();
                 inputTextRef.current.blur();
+                viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: true });
+                setSearchValues({
+                    ...searchValues,
+                    searchForPostId: stringConstants.EMPTY,
+                    searchText: stringConstants.EMPTY
+                });
             } else {
-                inputTextRef.current.focus();
+                setTimeout(() => {
+                    inputTextRef.current.focus();
+                    viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: false });
+                    setSearchValues({
+                        ...searchValues,
+                        searchForPostId: post.postId
+                    }, 200);
+                });
             }
         });
-    });
-    timing(content_translate_y, content_translate_y_config).start(() => {
-        InteractionManager.runAfterInteractions(() => {
-            setSearchValues({
-                ...searchValues,
-                searchForPostId: post.postId
-            });
-        });
-    });
-    timing(content_opacity, content_opacity_config).start();
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
+
+export const focusAndBlurInputBox = (isShowInputBox, inputTextRef) => {
+    'worklet';
+    if (!isShowInputBox) {
+        inputTextRef.current.clear();
+        inputTextRef.current.blur();
+    } else {
+        inputTextRef.current.focus();
+    }
+}
+
 
 export const fetchReportAbuseValues = async (optionsState, setOptionsState) => {
     try {
@@ -478,7 +490,7 @@ export const getFadeInAnimation = (textAnimationValue) =>
     [{
         opacity: textAnimationValue,
         transform: [{
-            scale: textAnimationValue.interpolate({
+            scale: textAnimationValue.interpolateNode({
                 inputRange: [0, 1],
                 outputRange: [0.85, 1],
             })
@@ -490,7 +502,7 @@ export const animatePostTextDetails = (textAnimationValue, isShow) => {
         toValue: isShow && 1 || 0,
         duration: 500,
         useNativeDriver: true,
-        easing: Easing.bounce
+        easing: EasingNode.bounce
     }).start(textAnimationValue.setValue(0));
 }
 

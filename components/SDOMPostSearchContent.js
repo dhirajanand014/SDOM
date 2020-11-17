@@ -1,21 +1,25 @@
 import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import Animated from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { glancePostStyles } from '../styles/sdomStyles'
 
 export function SDOMPostSearchContent(props) {
     const { screenWidth, contentOpacity, contentTranslateY, searchValues, posts, inputBoxTranslateX, screenHeight,
         inputTextRef, viewPagerRef, setSearchValues, postItem } = props;
+
+    const translateSearchContent = useAnimatedStyle(() => {
+        return {
+            transform: [{
+                translateY: contentTranslateY.value
+            }],
+            opacity: contentOpacity.value
+        }
+    })
     return (
         searchValues !== undefined &&
-        <Animated.View style={[glancePostStyles.search_content, {
-            opacity: contentOpacity,
-            transform: [{
-                translateY: contentTranslateY
-            }]
-        }]}>
+        <Animated.View style={[glancePostStyles.search_content, translateSearchContent]}>
             <View style={[glancePostStyles.search_content, {
                 width: screenWidth - 100
             }]}>
