@@ -9,7 +9,7 @@ import {
 } from '../constants/sdomConstants';
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Animated, { EasingNode, runOnJS, withSpring } from 'react-native-reanimated';
+import Animated, { runOnJS, withDelay, withSpring } from 'react-native-reanimated';
 const { timing } = Animated;
 
 export const fetchCategoryData = async () => {
@@ -486,24 +486,33 @@ export const fetchSavedReportAbuseOptions = async () => {
     }
 }
 
-export const getFadeInAnimation = (textAnimationValue) =>
-    [{
-        opacity: textAnimationValue,
-        transform: [{
-            scale: textAnimationValue.interpolateNode({
-                inputRange: [0, 1],
-                outputRange: [0.85, 1],
-            })
-        }]
-    }]
+export const resetAnimatePostTextDetails = (textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
+    const text_spring_config = {
+        damping: 20,
+        stiffness: 90
+    };
+    textPostDescriptionAnimationValue.value = withSpring(-300, text_spring_config);
+    textPostTypeAnimationValue.value = withSpring(-300, text_spring_config);
+}
 
-export const animatePostTextDetails = (textAnimationValue, isShow) => {
-    Animated.timing(textAnimationValue, {
-        toValue: isShow && 1 || 0,
-        duration: 500,
-        useNativeDriver: true,
-        easing: EasingNode.bounce
-    }).start(textAnimationValue.setValue(0));
+export const animateFinishedPostTextDetails = (textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
+    const text_spring_config = {
+        damping: 20,
+        stiffness: 90
+    };
+    textPostDescriptionAnimationValue.value = withDelay(150, withSpring(0, text_spring_config));
+    textPostTypeAnimationValue.value = withDelay(50, withSpring(0, text_spring_config));
+}
+
+export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
+    let index = 0;
+    if (event.position) {
+        index = event.position;
+    } else if (event.nativeEvent.layoutMeasurement) {
+        index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
+    }
+    postDetailsRef.current && postDetailsRef.current.setPostIndex(index);
+    animateFinishedPostTextDetails(textPostDescriptionAnimationValue, textPostTypeAnimationValue);
 }
 
 export const setAnimationVisible = (postDetailsState, setPostDetailsState, isVisible) => {
