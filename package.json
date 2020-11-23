@@ -11,15 +11,15 @@
     "@logvinme/react-native-action-button": "^2.9.1",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/native": "^5.8.9",
-    "@react-navigation/stack": "^5.12.6",
-    "axios": "^0.19.2",
-    "react": "16.9.0",
+    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/stack": "^5.12.8",
+    "axios": "^0.21.0",
+    "react": "^17.0.1",
     "react-native": "^0.63.3",
     "react-native-fast-image": "^8.3.4",
     "react-native-gesture-handler": "^1.8.0",
-    "react-native-reanimated": "^2.0.0-alpha.9.1",
-    "react-native-safe-area-context": "^0.7.3",
+    "react-native-reanimated": "^2.0.0-alpha.9.2",
+    "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.0",
     "react-native-shimmer": "^0.6.0",
     "react-native-svg": "^12.1.0",
@@ -28,10 +28,10 @@
     "rn-tourguide": "^2.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.7",
     "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "metro-react-native-babel-preset": "^0.56.4"
+    "@react-native-community/eslint-config": "^2.0.0",
+    "metro-react-native-babel-preset": "^0.64.0"
   },
   "jest": {
     "preset": "react-native"

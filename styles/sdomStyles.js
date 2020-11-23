@@ -1,37 +1,12 @@
 import { StyleSheet } from 'react-native'
 
 export const glancePostStyles = StyleSheet.create({
-    foregroundTextContainer: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "transparent"
-    },
-    foregroundText: {
-        fontSize: 34,
-        fontWeight: "700",
-        letterSpacing: 0.41,
-        color: "white"
-    },
-    gradient: {
-        paddingHorizontal: 12,
-        paddingVertical: 24,
-        backgroundColor: 'transparent',
-    },
     innerContainer: {
         flex: 1,
         position: 'absolute',
         paddingLeft: 15,
         bottom: 0,
         justifyContent: 'flex-end',
-    },
-    titleContainer: {
-        flexDirection: 'row',
-        marginBottom: 100,
-    },
-    descriptionContainer: {
-        flexDirection: 'row',
-        marginBottom: 40,
     },
     titleName: {
         fontSize: 18,
@@ -48,11 +23,6 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.25)',
         borderRadius: 16,
     },
-    backgroundIconSpacing: {
-        paddingRight: 1,
-        paddingTop: 3,
-        alignItems: 'center'
-    },
     postProfileName: {
         marginRight: 4,
         justifyContent: 'center',
@@ -67,16 +37,6 @@ export const glancePostStyles = StyleSheet.create({
         fontFamily: 'sdom_roman_font',
         display: 'flex',
         color: 'white',
-    },
-    categoryTitleType: {
-        marginRight: 4,
-        fontSize: 18,
-        fontFamily: 'sdom_roman_font',
-        display: 'flex',
-        color: 'white',
-    },
-    descriptionContainer: {
-        marginBottom: 12,
     },
     descriptionText: {
         fontSize: 14,
@@ -99,15 +59,6 @@ export const glancePostStyles = StyleSheet.create({
     category_selection_image: {
         width: 25,
         height: 25
-    },
-    buttonWithTextContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 24,
-    },
-    bottomIconsContainer: {
-        flex: 1,
-        flexDirection: 'row',
     },
     icon_post_like: {
         borderColor: 'red',
@@ -152,10 +103,6 @@ export const glancePostStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         borderRadius: 16
-    },
-    search_content_separator: {
-        flex: 1,
-        paddingTop: 2
     },
     search_content_post_selection: {
         flexDirection: 'row',
@@ -218,18 +165,6 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'flex-start',
         flexDirection: 'row',
         marginBottom: 10
-    },
-    smallButtonContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 'auto',
-        paddingLeft: 10,
-        paddingRight: 10,
-        color: 'white',
-        height: 24,
-    },
-    smallButtonWithTextIconContainer: {
-        marginRight: 12,
     },
     searchIconContainer: {
         flex: 1,
@@ -321,19 +256,6 @@ export const glancePostStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: "white"
     },
-    modalButton: {
-        borderRadius: 20,
-        marginTop: 20,
-        padding: 10,
-        elevation: 2
-    },
-    glanceTopIconLike: {
-        marginTop: 15,
-        paddingTop: 4,
-        paddingLeft: 2,
-        paddingBottom: 1,
-        paddingRight: 2
-    },
     closeReportAbuseModal: {
         position: 'absolute',
         top: 0,
@@ -351,9 +273,6 @@ export const glancePostStyles = StyleSheet.create({
         paddingLeft: 2,
         paddingBottom: 1,
         paddingRight: 2
-    },
-    glanceTopIconInfo: {
-        padding: 1
     },
     postDescriptionModalButton: {
         top: 0,
@@ -432,20 +351,6 @@ export const glancePostStyles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: 'black',
     },
-    search_input_safe_area: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
-    content_item_separator: {
-        paddingTop: 50,
-        marginTop: 5,
-        height: 1,
-        backgroundColor: '#e6e4eb'
-    },
-    search_items: {
-        padding: 16,
-        alignItems: 'center',
-    },
     tourGuideStyle: {
         width: 120,
         height: 130
@@ -453,14 +358,6 @@ export const glancePostStyles = StyleSheet.create({
 });
 
 export const categoryViewStyles = StyleSheet.create({
-    container: {
-        fontSize: 25,
-        flexDirection: "row",
-        marginLeft: 20,
-        marginTop: 70,
-        marginBottom: 30,
-        alignItems: "center"
-    },
     categoryView: {
         flex: 1,
         width: '100%',
@@ -501,11 +398,6 @@ export const categoryViewStyles = StyleSheet.create({
 })
 
 export const flatListItemStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        backgroundColor: "#e5e5e5"
-    },
     headerText: {
         fontSize: 20,
         textAlign: "center",
@@ -515,28 +407,6 @@ export const flatListItemStyles = StyleSheet.create({
     GridViewContainer: {
         flex: 1 / 3,
         justifyContent: 'space-between',
-    },
-    GridViewTextLayout: {
-        fontSize: 20,
-        position: 'absolute',
-        bottom: 0,
-        fontWeight: 'bold',
-        color: 'black',
-        padding: 10,
-    },
-    sdomCategoryImageRenderer: {
-        flex: 1,
-        width: "100%",
-        height: "100%"
-    },
-    sdomCategoryTextOverlay: {
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    sdomCheckboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
     },
     checkBoxSelected: {
         width: '100%',
@@ -591,15 +461,8 @@ export const flatListItemStyles = StyleSheet.create({
 });
 
 export const headerStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     headerText: {
         fontWeight: 'bold',
-    },
-    headerSave: {
-        padding: 15,
-        top: 2
     }
 });
 
