@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
-import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { togglePostSearchBox } from '../helper/SDOMHelper'
 import { glancePostStyles } from '../styles/sdomStyles'
 

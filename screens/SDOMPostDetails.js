@@ -34,6 +34,8 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
 
     useImperativeHandle(ref,
         () => ({
+            postIndex: postDetailsState.currentPostIndex,
+
             setPostIndex(index) {
                 setPostDetailsState({ ...postDetailsState, currentPostIndex: index });
             },

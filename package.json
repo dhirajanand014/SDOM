@@ -17,7 +17,7 @@
     "react": "^17.0.1",
     "react-native": "^0.63.3",
     "react-native-fast-image": "^8.3.4",
-    "react-native-gesture-handler": "^1.8.0",
+    "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "^2.0.0-alpha.9.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.0",
@@ -28,7 +28,7 @@
     "rn-tourguide": "^2.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.8",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "metro-react-native-babel-preset": "^0.64.0"

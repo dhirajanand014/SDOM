@@ -10,7 +10,6 @@ import {
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Animated, { runOnJS, withDelay, withSpring } from 'react-native-reanimated';
-const { timing } = Animated;
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
@@ -389,9 +388,9 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
         const content_opacity_config = {
             damping: 20
         }
-
+        viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: !isShowInputBox });
         input_search_box_translate_x.value = withSpring(isShowInputBox && 1 || width, input_text_translate_x_config, (finished) => {
-            //runOnJS(() => focusAndBlurInputBox(isShowInputBox, inputTextRef))
+            //runOnJS(focusAndBlurInputBox)(isShowInputBox, inputTextRef)
         })
 
         content_translate_y.value = withSpring(isShowInputBox && 1 || height, content_translate_y_config, (finished) => {
@@ -404,7 +403,6 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
             if (!isShowInputBox) {
                 inputTextRef.current.clear();
                 inputTextRef.current.blur();
-                viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: true });
                 setSearchValues({
                     ...searchValues,
                     searchForPostId: stringConstants.EMPTY,
@@ -413,12 +411,11 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
             } else {
                 setTimeout(() => {
                     inputTextRef.current.focus();
-                    viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: false });
                     setSearchValues({
                         ...searchValues,
                         searchForPostId: post.postId
-                    }, 200);
-                });
+                    });
+                }, 200);
             }
         });
     }
@@ -426,17 +423,6 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
         console.log(error);
     }
 }
-
-export const focusAndBlurInputBox = (isShowInputBox, inputTextRef) => {
-    'worklet';
-    if (!isShowInputBox) {
-        inputTextRef.current.clear();
-        inputTextRef.current.blur();
-    } else {
-        inputTextRef.current.focus();
-    }
-}
-
 
 export const fetchReportAbuseValues = async (optionsState, setOptionsState) => {
     try {
@@ -491,8 +477,8 @@ export const resetAnimatePostTextDetails = (textPostDescriptionAnimationValue, t
         damping: 20,
         stiffness: 90
     };
-    textPostDescriptionAnimationValue.value = withSpring(-300, text_spring_config);
-    textPostTypeAnimationValue.value = withSpring(-300, text_spring_config);
+    textPostDescriptionAnimationValue.value = withSpring(-1000, text_spring_config);
+    textPostTypeAnimationValue.value = withSpring(-1000, text_spring_config);
 }
 
 export const animateFinishedPostTextDetails = (textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
@@ -506,12 +492,12 @@ export const animateFinishedPostTextDetails = (textPostDescriptionAnimationValue
 
 export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
     let index = 0;
-    if (event.position) {
-        index = event.position;
+    if (event.position || event.nativeEvent.position) {
+        index = event.position - 1 || event.nativeEvent.position - 1;
     } else if (event.nativeEvent.layoutMeasurement) {
         index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
     }
-    postDetailsRef.current && postDetailsRef.current.setPostIndex(index);
+    postDetailsRef.current?.setPostIndex(index);
     animateFinishedPostTextDetails(textPostDescriptionAnimationValue, textPostTypeAnimationValue);
 }
 

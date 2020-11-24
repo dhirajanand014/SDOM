@@ -27,7 +27,6 @@ export function sdomGlance({ navigation }) {
         reportAbuseSubmitDisabled: false
     });
 
-
     const viewPagerRef = useRef(null);
 
     const postDetailsRef = useRef(null);
@@ -61,8 +60,8 @@ export function sdomGlance({ navigation }) {
             {
                 sdomDatastate.posts && sdomDatastate.posts.length &&
                 <View style={{ flex: 1 }}>
-                    <Swiper ref={viewPagerRef} index={optionsState.currentPostIndex} horizontal={false} showsPagination={false}
-                        bounces={true} loop onMomentumScrollBegin={(event) => postDetailsRef.current && postDetailsRef.current.setPostAnimationVisible(true)}
+                    <Swiper ref={viewPagerRef} index={postDetailsRef?.current?.postIndex} horizontal={false} showsPagination={false} scrollEventThrottle={16}
+                        bounces={true} loop onMomentumScrollBegin={(event) => postDetailsRef.current?.setPostAnimationVisible(true)}
                         onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
                         onScroll={() => resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
                             textPostTypeAnimationValue_translate_x)}>
