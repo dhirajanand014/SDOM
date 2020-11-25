@@ -1,10 +1,11 @@
 import React from 'react'
-import { TouchableOpacity, ImageBackground, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import Shimmer from 'react-native-shimmer';
 import { stringConstants } from '../constants/sdomConstants';
 import { getCategoryButtonType } from '../helper/SDOMHelper';
 import { flatListItemStyles, glancePostStyles } from '../styles/sdomStyles';
 import { TourGuideZone } from 'rn-tourguide';
+import FastImage from 'react-native-fast-image';
 
 export const sdomCategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover } = item;
@@ -22,7 +23,11 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                 <TourGuideZone zone={1} borderRadius={8} shape={`rectangle`}
                     style={glancePostStyles.tourGuideStyle} text={`Select a category`}>
                     <View style={flatListItemStyles.cardSurface}>
-                        <ImageBackground source={{ uri: categoryCover }}
+                        <FastImage source={{
+                            uri: categoryCover,
+                            priority: FastImage.priority.normal,
+                            cache: FastImage.cacheControl.immutable
+                        }}
                             style={category.categories[index].isSelected && flatListItemStyles.checkBoxSelected ||
                                 flatListItemStyles.imageBackGround}>
                             <View style={flatListItemStyles.textsView}>
@@ -33,10 +38,14 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                                     <Text style={flatListItemStyles.textCategoryCity}>{item.categoryOrigin}</Text>
                                 </Shimmer>
                             </View>
-                        </ImageBackground>
+                        </FastImage>
                     </View>
                 </TourGuideZone> || <View style={flatListItemStyles.cardSurface}>
-                    <ImageBackground source={{ uri: categoryCover }}
+                    <FastImage source={{
+                        uri: categoryCover,
+                        priority: FastImage.priority.normal,
+                        cache: FastImage.cacheControl.immutable,
+                    }}
                         style={category.categories[index].isSelected && flatListItemStyles.checkBoxSelected ||
                             flatListItemStyles.imageBackGround}>
                         <View style={flatListItemStyles.textsView}>
@@ -47,7 +56,7 @@ export const sdomCategoryRenderer = (item, index, category, setCategory) => {
                                 <Text style={flatListItemStyles.textCategoryCity}>{item.categoryOrigin}</Text>
                             </Shimmer>
                         </View>
-                    </ImageBackground>
+                    </FastImage>
                 </View>
             }
         </TouchableOpacity>
