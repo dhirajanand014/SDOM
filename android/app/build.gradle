@@ -109,6 +109,7 @@ def enableProguardInReleaseBuilds = true
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+def useIntlJsc = false
 
 /**
  * Whether to enable the Hermes VM.
@@ -185,6 +186,11 @@ dependencies {
     implementation "com.android.support:support-compat:28.0.0"
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    if (useIntlJsc) {
+        implementation 'org.webkit:android-jsc-intl:+'
+    } else {
+        implementation 'org.webkit:android-jsc:+'
+    }
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

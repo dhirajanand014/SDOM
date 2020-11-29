@@ -92,7 +92,7 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                 }
             </View>
             <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} size={28} useNativeFeedback={false} verticalOrientation={postitionStringConstants.DOWN}
-                position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true} autoInactive={false}>
+                position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true} autoInactive={optionsState.descriptionModal}>
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true} title={postDetailsButtonTitles.DESCRIPTION}
                     useNativeFeedback={false} onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
                         posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>
