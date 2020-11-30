@@ -9,7 +9,7 @@ import {
 } from '../constants/sdomConstants';
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Animated, { runOnJS, withDelay, withSpring } from 'react-native-reanimated';
+import { withDelay, withSpring } from 'react-native-reanimated';
 
 export const fetchCategoryData = async () => {
     const responseData = await axios.get(urlConstants.fetchCategories);
@@ -374,7 +374,6 @@ export const saveReportAbuseOptions = async (optionsState) => {
     }
 }
 
-
 export const togglePostSearchBox = (searchValues, setSearchValues, post,
     input_search_box_translate_x, content_translate_y, content_opacity, width,
     height, isShowInputBox, inputTextRef, viewPagerRef) => {
@@ -389,13 +388,9 @@ export const togglePostSearchBox = (searchValues, setSearchValues, post,
             damping: 20
         }
         viewPagerRef.current.scrollView.setNativeProps({ scrollEnabled: !isShowInputBox });
-        input_search_box_translate_x.value = withSpring(isShowInputBox && 1 || width, input_text_translate_x_config, (finished) => {
-            //runOnJS(focusAndBlurInputBox)(isShowInputBox, inputTextRef)
-        })
+        input_search_box_translate_x.value = withSpring(isShowInputBox && 1 || width, input_text_translate_x_config)
 
-        content_translate_y.value = withSpring(isShowInputBox && 1 || height, content_translate_y_config, (finished) => {
-            //runOnJS(inputTextRef.current.focus());
-        });
+        content_translate_y.value = withSpring(isShowInputBox && 1 || height + 500, content_translate_y_config);
 
         content_opacity.value = withSpring(isShowInputBox && 1 || 0, content_opacity_config);
 
