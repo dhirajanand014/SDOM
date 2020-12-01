@@ -5,7 +5,7 @@ import { SDOMPostSearch } from '../components/SDOMPostSearch';
 import {
     stringConstants, postCountTypes,
     postitionStringConstants, colorConstants,
-    postDetailsButtonTitles, permissionsButtons
+    permissionsButtons
 } from '../constants/sdomConstants';
 import {
     postWallPaperAlert, increaseAndSetPostCounts,
@@ -97,14 +97,14 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
             <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} backgroundTappable={true} size={28} useNativeFeedback={false}
                 verticalOrientation={postitionStringConstants.DOWN} position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true}
                 autoInactive={false} active={true}>
-                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true} title={postDetailsButtonTitles.DESCRIPTION}
+                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true}
                     useNativeFeedback={false} onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
                         posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>
                     <View style={glancePostStyles.backgroundRoundColor}>
                         <Image style={glancePostStyles.icon_post_description} source={post_description} />
                     </View>
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true} fixNativeFeedbackRadius={true} title={postDetailsButtonTitles.LIKES}
+                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true} fixNativeFeedbackRadius={true}
                     useNativeFeedback={!posts[postDetailsState.currentPostIndex].likeDisabled} onPress={async () => !posts[postDetailsState.currentPostIndex].likeDisabled &&
                         await increaseAndSetPostCounts(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate,
                             postCountTypes.POST_LIKES, postDetailsState, setPostDetailsState)}>
@@ -115,14 +115,14 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                     </View>
                     <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postLikes}</Text>
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true} title={postDetailsButtonTitles.SET_WALLPAPER} onPress={async () =>
+                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true} onPress={async () =>
                     await postWallPaperAlert(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
                     <View style={glancePostStyles.backgroundRoundColor}>
                         <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
                     </View>
                     <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postWallPapers}</Text>
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} title={postDetailsButtonTitles.DOWNLOAD_POST} fixNativeFeedbackRadius={true} onPress={async () =>
+                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true} onPress={async () =>
                     await downloadImageFromURL(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
                     <View style={glancePostStyles.backgroundRoundColor}>
                         <Image style={glancePostStyles.icon_post_download} source={post_download} />

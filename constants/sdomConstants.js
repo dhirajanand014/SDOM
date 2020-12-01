@@ -86,8 +86,3 @@ export const postitionStringConstants = {
 export const colorConstants = {
     TRANSPARENT_BUTTON: `rgba(0, 0, 0, 0.1)`
 }
-
-export const postDetailsButtonTitles = {
-    DESCRIPTION: `Description`, LIKES: `Likes`, SET_WALLPAPER: `Set Wallpaper`, DOWNLOAD_POST: `Download Post`
-}
-
