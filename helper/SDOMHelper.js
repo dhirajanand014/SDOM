@@ -283,7 +283,7 @@ export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
 
 export const setOptionsStateForDescription = (optionsState, setOptionsState, item,
     postDetailsState, setPostDetailsState) => {
-
+    debugger
     setAnimationVisible(postDetailsState, setPostDetailsState, false);
     setOptionsState({
         ...optionsState,

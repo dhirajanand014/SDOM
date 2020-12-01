@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { Text, View, Image, Linking, TouchableOpacity } from 'react-native';
+import { Text, View, Image, Linking, TouchableOpacity, Switch } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { SDOMPostSearch } from '../components/SDOMPostSearch';
 import {
@@ -29,7 +29,8 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
 
     const [postDetailsState, setPostDetailsState] = useState({
         currentPostIndex: 0,
-        animationVisible: false
+        animationVisible: false,
+        switchEnabled: true
     });
 
     useImperativeHandle(ref,
@@ -94,9 +95,14 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                         post={posts[postDetailsState.currentPostIndex]} />
                 }
             </View>
-            <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} backgroundTappable={true} size={28} useNativeFeedback={false}
+            <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} backgroundTappable={true} size={28} useNativeFeedback={false} degrees={0}
                 verticalOrientation={postitionStringConstants.DOWN} position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true}
-                autoInactive={false} active={true}>
+                autoInactive={false} active={postDetailsState.switchEnabled} renderIcon={(isActive) =>
+                    <Switch trackColor={{ false: colorConstants.GREY, true: colorConstants.YELLOW }}
+                        thumbColor={isActive ? colorConstants.WHITE : colorConstants.WHITE}
+                        style={{ transform: [{ scaleX: .85 }, { scaleY: .85 }] }} value={postDetailsState.switchEnabled}
+                        onValueChange={() => setPostDetailsState({ ...postDetailsState, switchEnabled: !isActive })} />
+                }>
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true}
                     useNativeFeedback={false} onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
                         posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>

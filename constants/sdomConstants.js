@@ -84,5 +84,8 @@ export const postitionStringConstants = {
 }
 
 export const colorConstants = {
-    TRANSPARENT_BUTTON: `rgba(0, 0, 0, 0.1)`
+    TRANSPARENT_BUTTON: `rgba(0, 0, 0, 0.0)`,
+    GREY: `#99999`,
+    YELLOW: `#fcc200`,
+    WHITE: `#ffffff`
 }
