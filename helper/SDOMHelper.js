@@ -283,13 +283,8 @@ export const fetchAndDisplayNamesAndCategoryTitles = (post) => {
 
 export const setOptionsStateForDescription = (optionsState, setOptionsState, item,
     postDetailsState, setPostDetailsState) => {
-    debugger
     setAnimationVisible(postDetailsState, setPostDetailsState, false);
-    setOptionsState({
-        ...optionsState,
-        descriptionModal: true,
-        selectedPost: item
-    })
+    setOptionsState({ ...optionsState, descriptionModal: true, selectedPost: item });
 }
 
 export const setReportAbuseSelectedOption = (optionsState, setOptionsState, selectedReportAbuseId) => {
