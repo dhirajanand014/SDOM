@@ -47,7 +47,7 @@ export function SDOMCategory() {
             {
                 category.initialCategory == 'skipButton' &&
                 <View style={categoryViewStyles.bottomButtonLayout}>
-                    <TouchableOpacity onPress={async () => {
+                    <TouchableOpacity activeOpacity={.7} onPress={async () => {
                         await saveCategoryButtonType('saveButton');
                         navigation.reset({
                             index: 0,
@@ -65,7 +65,7 @@ export function SDOMCategory() {
             {
                 category.initialCategory == 'saveButton' &&
                 <View style={categoryViewStyles.bottomButtonLayout}>
-                    <TouchableOpacity onPress={async () => {
+                    <TouchableOpacity activeOpacity={.7} onPress={async () => {
                         const categoryIds = category.categories.filter(item => item.isSelected).map(selectedCategory => {
                             const categoryJson = {
                                 selectedCategoryId: selectedCategory.categoryId,

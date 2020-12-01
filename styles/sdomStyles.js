@@ -378,15 +378,14 @@ export const categoryViewStyles = StyleSheet.create({
         borderColor: '#e3ddda',
         alignItems: 'center',
         elevation: 3,
-        borderRadius: 30,
-        borderWidth: 3
+        borderRadius: 30
     },
     bottomButtonLayout: {
         height: 63,
         backgroundColor: '#3d3d3d'
     },
     textSave: {
-        color: "#fff",
+        color: "#000000",
         textAlign: 'center',
         fontSize: 18,
         fontFamily: 'sdom_bold_font',
@@ -445,14 +444,14 @@ export const flatListItemStyles = StyleSheet.create({
     },
     textCategoryTitle: {
         fontFamily: 'sdom_bold_font',
-        color: "#3d3d3d",
+        color: "#ffffff",
         fontSize: 14,
         justifyContent: 'center',
         alignItems: "center"
     },
     textCategoryCity: {
         fontFamily: 'sdom_roman_font',
-        color: "#3d3d3d",
+        color: "#ffffff",
         padding: 1,
         fontSize: 12,
         justifyContent: 'center',

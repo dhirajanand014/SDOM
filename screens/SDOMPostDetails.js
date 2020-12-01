@@ -67,9 +67,12 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                 <View style={glancePostStyles.innerContainer}>
                     <Animated.View style={[glancePostStyles.smallButtonsContainer, postDetailsState.animationVisible && postTypeSpringStyle]}>
                         <Text style={glancePostStyles.titleName}>{posts[postDetailsState.currentPostIndex].postTitle}</Text>
-                        <TouchableOpacity style={{ width: 38 }} onPress={() => Linking.openURL(posts[postDetailsState.currentPostIndex].postLink)}>
-                            <Animated.Image style={[glancePostStyles.icon_external_link]} source={post_external_link} />
-                        </TouchableOpacity>
+                        {
+                            posts[postDetailsState.currentPostIndex].postLink &&
+                            <TouchableOpacity style={{ width: 38 }} onPress={() => Linking.openURL(posts[postDetailsState.currentPostIndex].postLink)}>
+                                <Animated.Image style={[glancePostStyles.icon_external_link]} source={post_external_link} />
+                            </TouchableOpacity>
+                        }
                     </Animated.View>
                     <Animated.View style={[glancePostStyles.postTitleAndProfileStyle, postDetailsState.animationVisible && postDescriptionSpringStyle]}>
                         <Text style={posts[postDetailsState.currentPostIndex].profileName && glancePostStyles.postProfileName}>
@@ -91,8 +94,9 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                         post={posts[postDetailsState.currentPostIndex]} />
                 }
             </View>
-            <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} size={28} useNativeFeedback={false} verticalOrientation={postitionStringConstants.DOWN}
-                position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true} autoInactive={optionsState.descriptionModal}>
+            <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} backgroundTappable={true} size={28} useNativeFeedback={false}
+                verticalOrientation={postitionStringConstants.DOWN} position={postitionStringConstants.RIGHT} offsetX={10} offsetY={13} hideShadow={true}
+                autoInactive={false} active={true}>
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true} title={postDetailsButtonTitles.DESCRIPTION}
                     useNativeFeedback={false} onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
                         posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>
