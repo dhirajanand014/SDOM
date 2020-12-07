@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AppIntro from 'rn-falcon-app-intro';
-import { View, Text } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import { introStyles } from '../styles/sdomStyles';
+import { colorConstants } from '../constants/sdomConstants';
 export const SDOMIntro = () => {
 
     const navigation = useNavigation();
@@ -11,27 +12,34 @@ export const SDOMIntro = () => {
         navigation.navigate('Category', { fromIntro: true });
     }
 
+    const { width, height } = Dimensions.get("window");
+
+    const wallpiper_intro_1 = require(`../assets/intro/wallpiper_intro_page_1.jpg`);
+    const wallpiper_intro_2 = require(`../assets/intro/wallpiper_intro_page_2.jpg`);
+    const wallpiper_intro_3 = require(`../assets/intro/wallpiper_intro_page_3.jpg`);
+    const wallpiper_intro_4 = require(`../assets/intro/wallpiper_intro_page_4.jpg`);
+    const wallpiper_intro_5 = require(`../assets/intro/wallpiper_intro_page_5.jpg`);
+    const wallpiper_intro_6 = require(`../assets/intro/wallpiper_intro_page_6.jpg`);
+
     return (
-        <AppIntro onSkipBtnClick={doneBtnHandle} onDoneBtnClick={doneBtnHandle} >
-            <View style={[introStyles.slide, { backgroundColor: '#fa931d' }]}>
-                <View level={10}><Text style={introStyles.text}>Page 1</Text></View>
-                <View level={15}><Text style={introStyles.text}>Page 1</Text></View>
-                <View level={8}><Text style={introStyles.text}>Page 1</Text></View>
+        <AppIntro onSkipBtnClick={doneBtnHandle} onDoneBtnClick={doneBtnHandle} activeDotColor={colorConstants.YELLOW}>
+            <View level={20} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_1} style={{ width: width, height: height }} resizeMode={'stretch'} />
             </View>
-            <View style={[introStyles.slide, { backgroundColor: '#a4b602' }]}>
-                <View level={-10}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={5}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={20}><Text style={introStyles.text}>Page 2</Text></View>
+            <View level={15} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_2} style={{ width: width, height: height }} resizeMode={'stretch'} />
             </View>
-            <View style={[introStyles.slide, { backgroundColor: '#fa931d' }]}>
-                <View level={-10}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={5}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={20}><Text style={introStyles.text}>Page 2</Text></View>
+            <View level={20} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_3} style={{ width: width, height: height }} resizeMode={'stretch'} />
             </View>
-            <View style={[introStyles.slide, { backgroundColor: '#a4b602' }]}>
-                <View level={-10}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={5}><Text style={introStyles.text}>Page 2</Text></View>
-                <View level={20}><Text style={introStyles.text}>Page 2</Text></View>
+            <View level={15} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_4} style={{ width: width, height: height }} resizeMode={'stretch'} />
+            </View>
+            <View level={20} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_5} style={{ width: width, height: height }} resizeMode={'stretch'} />
+            </View>
+            <View level={15} style={[introStyles.slide, { width: width, height: height }]}>
+                <Image source={wallpiper_intro_6} style={{ width: width, height: height }} resizeMode={'stretch'} />
             </View>
         </AppIntro>
     )

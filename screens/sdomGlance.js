@@ -5,7 +5,7 @@ import { onSwiperScrollEnd, fetchPostsAndSaveToState, resetAnimatePostTextDetail
 import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
 import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
 import { glancePostStyles } from '../styles/sdomStyles';
-import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
+import Animated, { useAnimatedScrollHandler, useDerivedValue, useSharedValue } from 'react-native-reanimated';
 import Shimmer from 'react-native-shimmer';
 import Swiper from 'react-native-swiper';
 import { SDOMSwipeItem } from './SDOMSwipeItem'
@@ -41,12 +41,23 @@ export function sdomGlance({ navigation }) {
     const textPostDescriptionAnimationValue = useSharedValue(-10);
     const textPostTypeAnimationValue = useSharedValue(-10);
 
+    const postImageParallax = useSharedValue(0);
+
     const textPostDescriptionAnimationValue_translate_x = useDerivedValue(() => {
         return textPostDescriptionAnimationValue.value * 100;
     });
 
     const textPostTypeAnimationValue_translate_x = useDerivedValue(() => {
         return textPostTypeAnimationValue.value * 100;
+    });
+
+    const onPostScrollFunction = (event) => {
+        'worklet';
+        postImageParallax.value = event.nativeEvent.contentOffset.y;
+    }
+
+    const onPostScroll = useAnimatedScrollHandler({
+        onScroll: onPostScrollFunction,
     });
 
     console.log(sdomDatastate);
@@ -63,13 +74,17 @@ export function sdomGlance({ navigation }) {
                     <Swiper ref={viewPagerRef} index={postDetailsRef?.current?.postIndex} horizontal={false} showsPagination={false} scrollEventThrottle={16}
                         bounces={true} loop onMomentumScrollBegin={(event) => postDetailsRef?.current?.setPostAnimationVisible(true)}
                         onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
-                        onScroll={() => resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
-                            textPostTypeAnimationValue_translate_x)}>
+                        onScroll={(event) => {
+                            resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
+                                textPostTypeAnimationValue_translate_x);
+                            onPostScrollFunction(event);
+                        }}>
                         {
                             sdomDatastate.posts.map((item, index) => {
-                                return <View key={index}>
-                                    <SDOMSwipeItem width={width} height={height} item={item} index={index} />
-                                </View>
+                                return <Animated.View key={index}>
+                                    <SDOMSwipeItem width={width} height={height} item={item} index={index}
+                                        postImageParallax={postImageParallax} />
+                                </Animated.View>
                             })}
                     </Swiper>
 

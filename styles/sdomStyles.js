@@ -14,12 +14,21 @@ export const glancePostStyles = StyleSheet.create({
         display: 'flex',
         color: 'white',
     },
-    backgroundRoundColor: {
+    backgroundRoundColor_description: {
         paddingRight: 1,
         paddingTop: 3,
         alignItems: 'center',
         width: 30,
         height: 30,
+        backgroundColor: 'rgba(0,0,0,0.25)',
+        borderRadius: 16,
+    },
+    backgroundRoundColor: {
+        paddingRight: 1,
+        paddingTop: 3,
+        alignItems: 'center',
+        width: 27,
+        height: 27,
         backgroundColor: 'rgba(0,0,0,0.25)',
         borderRadius: 16,
     },
@@ -62,8 +71,8 @@ export const glancePostStyles = StyleSheet.create({
     },
     icon_post_like: {
         borderColor: 'red',
-        width: 26,
-        height: 26
+        width: 22,
+        height: 22
     },
     icon_post_search: {
         width: 22,
@@ -136,16 +145,16 @@ export const glancePostStyles = StyleSheet.create({
         fontSize: 15
     },
     icon_post_description: {
-        width: 25,
-        height: 25
+        width: 22,
+        height: 22
     },
-    icon_post_wallpaper: {
-        width: 25,
-        height: 25
+    icon_post_details: {
+        width: 22,
+        height: 22,
     },
-    icon_post_download: {
-        width: 25,
-        height: 25
+    icon_post_share: {
+        width: 20,
+        height: 20
     },
     icon_external_link: {
         width: 23,
@@ -159,12 +168,12 @@ export const glancePostStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 6,
     },
     postTitleAndProfileStyle: {
         alignItems: 'flex-start',
         flexDirection: 'row',
-        marginBottom: 10
+        marginBottom: 8
     },
     searchIconContainer: {
         flex: 1,
@@ -469,13 +478,6 @@ export const introStyles = StyleSheet.create({
     slide: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#9DD6EB',
-        padding: 15,
-    },
-    text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
+        alignItems: 'center'
     }
 });

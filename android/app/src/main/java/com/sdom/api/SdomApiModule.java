@@ -25,6 +25,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.sdom.R;
 import com.sdom.constants.SdomConstants;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -70,6 +72,32 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void shareImage(String inImageURL, String inTitle) {
+        try {
+            Bitmap imageBitmap = getBitmapFromURL(inImageURL);
+
+            String imagePath = MediaStore.Images.Media.insertImage(reactContext.getContentResolver(), imageBitmap, inTitle, null);
+            Uri bitmapUri = Uri.parse(imagePath);
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setType("image/png");
+            intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+            intent.putExtra(Intent.EXTRA_TEXT, inTitle);
+
+            Intent chooserIntent = Intent.createChooser(intent, "Share Via");
+            chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            reactContext.startActivity(chooserIntent);
+        } catch (Exception exception) {
+            Toast.makeText(reactContext, "Cannot share image for "
+                    + inTitle, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @ReactMethod
     public void downloadPostImage(String inUrl, String inCategoryTitle, String postRequestType) {
         try {
             new AsyncSetImage(reactContext).execute(inUrl, inCategoryTitle, postRequestType);
@@ -77,6 +105,20 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             Toast.makeText(reactContext, "Cannot download image for "
                     + inCategoryTitle, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Get the bitmap image from the URL passed by the UI component.
+     *
+     * @param src
+     * @return
+     */
+    private Bitmap getBitmapFromURL(String src) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) new URL(src).openConnection();
+        connection.setDoInput(true);
+        connection.connect();
+        InputStream input = connection.getInputStream();
+        return BitmapFactory.decodeStream(input);
     }
 
     /**
@@ -124,20 +166,6 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                 }
                 notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
             }
-        }
-
-        /**
-         * Get the bitmap image from the URL passed by the UI component.
-         *
-         * @param src
-         * @return
-         */
-        private Bitmap getBitmapFromURL(String src) throws IOException {
-            HttpURLConnection connection = (HttpURLConnection) new URL(src).openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            return BitmapFactory.decodeStream(input);
         }
 
         @Override

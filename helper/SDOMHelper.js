@@ -177,6 +177,15 @@ export const downloadCurrentImage = async (postUrl, postTitle, postType) => {
     }
 }
 
+export const shareImage = async (post) => {
+    const { postImage, postTitle } = post
+    try {
+        NativeModules.SdomApi.shareImage(postImage, postTitle);
+    } catch (error) {
+        console.log("Cannot share image", error);
+    }
+}
+
 export const saveCategoryButtonType = async (inCategoryButtonType) => {
     try {
         await AsyncStorage.setItem(asyncStorageKeys.SAVE_CATEGORY_BUTTON_TYPE, inCategoryButtonType);

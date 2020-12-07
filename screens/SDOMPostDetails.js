@@ -9,16 +9,17 @@ import {
 } from '../constants/sdomConstants';
 import {
     postWallPaperAlert, increaseAndSetPostCounts,
-    downloadImageFromURL, setOptionsStateForDescription
+    downloadImageFromURL, setOptionsStateForDescription, shareImage
 } from '../helper/SDOMHelper';
 import { glancePostStyles } from '../styles/sdomStyles';
 import ActionButton from '@logvinme/react-native-action-button';
 
-const post_like = require('../assets/post_likes_heart_arrow_icon.png');
-const post_like_selected = require('../assets/post_likes_heart_arrow_icon_selected.png');
-const post_description = require('../assets/post_description_icon.png');
-const post_wallpaper = require('../assets/post_set_wallpaper_icon.png');
-const post_download = require('../assets/post_download_icon.png');
+const post_like = require(`../assets/post_likes_heart_arrow_icon.png`);
+const post_like_selected = require(`../assets/post_likes_heart_arrow_icon_selected.png`);
+const post_description = require(`../assets/post_description_icon.png`);
+const post_wallpaper = require(`../assets/post_set_wallpaper_icon.png`);
+const post_download = require(`../assets/post_download_icon.png`);
+const post_share = require(`../assets/post_share.png`);
 
 export const SDOMPostDetails = forwardRef((props, ref) => {
 
@@ -106,7 +107,7 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} hideLabelShadow={true}
                     useNativeFeedback={false} onPress={() => setOptionsStateForDescription(optionsState, setOptionsState,
                         posts[postDetailsState.currentPostIndex], postDetailsState, setPostDetailsState)}>
-                    <View style={glancePostStyles.backgroundRoundColor}>
+                    <View style={glancePostStyles.backgroundRoundColor_description}>
                         <Image style={glancePostStyles.icon_post_description} source={post_description} />
                     </View>
                 </ActionButton.Item>
@@ -124,16 +125,22 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true} onPress={async () =>
                     await postWallPaperAlert(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
                     <View style={glancePostStyles.backgroundRoundColor}>
-                        <Image style={glancePostStyles.icon_post_wallpaper} source={post_wallpaper} />
+                        <Image style={glancePostStyles.icon_post_details} source={post_wallpaper} />
                     </View>
                     <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postWallPapers}</Text>
                 </ActionButton.Item>
                 <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true} onPress={async () =>
                     await downloadImageFromURL(posts[postDetailsState.currentPostIndex], sdomDatastate, setSdomDatastate)}>
                     <View style={glancePostStyles.backgroundRoundColor}>
-                        <Image style={glancePostStyles.icon_post_download} source={post_download} />
+                        <Image style={glancePostStyles.icon_post_details} source={post_download} />
                     </View>
                     <Text style={glancePostStyles.icon_count_text}>{posts[postDetailsState.currentPostIndex].postDownloads}</Text>
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor={colorConstants.TRANSPARENT_BUTTON} fixNativeFeedbackRadius={true}
+                    onPress={async () => shareImage(posts[postDetailsState.currentPostIndex])}>
+                    <View style={glancePostStyles.backgroundRoundColor}>
+                        <Image style={glancePostStyles.icon_post_share} source={post_share} />
+                    </View>
                 </ActionButton.Item>
             </ActionButton>
         </React.Fragment>
