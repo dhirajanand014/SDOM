@@ -1,5 +1,8 @@
 package com.sdom;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,6 +15,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.animation.AnimationUtils;
+import com.google.android.material.animation.AnimatorSetCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.reactnativecommunity.asyncstorage.AsyncLocalStorageUtil;
 import com.reactnativecommunity.asyncstorage.ReactDatabaseSupplier;
@@ -20,21 +25,34 @@ import java.util.Observable;
 import java.util.Observer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat;
+import androidx.vectordrawable.graphics.drawable.AnimatorInflaterCompat;
 
 /**
  * Main class for splash screen.
  */
 public class SDOMSplashScreen extends AppCompatActivity implements Observer {
-    private ProgressBar progressBar;
     private NetworkChangeReceiver networkChangeReceiverSplashScreen = new NetworkChangeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+
+        AppCompatImageView imageView = findViewById(R.id.SDOMSplashScreen);
+
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(imageView,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+
+        objectAnimator.setDuration(500);
+        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        objectAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        objectAnimator.start();
+
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         ObservableObject.getInstance().addObserver(this);
         registerReceiver(networkChangeReceiverSplashScreen, intentFilter);

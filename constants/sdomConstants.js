@@ -1,9 +1,9 @@
 export const urlConstants = {
-    fetchCategories: `https://sdom.zevcore.in/4RhvfbEGwnsmxcat.php`,
-    fetchPosts: `https://sdom.zevcore.in/4RhvfbEGwnsmxcpst.php`,
-    setPostCounts: `https://sdom.zevcore.in/4RhvfbEGwnsmxliks.php`,
-    fetchReportAbuses: `https://sdom.zevcore.in/4RhvfbEGwnsmxrpts.php`,
-    setReportAbuseIdWithPostId: `https://sdom.zevcore.in/4RhvfbEGwnsmxrptlist.php`
+    fetchCategories: `https://www.wallpiper.app/4RhvfbEGwnsmxcat.php`,
+    fetchPosts: `https://www.wallpiper.app/4RhvfbEGwnsmxcpst.php`,
+    setPostCounts: `https://www.wallpiper.app/4RhvfbEGwnsmxliks.php`,
+    fetchReportAbuses: `https://www.wallpiper.app/4RhvfbEGwnsmxrpts.php`,
+    setReportAbuseIdWithPostId: `https://www.wallpiper.app/4RhvfbEGwnsmxrptlist.php`
 }
 
 export const asyncStorageKeys = {

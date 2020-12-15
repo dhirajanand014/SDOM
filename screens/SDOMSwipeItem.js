@@ -19,7 +19,7 @@ export const SDOMSwipeItem = (props) => {
 
     return (
         <Animated.View key={`${index}_${item.categoryId}`}>
-            <AnimatedFastImage style={[{ width: width, height: height }]} source={{
+            <FastImage style={[{ width: width, height: height }]} source={{
                 uri: item.postImage,
                 priority: FastImage.priority.normal,
                 cache: FastImage.cacheControl.immutable
