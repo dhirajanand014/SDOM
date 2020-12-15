@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* SDOMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
-		03D1D80892267789B69CD395 /* libPods-SDOMTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF30AEFA6A7C18705DE9BFF /* libPods-SDOMTests.a */; };
+		00E356F31AD99517003FC87E /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
+		03D1D80892267789B69CD395 /* libPods-WallPiperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF30AEFA6A7C18705DE9BFF /* libPods-SDOMTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1B1FE2F83F8E4390A69B22B6 /* sdom_bold_fonts_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */; };
+		1B1FE2F83F8E4390A69B22B6 /* wallpiper_bold_fonts_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* SDOMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
-		348177D7A3816B1CB0339D39 /* libPods-SDOM-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76E88A985825E787845243D /* libPods-SDOM-tvOS.a */; };
-		C4033F5CD159472DAFD4D084 /* sdom_roman_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9250657F54C2C88677228 /* sdom_roman_font.ttf */; };
-		D2F69264578C404154BC9F18 /* libPods-SDOM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89886786AB3EDF8D59E29C99 /* libPods-SDOM.a */; };
-		D3BB671062D090D60D4CCD80 /* libPods-SDOM-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90D9E739FDF9F0FC550CB10 /* libPods-SDOM-tvOSTests.a */; };
-		E62CA786CF334991B859CCB6 /* sdom_bold_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */; };
+		2DCD954D1E0B4F2C00145EB5 /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
+		348177D7A3816B1CB0339D39 /* libPods-WallPiper-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76E88A985825E787845243D /* libPods-SDOM-tvOS.a */; };
+		C4033F5CD159472DAFD4D084 /* wallpiper_roman_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9250657F54C2C88677228 /* sdom_roman_font.ttf */; };
+		D2F69264578C404154BC9F18 /* libPods-WallPiper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89886786AB3EDF8D59E29C99 /* libPods-SDOM.a */; };
+		D3BB671062D090D60D4CCD80 /* libPods-WallPiper-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90D9E739FDF9F0FC550CB10 /* libPods-SDOM-tvOSTests.a */; };
+		E62CA786CF334991B859CCB6 /* wallpiper_bold_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,24 +31,24 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = SDOM;
+			remoteInfo = WallPiper;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "SDOM-tvOS";
+			remoteInfo = "WallPiper-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00C9A829433DBD2DAB79F647 /* Pods-SDOM-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOS/Pods-SDOM-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* SDOMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDOMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00C9A829433DBD2DAB79F647 /* Pods-WallPiper-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOS/Pods-SDOM-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* WallPiperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDOMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* SDOMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDOMTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* SDOM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDOM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F21AD99517003FC87E /* WallPiperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDOMTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* WallPiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDOM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SDOM/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SDOM/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };

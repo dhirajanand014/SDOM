@@ -1,13 +1,13 @@
 import React from 'react'
 import { TouchableOpacity, View, Text } from 'react-native';
 import Shimmer from 'react-native-shimmer';
-import { stringConstants } from '../constants/sdomConstants';
-import { getCategoryButtonType } from '../helper/SDOMHelper';
-import { flatListItemStyles, glancePostStyles } from '../styles/sdomStyles';
+import { stringConstants } from '../constants/Constants';
+import { getCategoryButtonType } from '../helper/Helper';
+import { flatListItemStyles, glancePostStyles } from '../styles/Styles';
 import { TourGuideZone } from 'rn-tourguide';
 import FastImage from 'react-native-fast-image';
 
-export const sdomCategoryRenderer = (item, index, category, setCategory) => {
+export const CategoryRenderer = (item, index, category, setCategory) => {
     const { categoryCover } = item;
     return (
         <TouchableOpacity activeOpacity={.7} style={flatListItemStyles.GridViewContainer}

@@ -43,7 +43,7 @@ export const permissionsButtons = {
 
 export const permissionMessages = {
     READ_WRITE_EXTERNAL_STORAGE_TITLE: `Requesting Permission to access your external storage`,
-    READ_WRITE_EXTERNAL_STORAGE_MESSAGE: `Stardom requires access to write to your External Storage`
+    READ_WRITE_EXTERNAL_STORAGE_MESSAGE: `WallPiper requires access to write to your External Storage`
 }
 
 export const stringConstants = {

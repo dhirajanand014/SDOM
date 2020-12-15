@@ -1,17 +1,17 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Text, View, Image, Linking, TouchableOpacity, Switch } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { SDOMPostSearch } from '../components/SDOMPostSearch';
+import { PostSearch } from '../components/PostSearch';
 import {
     stringConstants, postCountTypes,
     postitionStringConstants, colorConstants,
     permissionsButtons
-} from '../constants/sdomConstants';
+} from '../constants/Constants';
 import {
     postWallPaperAlert, increaseAndSetPostCounts,
     downloadImageFromURL, setOptionsStateForDescription, shareImage
-} from '../helper/SDOMHelper';
-import { glancePostStyles } from '../styles/sdomStyles';
+} from '../helper/Helper';
+import { glancePostStyles } from '../styles/Styles';
 import ActionButton from '@logvinme/react-native-action-button';
 
 const post_like = require(`../assets/post_likes_heart_arrow_icon.png`);
@@ -21,7 +21,7 @@ const post_wallpaper = require(`../assets/post_set_wallpaper_icon.png`);
 const post_download = require(`../assets/post_download_icon.png`);
 const post_share = require(`../assets/post_share.png`);
 
-export const SDOMPostDetails = forwardRef((props, ref) => {
+export const PostDetails = forwardRef((props, ref) => {
 
     const { posts, textPostTypeAnimationValue, optionsState, setOptionsState, sdomDatastate, setSdomDatastate,
         viewPagerRef, width, height, textPostDescriptionAnimationValue } = props;
@@ -91,7 +91,7 @@ export const SDOMPostDetails = forwardRef((props, ref) => {
             <View style={glancePostStyles.searchIconContainer}>
                 {
                     optionsState.showSearch &&
-                    <SDOMPostSearch sdomDatastate={sdomDatastate} screenWidth={width} screenHeight={height}
+                    <PostSearch sdomDatastate={sdomDatastate} screenWidth={width} screenHeight={height}
                         optionsState={optionsState} setOptionsState={setOptionsState} viewPagerRef={viewPagerRef}
                         post={posts[postDetailsState.currentPostIndex]} />
                 }

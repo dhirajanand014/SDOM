@@ -149,7 +149,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                     intent.setAction(Intent.ACTION_VIEW);
 
                     File downloadImageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS +
-                            File.separator + Constants.STARDOM), mPostTitle + ".png");
+                            File.separator + Constants.WALLPIPER), mPostTitle + ".png");
                     Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName()
                             + ".provider", downloadImageFile);
                     intent.setDataAndType(uri, MimeTypeMap.getSingleton().getMimeTypeFromExtension("png"));
@@ -229,7 +229,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                 contentValues.put(MediaStore.Images.Media.MIME_TYPE, "images/png");
                 contentValues.put(MediaStore.Images.Media.IS_PENDING, true);
                 contentValues.put(MediaStore.Downloads.RELATIVE_PATH, String.join(File.separator,
-                        Environment.DIRECTORY_DOWNLOADS, Constants.STARDOM));
+                        Environment.DIRECTORY_DOWNLOADS, Constants.WALLPIPER));
                 Uri imageInsert = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
                 if (null != imageInsert) {
                     publishProgress(Constants.INT_FORTY);
@@ -242,7 +242,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
             } else {
                 publishProgress(Constants.INT_TWENTY);
                 File downloadsFolderDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS +
-                        File.separator + Constants.STARDOM);
+                        File.separator + Constants.WALLPIPER);
                 if (!downloadsFolderDirectory.exists())
                     downloadsFolderDirectory.mkdirs();
                 File downloadImageFile = new File(downloadsFolderDirectory, mPostTitle + ".png");

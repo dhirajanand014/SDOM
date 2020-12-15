@@ -2,10 +2,10 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AppIntro from 'rn-falcon-app-intro';
 import { View, Dimensions, Image } from 'react-native';
-import { introStyles } from '../styles/sdomStyles';
-import { colorConstants } from '../constants/sdomConstants';
+import { introStyles } from '../styles/Styles';
+import { colorConstants } from '../constants/Constants';
 import FastImage from 'react-native-fast-image';
-export const SDOMIntro = () => {
+export const Intro = () => {
 
     const navigation = useNavigation();
 

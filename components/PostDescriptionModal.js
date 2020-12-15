@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, ScrollView, Modal, Image } from 'react-native';
-import { resetOptionsState, setOptionsStateRadioOptions } from '../helper/SDOMHelper';
-import { glancePostStyles } from '../styles/sdomStyles';
+import { resetOptionsState, setOptionsStateRadioOptions } from '../helper/Helper';
+import { glancePostStyles } from '../styles/Styles';
 
 const post_modal_close_icon = require('../assets/post_modal_close_icon.png');
 
-export const SDOMPostDescriptionModal = (props) => {
+export const PostDescriptionModal = (props) => {
     const { optionsState, setOptionsState, reportAbuseIcon } = props;
     return (
         <Modal animationType="fade" transparent={true} visible={optionsState.descriptionModal}

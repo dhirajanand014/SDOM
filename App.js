@@ -2,19 +2,19 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton, CardStyleInterpolators } from '@react-navigation/stack';
-import { sdomGlance } from './screens/sdomGlance';
-import { SDOMCategory } from './screens/SDOMCategory';
-import { headerStyles } from './styles/sdomStyles';
-import { fetchAndUpdateCategoryState } from './helper/SDOMHelper.js';
-import { SDOMIntro } from './screens/SDOMIntro';
+import { Glance } from './screens/Glance';
+import { Category } from './screens/Category';
+import { headerStyles } from './styles/Styles';
+import { fetchAndUpdateCategoryState } from './helper/Helper.js';
+import { Intro } from './screens/Intro';
 import { TourGuideProvider, TourGuideZone } from 'rn-tourguide';
 
-export const SDOMCategoryContext = React.createContext();
+export const CategoryContext = React.createContext();
 
 export default class App extends React.PureComponent {
 
     render() {
-        const SDOMStack = createStackNavigator();
+        const Stack = createStackNavigator();
 
         const fetchCategories = (category, setCategory) => {
             fetchAndUpdateCategoryState(category, setCategory);
@@ -23,20 +23,20 @@ export default class App extends React.PureComponent {
         const initialCategorySelection = this.props.initialCategorySelection || false;
 
         return (
-            <SDOMCategoryContext.Provider value={{ fetchCategories, initialCategorySelection }}>
+            <CategoryContext.Provider value={{ fetchCategories, initialCategorySelection }}>
                 <TourGuideProvider androidStatusBarVisible={true}
                     backdropColor={this.props.initialCategorySelection == 'Intro' && `rgba(145, 63, 146, 0.6)`}>
                     <NavigationContainer>
-                        <SDOMStack.Navigator initialRouteName={this.props.navigationRoute}
+                        <Stack.Navigator initialRouteName={this.props.navigationRoute}
                             screenOptions={{
                                 gestureEnabled: true, gestureDirection: 'horizontal',
                                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
                             }}
                             headerMode='float' animation="fade">
-                            <SDOMStack.Screen name="Intro" component={SDOMIntro} options={{ headerShown: false }} />
-                            <SDOMStack.Screen name="Glance" component={sdomGlance} options={{ headerShown: false }} />
+                            <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
+                            <Stack.Screen name="Glance" component={Glance} options={{ headerShown: false }} />
 
-                            <SDOMStack.Screen name="Category" component={SDOMCategory} options={{
+                            <Stack.Screen name="Category" component={Category} options={{
                                 headerShown: true,
                                 headerTitle: 'Select Categories',
                                 headerStyle: { backgroundColor: '#3d3d3d' },
@@ -51,10 +51,10 @@ export default class App extends React.PureComponent {
                                     )
                                 })
                             }} />
-                        </SDOMStack.Navigator>
+                        </Stack.Navigator>
                     </NavigationContainer>
                 </TourGuideProvider>
-            </SDOMCategoryContext.Provider>
+            </CategoryContext.Provider>
         )
     }
 }

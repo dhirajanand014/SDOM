@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FlatList, View, Dimensions, StatusBar, Text, TouchableOpacity, BackHandler } from 'react-native';
-import { SDOMCategoryContext } from '../App';
-import { categoryViewStyles } from '../styles/sdomStyles';
+import { CategoryContext } from '../App';
+import { categoryViewStyles } from '../styles/Styles';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/SDOMHelper'
-import { sdomCategoryRenderer } from './sdomCategoryRenderer.js';
+import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/Helper'
+import { CategoryRenderer } from './CategoryRenderer.js';
 import { TourGuideZone, useTourGuideController } from 'rn-tourguide';
 
-export function SDOMCategory() {
+export function Category() {
 
-    const { fetchCategories, initialCategorySelection } = useContext(SDOMCategoryContext);
+    const { fetchCategories, initialCategorySelection } = useContext(CategoryContext);
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -42,7 +42,7 @@ export function SDOMCategory() {
     return (
         <View style={categoryViewStyles.categoryView} >
             <FlatList data={category.categories}
-                renderItem={({ item, index }) => sdomCategoryRenderer(item, index, category, setCategory)} numColumns={3}
+                renderItem={({ item, index }) => CategoryRenderer(item, index, category, setCategory)} numColumns={3}
                 keyExtractor={(item) => item.categoryId} />
             {
                 category.initialCategory == 'skipButton' &&

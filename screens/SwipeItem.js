@@ -1,9 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, useDerivedValue } from 'react-native-reanimated';
 
-export const SDOMSwipeItem = (props) => {
+export const SwipeItem = (props) => {
 
     const { width, height, item, index, postImageParallax } = props;
     const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);

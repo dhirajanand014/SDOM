@@ -52,7 +52,7 @@ public class MainActivity extends ReactActivity {
                     }
                 }
                 createNotificationChannel();
-                subscribeToFireBaseTopic();
+                //subscribeToFireBaseTopic();
                 super.onCreate(savedInstanceState);
             }
         }

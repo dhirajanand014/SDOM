@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { TextInput, Image, TouchableOpacity, View } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, useDerivedValue } from 'react-native-reanimated';
-import { togglePostSearchBox } from '../helper/SDOMHelper'
-import { stringConstants } from '../constants/sdomConstants';
-import { glancePostStyles } from '../styles/sdomStyles'
-import { SDOMPostSearchContent } from './SDOMPostSearchContent';
+import { togglePostSearchBox } from '../helper/Helper'
+import { stringConstants } from '../constants/Constants';
+import { glancePostStyles } from '../styles/Styles'
+import { PostSearchContent } from './PostSearchContent';
 
 const post_search_input_close = require('../assets/post_search_input_close_icon.png');
 const post_search = require('../assets/post_search_icon.png');
 
-export function SDOMPostSearch(props) {
+export function PostSearch(props) {
 
     const { sdomDatastate, screenWidth, screenHeight, post, viewPagerRef } = props;
     const { posts } = sdomDatastate;
@@ -66,7 +66,7 @@ export function SDOMPostSearch(props) {
                         <Image style={glancePostStyles.search_input_close_input_icon} source={post_search_input_close} />
                     </TouchableOpacity>
                 </Animated.View>
-                <SDOMPostSearchContent postItem={post} screenWidth={screenWidth} searchValues={searchValues}
+                <PostSearchContent postItem={post} screenWidth={screenWidth} searchValues={searchValues}
                     contentOpacity={content_opacity} contentTranslateY={content_translate_y} setSearchValues={setSearchValues}
                     searchValues={searchValues} posts={posts} inputBoxTranslateX={input_search_box_translate_x} screenHeight={screenHeight}
                     inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} />

@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
-import { stringConstants } from '../constants/sdomConstants';
-import { onSwiperScrollEnd, fetchPostsAndSaveToState, resetAnimatePostTextDetails } from '../helper/SDOMHelper';
-import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
-import { SDOMPostReportAbuseModal } from '../components/SDOMPostReportAbuseModal';
-import { glancePostStyles } from '../styles/sdomStyles';
+import { stringConstants } from '../constants/Constants';
+import { onSwiperScrollEnd, fetchPostsAndSaveToState, resetAnimatePostTextDetails } from '../helper/Helper';
+import { PostDescriptionModal } from '../components/PostDescriptionModal';
+import { PostReportAbuseModal } from '../components/PostReportAbuseModal';
+import { glancePostStyles } from '../styles/Styles';
 import Animated, { useAnimatedScrollHandler, useDerivedValue, useSharedValue } from 'react-native-reanimated';
 import Shimmer from 'react-native-shimmer';
 import Swiper from 'react-native-swiper';
-import { SDOMSwipeItem } from './SDOMSwipeItem'
-import { SDOMPostDetails } from './SDOMPostDetails';
+import { SwipeItem } from './SwipeItem'
+import { PostDetails } from './PostDetails';
 import FastImage from 'react-native-fast-image';
 
 const category_selection = require('../assets/category_selection_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
 
-export function sdomGlance({ navigation }) {
+export function Glance({ navigation }) {
 
     const [sdomDatastate, setSdomDatastate] = useState([]);
     const [optionsState, setOptionsState] = useState({
@@ -88,13 +88,13 @@ export function sdomGlance({ navigation }) {
                         {
                             sdomDatastate.posts.map((item, index) => {
                                 return <Animated.View key={index}>
-                                    <SDOMSwipeItem width={width} height={height} item={item} index={index}
+                                    <SwipeItem width={width} height={height} item={item} index={index}
                                         postImageParallax={postImageParallax} />
                                 </Animated.View>
                             })}
                     </Swiper>
 
-                    <SDOMPostDetails ref={postDetailsRef} posts={sdomDatastate.posts} textPostTypeAnimationValue={textPostTypeAnimationValue_translate_x}
+                    <PostDetails ref={postDetailsRef} posts={sdomDatastate.posts} textPostTypeAnimationValue={textPostTypeAnimationValue_translate_x}
                         width={width} height={height} optionsState={optionsState} setOptionsState={setOptionsState}
                         sdomDatastate={sdomDatastate} setSdomDatastate={setSdomDatastate} optionsState={optionsState}
                         setOptionsState={setOptionsState} viewPagerRef={viewPagerRef} textPostDescriptionAnimationValue={textPostDescriptionAnimationValue_translate_x} />
@@ -109,9 +109,9 @@ export function sdomGlance({ navigation }) {
                     </Shimmer>
                 </View>
             }
-            <SDOMPostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
+            <PostDescriptionModal optionsState={optionsState} setOptionsState={setOptionsState}
                 reportAbuseIcon={post_report_abuse} />
-            <SDOMPostReportAbuseModal optionsState={optionsState} setOptionsState={setOptionsState} />
+            <PostReportAbuseModal optionsState={optionsState} setOptionsState={setOptionsState} />
         </View >
     );
 }

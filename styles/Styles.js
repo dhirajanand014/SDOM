@@ -10,7 +10,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     titleName: {
         fontSize: 18,
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         display: 'flex',
         color: 'white',
     },
@@ -36,14 +36,14 @@ export const glancePostStyles = StyleSheet.create({
         marginRight: 4,
         justifyContent: 'center',
         fontSize: 9,
-        fontFamily: 'sdom_bold_font',
+        fontFamily: 'wallpiper_bold_font',
         display: 'flex',
         color: 'white',
     },
     postCategoriesIn: {
         fontSize: 9,
         justifyContent: 'center',
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         display: 'flex',
         color: 'white',
     },
@@ -124,10 +124,10 @@ export const glancePostStyles = StyleSheet.create({
         borderBottomEndRadius: 16
     },
     search_content_post_title: {
-        fontFamily: 'sdom_roman_font'
+        fontFamily: 'wallpiper_roman_font'
     },
     search_content_post_index: {
-        fontFamily: 'sdom_bold_font',
+        fontFamily: 'wallpiper_bold_font',
         marginLeft: 16
     },
     search_content_activity_indicator: {
@@ -141,7 +141,7 @@ export const glancePostStyles = StyleSheet.create({
         backgroundColor: '#e4e6eb',
         borderRadius: 20,
         paddingHorizontal: 20,
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         fontSize: 15
     },
     icon_post_description: {
@@ -230,20 +230,20 @@ export const glancePostStyles = StyleSheet.create({
     },
     modalHideText: {
         color: "white",
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         textAlign: "center",
         fontSize: 15
     },
     reportAbuseCancelText: {
         fontSize: 14,
         textDecorationLine: 'underline',
-        fontFamily: 'sdom_roman_font'
+        fontFamily: 'wallpiper_roman_font'
     },
     reportAbuseModalHeader: {
         alignItems: 'center'
     },
     reportAbuseModalTitle: {
-        fontFamily: 'sdom_bold_font',
+        fontFamily: 'wallpiper_bold_font',
         fontSize: 20,
         padding: 10
     },
@@ -254,7 +254,7 @@ export const glancePostStyles = StyleSheet.create({
     },
     icon_count_text: {
         color: "white",
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         textAlign: "center",
         fontSize: 10,
         top: 1
@@ -328,7 +328,7 @@ export const glancePostStyles = StyleSheet.create({
     reportAbuseRadioText: {
         marginRight: 35,
         fontSize: 14,
-        fontFamily: 'sdom_roman_font'
+        fontFamily: 'wallpiper_roman_font'
     },
     reportAbusesFetchLoading: {
         alignItems: 'center',
@@ -352,7 +352,7 @@ export const glancePostStyles = StyleSheet.create({
         marginBottom: 25,
         justifyContent: 'center',
         padding: 8,
-        fontFamily: 'sdom_bold_font'
+        fontFamily: 'wallpiper_bold_font'
     },
     reportAbuseSelectedRb: {
         width: 10,
@@ -401,7 +401,7 @@ export const categoryViewStyles = StyleSheet.create({
         color: "#000000",
         textAlign: 'center',
         fontSize: 18,
-        fontFamily: 'sdom_bold_font',
+        fontFamily: 'wallpiper_bold_font',
     },
     skipTourZoneStyle: {
         width: 95,
@@ -456,14 +456,14 @@ export const flatListItemStyles = StyleSheet.create({
         left: 4
     },
     textCategoryTitle: {
-        fontFamily: 'sdom_bold_font',
+        fontFamily: 'wallpiper_bold_font',
         color: "#ffffff",
         fontSize: 14,
         justifyContent: 'center',
         alignItems: "center"
     },
     textCategoryCity: {
-        fontFamily: 'sdom_roman_font',
+        fontFamily: 'wallpiper_roman_font',
         color: "#ffffff",
         padding: 1,
         fontSize: 12,

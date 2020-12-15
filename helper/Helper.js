@@ -6,7 +6,7 @@ import {
     permissionsButtons, permissionMessages,
     stringConstants, alertTextMessages,
     reportAbuseRequestPayloadKeys, responseStringData
-} from '../constants/sdomConstants';
+} from '../constants/Constants';
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { withDelay, withSpring } from 'react-native-reanimated';
@@ -163,7 +163,7 @@ export const getPostCounts = async () => {
 
 export const setCurrentImageAsWallPaper = async (postUrl, postTitle, postType) => {
     try {
-        NativeModules.SdomApi.setPostAsWallPaper(postUrl, postTitle, postType);
+        NativeModules.WallPiperApi.setPostAsWallPaper(postUrl, postTitle, postType);
     } catch (error) {
         console.log("Cannot set current image as wallpaper", error);
     }
@@ -171,7 +171,7 @@ export const setCurrentImageAsWallPaper = async (postUrl, postTitle, postType) =
 
 export const downloadCurrentImage = async (postUrl, postTitle, postType) => {
     try {
-        NativeModules.SdomApi.downloadPostImage(postUrl, postTitle, postType);
+        NativeModules.WallPiperApi.downloadPostImage(postUrl, postTitle, postType);
     } catch (error) {
         console.log("Cannot download the current image", error);
     }
@@ -180,7 +180,7 @@ export const downloadCurrentImage = async (postUrl, postTitle, postType) => {
 export const shareImage = async (post) => {
     const { postImage, postTitle } = post
     try {
-        NativeModules.SdomApi.shareImage(postImage, postTitle);
+        NativeModules.WallPiperApi.shareImage(postImage, postTitle);
     } catch (error) {
         console.log("Cannot share image", error);
     }
@@ -242,10 +242,10 @@ export const displaySuccessAlert = () => {
 }
 
 export const downloadImageFromURL = async (item, sdomDatastate, setSdomDatastate) => {
-    const write_granted = await accessAndGrantPermssionsToSDOM(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
+    const write_granted = await accessAndGrantPermssionsToWallPiper(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
         permissionMessages.READ_WRITE_EXTERNAL_STORAGE_MESSAGE, PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
 
-    const read_granted = await accessAndGrantPermssionsToSDOM(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
+    const read_granted = await accessAndGrantPermssionsToWallPiper(permissionMessages.READ_WRITE_EXTERNAL_STORAGE_TITLE,
         permissionMessages.READ_WRITE_EXTERNAL_STORAGE_MESSAGE, PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
 
     if (PermissionsAndroid.RESULTS.GRANTED == write_granted && PermissionsAndroid.RESULTS.GRANTED === read_granted) {
@@ -256,7 +256,7 @@ export const downloadImageFromURL = async (item, sdomDatastate, setSdomDatastate
     }
 }
 
-export const accessAndGrantPermssionsToSDOM = async (permissionTitie, permissionMessage, permissionType) => {
+export const accessAndGrantPermssionsToWallPiper = async (permissionTitie, permissionMessage, permissionType) => {
     try {
         return await PermissionsAndroid.request(permissionType,
             {

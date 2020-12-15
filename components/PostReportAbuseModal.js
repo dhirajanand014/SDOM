@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Modal, ScrollView, ActivityIndicator, Image } from 'react-native';
-import { alertTextMessages, modalTextConstants, reportAbuseRequestPayloadKeys } from '../constants/sdomConstants';
-import { setReportAbuseSelectedOption, setReportIdForPost, fetchReportAbuseValues, closeReportAbuseModal } from '../helper/SDOMHelper';
-import { glancePostStyles } from '../styles/sdomStyles';
+import { alertTextMessages, modalTextConstants, reportAbuseRequestPayloadKeys } from '../constants/Constants';
+import { setReportAbuseSelectedOption, setReportIdForPost, fetchReportAbuseValues, closeReportAbuseModal } from '../helper/Helper';
+import { glancePostStyles } from '../styles/Styles';
 
 const post_modal_close_icon = require('../assets/post_modal_close_icon.png');
 
-export const SDOMPostReportAbuseModal = (props) => {
+export const PostReportAbuseModal = (props) => {
     const { optionsState, setOptionsState } = props;
     const { reportAbuses, selectedReportAbuse } = optionsState;
     return (

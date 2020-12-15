@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { togglePostSearchBox } from '../helper/SDOMHelper'
-import { glancePostStyles } from '../styles/sdomStyles'
+import { togglePostSearchBox } from '../helper/Helper'
+import { glancePostStyles } from '../styles/Styles'
 
-export function SDOMPostSearchContent(props) {
+export function PostSearchContent(props) {
     const { screenWidth, contentOpacity, contentTranslateY, searchValues, posts, inputBoxTranslateX, screenHeight,
         inputTextRef, viewPagerRef, setSearchValues, postItem } = props;
 
