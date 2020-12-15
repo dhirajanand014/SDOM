@@ -1,4 +1,4 @@
-package com.sdom;
+package com.wallpiper;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,7 +8,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.sdom.packages.SdomPackage;
+import com.wallpiper.packages.WallPiperPackage;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
@@ -30,7 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
                     List<ReactPackage> packages = new PackageList(this).getPackages();
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // packages.add(new MyReactNativePackage());
-                    packages.add(new SdomPackage());
+                    packages.add(new WallPiperPackage());
                     return packages;
                 }
 

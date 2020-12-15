@@ -1,10 +1,10 @@
-package com.sdom.packages;
+package com.wallpiper.packages;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-import com.sdom.api.SdomApiModule;
+import com.wallpiper.api.WallpiperApiModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +12,12 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 
-public class SdomPackage implements ReactPackage {
+public class WallPiperPackage implements ReactPackage {
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactApplicationContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new SdomApiModule(reactApplicationContext));
+        modules.add(new WallpiperApiModule(reactApplicationContext));
         return modules;
     }
 

@@ -1,4 +1,4 @@
-package com.sdom;
+package com.wallpiper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

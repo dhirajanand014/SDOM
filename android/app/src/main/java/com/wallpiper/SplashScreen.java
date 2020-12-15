@@ -1,4 +1,4 @@
-package com.sdom;
+package com.wallpiper;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -12,11 +12,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.animation.AnimationUtils;
-import com.google.android.material.animation.AnimatorSetCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.reactnativecommunity.asyncstorage.AsyncLocalStorageUtil;
 import com.reactnativecommunity.asyncstorage.ReactDatabaseSupplier;
@@ -26,15 +23,12 @@ import java.util.Observer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
-import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat;
-import androidx.vectordrawable.graphics.drawable.AnimatorInflaterCompat;
 
 /**
  * Main class for splash screen.
  */
-public class SDOMSplashScreen extends AppCompatActivity implements Observer {
+public class SplashScreen extends AppCompatActivity implements Observer {
     private NetworkChangeReceiver networkChangeReceiverSplashScreen = new NetworkChangeReceiver();
 
     @Override
@@ -42,7 +36,7 @@ public class SDOMSplashScreen extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        AppCompatImageView imageView = findViewById(R.id.SDOMSplashScreen);
+        AppCompatImageView imageView = findViewById(R.id.splashScreenImageView);
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(imageView,
                 PropertyValuesHolder.ofFloat("scaleX", 1.2f),
@@ -64,7 +58,7 @@ public class SDOMSplashScreen extends AppCompatActivity implements Observer {
      * @param context
      */
     public void animateSlideLeft(Context context) {
-        ((SDOMSplashScreen) context).overridePendingTransition(R.anim.animate_slide_left_enter, R.anim.animate_slide_left_exit);
+        ((SplashScreen) context).overridePendingTransition(R.anim.animate_slide_left_enter, R.anim.animate_slide_left_exit);
     }
 
     @Override
@@ -88,13 +82,13 @@ public class SDOMSplashScreen extends AppCompatActivity implements Observer {
             TextView mTextView = mView.findViewById(com.google.android.material.R.id.snackbar_text);
             // set text to center
             mTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-            mTextView.setBackgroundColor(ContextCompat.getColor(SDOMSplashScreen.this, status ? R.color.colorGreen : R.color.design_default_color_error));
+            mTextView.setBackgroundColor(ContextCompat.getColor(SplashScreen.this, status ? R.color.colorGreen : R.color.design_default_color_error));
             // show the snackbar
             snackBar.show();
 
             if (status) {
                 try {
-                    Intent mainIntent = new Intent(SDOMSplashScreen.this, MainActivity.class);
+                    Intent mainIntent = new Intent(SplashScreen.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     String value = null;
                     SQLiteDatabase readableDatabase = ReactDatabaseSupplier.getInstance(this).getReadableDatabase();

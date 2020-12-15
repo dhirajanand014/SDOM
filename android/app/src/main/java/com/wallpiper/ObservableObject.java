@@ -1,4 +1,4 @@
-package com.sdom;
+package com.wallpiper;
 
 import java.util.Observable;
 
@@ -24,7 +24,7 @@ public class ObservableObject extends Observable {
     }
 
     /**
-     * Create new com.sdom.ObservableObject
+     * Create new com.wallpiper.ObservableObject
      */
     public void reset() {
         instance = new ObservableObject();

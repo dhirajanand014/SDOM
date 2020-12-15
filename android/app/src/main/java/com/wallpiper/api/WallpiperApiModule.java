@@ -1,4 +1,4 @@
-package com.sdom.api;
+package com.wallpiper.api;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -22,10 +22,9 @@ import android.widget.Toast;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.sdom.R;
-import com.sdom.constants.SdomConstants;
+import com.wallpiper.R;
+import com.wallpiper.constants.Constants;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,18 +32,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
-public class SdomApiModule extends ReactContextBaseJavaModule {
+public class WallpiperApiModule extends ReactContextBaseJavaModule {
 
     private static ReactApplicationContext reactContext;
 
-    public SdomApiModule(ReactApplicationContext context) {
+    public WallpiperApiModule(ReactApplicationContext context) {
         super(context);
         reactContext = context;
     }
@@ -52,7 +50,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
     @NonNull
     @Override
     public String getName() {
-        return "SdomApi";
+        return "WallPiperApi";
     }
 
     /**
@@ -151,7 +149,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                     intent.setAction(Intent.ACTION_VIEW);
 
                     File downloadImageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS +
-                            File.separator + SdomConstants.STARDOM), mPostTitle + ".png");
+                            File.separator + Constants.STARDOM), mPostTitle + ".png");
                     Uri uri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName()
                             + ".provider", downloadImageFile);
                     intent.setDataAndType(uri, MimeTypeMap.getSingleton().getMimeTypeFromExtension("png"));
@@ -164,7 +162,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                 } else {
                     notificationBuilder.setProgress(NOTIFICATION_PROGRESS_COMPLETE, progressValue, false);
                 }
-                notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
+                notificationManager.notify(Constants.NOTIFICATION_ID, notificationBuilder.build());
             }
         }
 
@@ -173,12 +171,12 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             try {
                 Bitmap bitmapImage = getBitmapFromURL(inParameters[0]);
                 mPostTitle = inParameters[1];
-                if (inParameters[2].equals(SdomConstants.POST_WALLPAPER_SET)) {
+                if (inParameters[2].equals(Constants.POST_WALLPAPER_SET)) {
                     WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                     wallpaperManager.setBitmap(bitmapImage, null, true,
                             WallpaperManager.FLAG_LOCK | WallpaperManager.FLAG_SYSTEM);
-                    return SdomConstants.POST_WALLPAPER_SET;
-                } else if (inParameters[2].equals(SdomConstants.POST_IMAGE_DOWNLOAD)) {
+                    return Constants.POST_WALLPAPER_SET;
+                } else if (inParameters[2].equals(Constants.POST_IMAGE_DOWNLOAD)) {
                     initNotification(bitmapImage);
                     return downloadImage(bitmapImage);
                 }
@@ -186,7 +184,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                 Toast.makeText(reactContext, "Cannot set image " + mPostTitle +
                         " as wallpaper or the lockScreen", Toast.LENGTH_SHORT).show();
             }
-            return SdomConstants.EMPTY;
+            return Constants.EMPTY;
         }
 
         /**
@@ -196,9 +194,9 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
          */
         private void initNotification(Bitmap bitmapImage) {
             notificationBuilder =
-                    new NotificationCompat.Builder(reactContext, SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_post_download)
+                    new NotificationCompat.Builder(reactContext, Constants.NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_post_download)
                             .setContentTitle(mPostTitle)
-                            .setContentText(SdomConstants.DOWNLOADING_IMAGE_OF + mPostTitle)
+                            .setContentText(Constants.DOWNLOADING_IMAGE_OF + mPostTitle)
                             .setLargeIcon(bitmapImage)
                             .setStyle(new NotificationCompat.BigPictureStyle()
                                     .bigPicture(bitmapImage)
@@ -210,7 +208,7 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
                             .setOnlyAlertOnce(true)
                             .setOngoing(true).setProgress(NOTIFICATION_PROGRESS_COMPLETE, NOTIFICATION_PROGRESS_START, false);
             notificationManager = (NotificationManager) reactContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(SdomConstants.NOTIFICATION_ID, notificationBuilder.build());
+            notificationManager.notify(Constants.NOTIFICATION_ID, notificationBuilder.build());
         }
 
         /**
@@ -224,42 +222,42 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
             OutputStream fileOutputStream;
             boolean result = false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                publishProgress(SdomConstants.INT_TWENTY);
+                publishProgress(Constants.INT_TWENTY);
                 ContentResolver contentResolver = reactContext.getContentResolver();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, mPostTitle + ".png");
                 contentValues.put(MediaStore.Images.Media.MIME_TYPE, "images/png");
                 contentValues.put(MediaStore.Images.Media.IS_PENDING, true);
                 contentValues.put(MediaStore.Downloads.RELATIVE_PATH, String.join(File.separator,
-                        Environment.DIRECTORY_DOWNLOADS, SdomConstants.STARDOM));
+                        Environment.DIRECTORY_DOWNLOADS, Constants.STARDOM));
                 Uri imageInsert = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
                 if (null != imageInsert) {
-                    publishProgress(SdomConstants.INT_FORTY);
+                    publishProgress(Constants.INT_FORTY);
                     fileOutputStream = contentResolver.openOutputStream(Objects.requireNonNull(imageInsert));
                     result = saveImageFromURL(bitmapImage, fileOutputStream);
-                    publishProgress(SdomConstants.INT_EIGHTY);
+                    publishProgress(Constants.INT_EIGHTY);
                     contentValues.put(MediaStore.Images.Media.IS_PENDING, false);
                     reactContext.getContentResolver().update(imageInsert, contentValues, null, null);
                 }
             } else {
-                publishProgress(SdomConstants.INT_TWENTY);
+                publishProgress(Constants.INT_TWENTY);
                 File downloadsFolderDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS +
-                        File.separator + SdomConstants.STARDOM);
+                        File.separator + Constants.STARDOM);
                 if (!downloadsFolderDirectory.exists())
                     downloadsFolderDirectory.mkdirs();
                 File downloadImageFile = new File(downloadsFolderDirectory, mPostTitle + ".png");
                 fileOutputStream = new FileOutputStream(downloadImageFile);
-                publishProgress(SdomConstants.INT_FORTY);
+                publishProgress(Constants.INT_FORTY);
                 result = saveImageFromURL(bitmapImage, fileOutputStream);
-                publishProgress(SdomConstants.INT_EIGHTY);
+                publishProgress(Constants.INT_EIGHTY);
                 if (result && !TextUtils.isEmpty(downloadImageFile.getAbsolutePath())) {
                     ContentValues values = createContentValues();
                     values.put(MediaStore.Images.Media.DATA, downloadImageFile.getAbsolutePath());
                     reactContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                 }
             }
-            publishProgress(SdomConstants.INT_HUNDRED);
-            return result ? SdomConstants.POST_IMAGE_DOWNLOAD : "";
+            publishProgress(Constants.INT_HUNDRED);
+            return result ? Constants.POST_IMAGE_DOWNLOAD : "";
         }
 
         /**
@@ -293,10 +291,10 @@ public class SdomApiModule extends ReactContextBaseJavaModule {
 
         @Override
         protected void onPostExecute(String inResult) {
-            String message = SdomConstants.EMPTY;
-            if (SdomConstants.POST_WALLPAPER_SET.equals(inResult)) {
+            String message = Constants.EMPTY;
+            if (Constants.POST_WALLPAPER_SET.equals(inResult)) {
                 message = "Wallpaper set for " + mPostTitle + "!";
-            } else if (SdomConstants.POST_IMAGE_DOWNLOAD.equals(inResult)) {
+            } else if (Constants.POST_IMAGE_DOWNLOAD.equals(inResult)) {
                 message = "Downloaded file for " + mPostTitle + "!";
             }
             if (!TextUtils.isEmpty(message))

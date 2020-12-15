@@ -1,4 +1,4 @@
-package com.sdom;
+package com.wallpiper;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.sdom.constants.SdomConstants;
+import com.wallpiper.constants.Constants;
 
 import androidx.annotation.Nullable;
 
@@ -23,7 +23,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "SDOM";
+        return "WallPiper";
     }
 
     public static class NavigationScreenDelegate extends ReactActivityDelegate {
@@ -51,7 +51,7 @@ public class MainActivity extends ReactActivity {
                         mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
                     }
                 }
-                createSdomNotificationChannel();
+                createNotificationChannel();
                 subscribeToFireBaseTopic();
                 super.onCreate(savedInstanceState);
             }
@@ -65,16 +65,16 @@ public class MainActivity extends ReactActivity {
         /**
          * Create notification channels for post button actions.
          */
-        private void createSdomNotificationChannel() {
+        private void createNotificationChannel() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel notificationChannel = new NotificationChannel(SdomConstants.SDOM_NOTIFICATION_CHANNEL_ID,
-                        SdomConstants.SDOM_NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
+                NotificationChannel notificationChannel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID,
+                        Constants.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
                 notificationChannel.enableVibration(true);
                 notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     notificationChannel.setAllowBubbles(true);
                 }
-                notificationChannel.setDescription("Channel for displaying SDOM notifications for post actions");
+                notificationChannel.setDescription("Channel for displaying Wallpiper notifications for post actions");
 
                 NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(notificationChannel);
@@ -97,14 +97,14 @@ public class MainActivity extends ReactActivity {
      * Allow device to subscribe to new post notifications to a specific topic.
      */
     private static void subscribeToFireBaseTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic(SdomConstants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
+        FirebaseMessaging.getInstance().subscribeToTopic(Constants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
     }
 
     /**
      * Allow device to unsubscribe to new post notifications to a specific topic.
      */
     private void unSubscribeToFireBaseTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(SdomConstants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(Constants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
     }
 
 }

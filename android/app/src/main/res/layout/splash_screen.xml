@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff01"
-    tools:context=".SDOMSplashScreen">
+    tools:context=".SplashScreen">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/SDOMSplashScreen"
+        android:id="@+id/splashScreenImageView"
         android:layout_width="180dp"
         android:layout_height="224dp"
         android:layout_marginEnd="116dp"
