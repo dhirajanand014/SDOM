@@ -18,8 +18,8 @@ export const glancePostStyles = StyleSheet.create({
         paddingRight: 1,
         paddingTop: 3,
         alignItems: 'center',
-        width: 30,
-        height: 30,
+        width: 29,
+        height: 29,
         backgroundColor: 'rgba(0,0,0,0.25)',
         borderRadius: 16,
     },
@@ -145,8 +145,8 @@ export const glancePostStyles = StyleSheet.create({
         fontSize: 15
     },
     icon_post_description: {
-        width: 22,
-        height: 22
+        width: 25,
+        height: 25
     },
     icon_post_details: {
         width: 22,
@@ -363,6 +363,10 @@ export const glancePostStyles = StyleSheet.create({
     tourGuideStyle: {
         width: 120,
         height: 130
+    },
+    preloaderStyle: {
+        width: 30,
+        height: 30
     }
 });
 

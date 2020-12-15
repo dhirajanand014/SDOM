@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Image, TouchableOpacity, Dimensions, StatusBar, ActivityIndicator } from 'react-native';
+import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import { stringConstants } from '../constants/sdomConstants';
 import { onSwiperScrollEnd, fetchPostsAndSaveToState, resetAnimatePostTextDetails } from '../helper/SDOMHelper';
 import { SDOMPostDescriptionModal } from '../components/SDOMPostDescriptionModal';
@@ -10,6 +10,7 @@ import Shimmer from 'react-native-shimmer';
 import Swiper from 'react-native-swiper';
 import { SDOMSwipeItem } from './SDOMSwipeItem'
 import { SDOMPostDetails } from './SDOMPostDetails';
+import FastImage from 'react-native-fast-image';
 
 const category_selection = require('../assets/category_selection_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
@@ -77,8 +78,13 @@ export function sdomGlance({ navigation }) {
                         onScroll={(event) => {
                             resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
                                 textPostTypeAnimationValue_translate_x);
-                            onPostScrollFunction(event);
-                        }}>
+                            //onPostScrollFunction(event);
+                        }} loadMinimalLoader={
+                            <FastImage style={glancePostStyles.preloaderStyle} source={{
+                                uri: Image.resolveAssetSource(require(`../assets/wallpiper-preloader.gif`)).uri,
+                                priority: FastImage.priority.normal
+                            }} />
+                        }>
                         {
                             sdomDatastate.posts.map((item, index) => {
                                 return <Animated.View key={index}>
@@ -95,7 +101,10 @@ export function sdomGlance({ navigation }) {
                 </View> || <View>
                     <Shimmer style={{ width: width, height: height }} duration={500} direction="up" tilt={45}>
                         <View style={glancePostStyles.shimmerViewInit}>
-                            <ActivityIndicator color="#de4463" hidesWhenStopped size="small" />
+                            <FastImage style={glancePostStyles.preloaderStyle} source={{
+                                uri: Image.resolveAssetSource(require(`../assets/wallpiper-preloader.gif`)).uri,
+                                priority: FastImage.priority.normal
+                            }} />
                         </View>
                     </Shimmer>
                 </View>
