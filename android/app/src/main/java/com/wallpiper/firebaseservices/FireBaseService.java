@@ -38,10 +38,10 @@ public class FireBaseService extends FirebaseMessagingService {
                 String title = remoteMessage.getNotification().getTitle();
                 NotificationCompat.Builder notificationBuilder =
                         new NotificationCompat.Builder(this, Constants.NOTIFICATION_CHANNEL_ID)
-                                .setSmallIcon(R.drawable.wallpiper_logo)
+                                .setSmallIcon(R.drawable.ic_wallpiper_notification)
                                 .setContentTitle(!TextUtils.isEmpty(title) ? title : "New Post")
                                 .setContentText(remoteMessage.getNotification().getBody())
-                                .setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.wallpiper_logo), 128, 128, false))
+                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_wallpiper_notification))
                                 .setStyle(new NotificationCompat.BigPictureStyle()
                                         // .bigPicture(bitmapImage)
                                         .bigLargeIcon(null))
