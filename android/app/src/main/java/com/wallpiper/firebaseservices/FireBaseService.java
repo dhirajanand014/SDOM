@@ -5,6 +5,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +21,7 @@ import com.wallpiper.constants.Constants;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 public class FireBaseService extends FirebaseMessagingService {
     @Override
@@ -33,10 +38,10 @@ public class FireBaseService extends FirebaseMessagingService {
                 String title = remoteMessage.getNotification().getTitle();
                 NotificationCompat.Builder notificationBuilder =
                         new NotificationCompat.Builder(this, Constants.NOTIFICATION_CHANNEL_ID)
-                                .setSmallIcon(R.drawable.ic_post_download)
+                                .setSmallIcon(R.drawable.wallpiper_logo)
                                 .setContentTitle(!TextUtils.isEmpty(title) ? title : "New Post")
                                 .setContentText(remoteMessage.getNotification().getBody())
-                                // .setLargeIcon(bitmapImage)
+                                .setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.wallpiper_logo), 128, 128, false))
                                 .setStyle(new NotificationCompat.BigPictureStyle()
                                         // .bigPicture(bitmapImage)
                                         .bigLargeIcon(null))
