@@ -64,9 +64,12 @@ public class MainActivity extends ReactActivity {
                 if (Constants.INTRO.equalsIgnoreCase(bundle.getString(Constants.NAVIGATION_ROUTE))) {
                     mInitialProps.putBoolean(Constants.INITIAL_CATEGORY_SELECTION, true);
                 }
-                if (bundle.containsKey(Constants.POST_ID_FROM_NOTIFICATION)) {
+                if (bundle.containsKey(Constants.POST_ID_FROM_NOTIFICATION) &&
+                        bundle.containsKey(Constants.CATEGORY_ID_FROM_NOTIFICATION)) {
                     mInitialProps.putInt(Constants.POST_ID_FROM_NOTIFICATION,
                             Integer.parseInt(bundle.getString(Constants.POST_ID_FROM_NOTIFICATION)));
+                    mInitialProps.putInt(Constants.CATEGORY_ID_FROM_NOTIFICATION,
+                            Integer.parseInt(bundle.getString(Constants.CATEGORY_ID_FROM_NOTIFICATION)));
                 }
             }
         }

@@ -31,12 +31,13 @@ export function Glance({ navigation }) {
         reportAbuses: [],
         reportAbuseSubmitDisabled: false
     });
-    const { postIdFromNotification } = useContext(CategoryContext);
+    const { postIdFromNotification, categoryIdFromNotification } = useContext(CategoryContext);
     const viewPagerRef = useRef(null);
     const postDetailsRef = useRef(null);
 
     useEffect(() => {
-        fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate, optionsState, setOptionsState);
+        fetchPostsAndSaveToState(sdomDatastate, setSdomDatastate, optionsState, setOptionsState,
+            categoryIdFromNotification);
     }, []);
 
     let { width, height } = Dimensions.get("window");

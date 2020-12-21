@@ -64,6 +64,7 @@ public class FireBaseService extends FirebaseMessagingService {
      */
     private NotificationCompat.Builder newPostNotification(@NonNull RemoteMessage remoteMessage,
                                                            NotificationCompat.Builder notificationBuilder) {
+        String categoryId = remoteMessage.getData().get(Constants.CATEGORY_ID);
         String postId = remoteMessage.getData().get(Constants.POST_ID);
         String title = remoteMessage.getNotification().getTitle();
         notificationBuilder.setSmallIcon(R.drawable.ic_wallpiper_notification)
@@ -85,6 +86,7 @@ public class FireBaseService extends FirebaseMessagingService {
 
         Bundle extras = new Bundle();
         extras.putString(Constants.POST_ID_FROM_NOTIFICATION, postId);
+        extras.putString(Constants.CATEGORY_ID_FROM_NOTIFICATION, categoryId);
         extras.putString(Constants.NAVIGATION_ROUTE, Constants.GLANCE);
 
         intent.putExtras(extras);

@@ -16,7 +16,9 @@ public class Constants {
 
     public static final String NEW_POST = "New Post";
     public static final String POST_ID = "postId";
+    public static final String CATEGORY_ID = "categoryId";
     public static final String POST_ID_FROM_NOTIFICATION = "postIdFromNotification";
+    public static final String CATEGORY_ID_FROM_NOTIFICATION = "categoryIdFromNotification";
 
     public static final String NAVIGATION_ROUTE = "navigationRoute";
     public static final String INITIAL_CATEGORY_SELECTION = "initialCategorySelection";

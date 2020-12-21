@@ -16,14 +16,18 @@ export default class App extends React.PureComponent {
     render() {
         const Stack = createStackNavigator();
 
-        const fetchCategories = (category, setCategory) => {
-            fetchAndUpdateCategoryState(category, setCategory);
+        const fetchCategories = (category, setCategory, categoryIdFromNotification) => {
+            fetchAndUpdateCategoryState(category, setCategory, categoryIdFromNotification);
         }
         const initialCategorySelection = this.props.initialCategorySelection || false;
         const postIdFromNotification = this.props.postIdFromNotification || false;
+        const categoryIdFromNotification = this.props.categoryIdFromNotification || false;
 
         return (
-            <CategoryContext.Provider value={{ fetchCategories, initialCategorySelection, postIdFromNotification }}>
+            <CategoryContext.Provider value={{
+                fetchCategories, initialCategorySelection,
+                postIdFromNotification, categoryIdFromNotification
+            }}>
                 <TourGuideProvider androidStatusBarVisible={true}
                     backdropColor={this.props.initialCategorySelection == 'Intro' && `rgba(145, 63, 146, 0.6)`}>
                     <NavigationContainer>

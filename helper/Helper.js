@@ -37,16 +37,19 @@ export const fetchAndUpdateCategoryState = async (category, setCategory) => {
     }
 }
 
-export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate, optionsState, setOptionsState) => {
+export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate, optionsState,
+    setOptionsState, categoryIdFromNotification) => {
     try {
         let categoryPostsData = [];
         const responseData = await axios.get(urlConstants.fetchPosts);
         if (responseData) {
             const responsePostsData = responseData.data.posts;
-            const selectedCategories = await getSelectedCategoryIdsFromStorage();
+            let selectedCategories = await getSelectedCategoryIdsFromStorage();
+
+            selectedCategories = await checkAndAddCategoriesFromFCMNotification(selectedCategories,
+                categoryIdFromNotification);
 
             const fetchedPostCounts = await getPostCounts();
-
             const postCounts = fetchedPostCounts && JSON.parse(fetchedPostCounts) || [];
 
             const parsedCategoryIds = selectedCategories && JSON.parse(selectedCategories) || categoryPostsData;
@@ -509,10 +512,40 @@ export const setAnimationVisible = (postDetailsState, setPostDetailsState, isVis
 
 export const scrollWhenPostIdFromNotification = (sdomDatastate, postIdFromNotification, viewPagerRef,
     postDetailsRef) => {
-    if (!postDetailsRef?.current?.newPostViewed && postIdFromNotification && viewPagerRef?.current) {
-        const index = sdomDatastate.posts.findIndex(post => post.postId == postIdFromNotification)
-        viewPagerRef.current.scrollBy(index);
-        postDetailsRef?.current?.setPostIndex(index);
-        postDetailsRef?.current?.setNewPostViewed(true);
+    try {
+        if (!postDetailsRef?.current?.newPostViewed && postIdFromNotification && viewPagerRef?.current) {
+            const index = sdomDatastate.posts.findIndex(post => post.postId == postIdFromNotification)
+            viewPagerRef.current.scrollBy(index);
+            postDetailsRef?.current?.setPostIndex(index);
+            postDetailsRef?.current?.setNewPostViewed(true);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const checkAndAddCategoriesFromFCMNotification = async (selectedCategories, categoryIdFromNotification) => {
+    try {
+        if (categoryIdFromNotification && selectedCategories.length) {
+            let selectCategories = JSON.parse(selectedCategories);
+            if (selectCategories.some((selectedCategory) =>
+                selectedCategory.selectedCategoryId != categoryIdFromNotification)) {
+                const responseCategoryData = await fetchCategoryData();
+
+                const categoryTitle = responseCategoryData.find((item) => item.categoryId == categoryIdFromNotification).categoryTitle ||
+                    stringConstants.EMPTY;
+
+                selectCategories.push({
+                    selectedCategoryId: categoryIdFromNotification.toString(),
+                    selectedCategoryTitle: categoryTitle
+                });
+
+                selectedCategories = JSON.stringify(selectCategories);
+                await saveCategoryIdsToStorage(selectedCategories);
+            }
+        }
+        return selectedCategories;
+    } catch (error) {
+        console.log(error);
     }
 }
