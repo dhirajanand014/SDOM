@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import { stringConstants } from '../constants/Constants';
-import { onSwiperScrollEnd, fetchPostsAndSaveToState, resetAnimatePostTextDetails } from '../helper/Helper';
+import {
+    onSwiperScrollEnd, fetchPostsAndSaveToState,
+    resetAnimatePostTextDetails
+} from '../helper/Helper';
 import { PostDescriptionModal } from '../components/PostDescriptionModal';
 import { PostReportAbuseModal } from '../components/PostReportAbuseModal';
 import { glancePostStyles } from '../styles/Styles';
@@ -11,6 +14,7 @@ import Swiper from 'react-native-swiper';
 import { SwipeItem } from './SwipeItem'
 import { PostDetails } from './PostDetails';
 import FastImage from 'react-native-fast-image';
+import { CategoryContext } from '../App';
 
 const category_selection = require('../assets/category_selection_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
@@ -27,9 +31,8 @@ export function Glance({ navigation }) {
         reportAbuses: [],
         reportAbuseSubmitDisabled: false
     });
-
+    const { postIdFromNotification } = useContext(CategoryContext);
     const viewPagerRef = useRef(null);
-
     const postDetailsRef = useRef(null);
 
     useEffect(() => {
@@ -89,7 +92,9 @@ export function Glance({ navigation }) {
                             sdomDatastate.posts.map((item, index) => {
                                 return <Animated.View key={index}>
                                     <SwipeItem width={width} height={height} item={item} index={index}
-                                        postImageParallax={postImageParallax} />
+                                        postImageParallax={postImageParallax} sdomDatastate={sdomDatastate}
+                                        postIdFromNotification={postIdFromNotification} viewPagerRef={viewPagerRef}
+                                        postDetailsRef={postDetailsRef} />
                                 </Animated.View>
                             })}
                     </Swiper>

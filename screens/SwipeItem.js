@@ -1,10 +1,12 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, useDerivedValue } from 'react-native-reanimated';
+import { scrollWhenPostIdFromNotification } from '../helper/Helper';
 
 export const SwipeItem = (props) => {
 
-    const { width, height, item, index, postImageParallax } = props;
+    const { width, height, item, index, postImageParallax, sdomDatastate, postIdFromNotification, viewPagerRef,
+        postDetailsRef } = props;
     const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 
     const verticalSpeed = Math.abs(height * 0.5 - height)
@@ -22,6 +24,7 @@ export const SwipeItem = (props) => {
                 uri: item.postImage,
                 priority: FastImage.priority.normal,
                 cache: FastImage.cacheControl.immutable
-            }} />
+            }} onLoadEnd={() => scrollWhenPostIdFromNotification(sdomDatastate, postIdFromNotification, viewPagerRef,
+                postDetailsRef)} />
         </Animated.View>)
 }

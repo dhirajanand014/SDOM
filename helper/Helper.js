@@ -506,3 +506,13 @@ export const setAnimationVisible = (postDetailsState, setPostDetailsState, isVis
         animationVisible: isVisible
     });
 }
+
+export const scrollWhenPostIdFromNotification = (sdomDatastate, postIdFromNotification, viewPagerRef,
+    postDetailsRef) => {
+    if (!postDetailsRef?.current?.newPostViewed && postIdFromNotification && viewPagerRef?.current) {
+        const index = sdomDatastate.posts.findIndex(post => post.postId == postIdFromNotification)
+        viewPagerRef.current.scrollBy(index);
+        postDetailsRef?.current?.setPostIndex(index);
+        postDetailsRef?.current?.setNewPostViewed(true);
+    }
+}

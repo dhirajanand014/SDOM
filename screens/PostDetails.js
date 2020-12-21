@@ -31,12 +31,18 @@ export const PostDetails = forwardRef((props, ref) => {
     const [postDetailsState, setPostDetailsState] = useState({
         currentPostIndex: 0,
         animationVisible: false,
-        switchEnabled: true
+        switchEnabled: true,
+        newPostViewed: false
     });
 
     useImperativeHandle(ref,
         () => ({
             postIndex: postDetailsState.currentPostIndex,
+            newPostViewed: postDetailsState.newPostViewed,
+
+            setNewPostViewed(bool) {
+                setPostDetailsState({ ...postDetailsState, newPostViewed: bool });
+            },
 
             setPostIndex(index) {
                 setPostDetailsState({ ...postDetailsState, currentPostIndex: index });

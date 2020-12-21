@@ -8,12 +8,20 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/WallPiperActivityTransitionAnimation</item>
     </style>
 
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/WallPiperActivityTransitionAnimation</item>
     </style>
 
+    <style name="WallPiperActivityTransitionAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/animate_slide_left_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/animate_slide_left_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/animate_slide_right_exit</item>
+        <item name="android:activityCloseExitAnimation">@anim/animate_slide_right_enter</item>
+    </style>
 </resources>

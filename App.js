@@ -19,11 +19,11 @@ export default class App extends React.PureComponent {
         const fetchCategories = (category, setCategory) => {
             fetchAndUpdateCategoryState(category, setCategory);
         }
-
         const initialCategorySelection = this.props.initialCategorySelection || false;
+        const postIdFromNotification = this.props.postIdFromNotification || false;
 
         return (
-            <CategoryContext.Provider value={{ fetchCategories, initialCategorySelection }}>
+            <CategoryContext.Provider value={{ fetchCategories, initialCategorySelection, postIdFromNotification }}>
                 <TourGuideProvider androidStatusBarVisible={true}
                     backdropColor={this.props.initialCategorySelection == 'Intro' && `rgba(145, 63, 146, 0.6)`}>
                     <NavigationContainer>

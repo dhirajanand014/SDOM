@@ -11,7 +11,18 @@ public class Constants {
     public static final String NOTIFICATION_CHANNEL_NAME = "Channel_1";
     public static final Integer NOTIFICATION_ID = 1;
 
-    public static final String FIREBASE_MESSAGING_TOPIC_NEW_POST="wallpiperNewPostTopic";
+    public static final String FIREBASE_MESSAGING_TOPIC_NEW_POST = "wallpiperNewPostTopic";
+    public static final String NOTIFICATION_TYPE = "notificationType";
+
+    public static final String NEW_POST = "New Post";
+    public static final String POST_ID = "postId";
+    public static final String POST_ID_FROM_NOTIFICATION = "postIdFromNotification";
+
+    public static final String NAVIGATION_ROUTE = "navigationRoute";
+    public static final String INITIAL_CATEGORY_SELECTION = "initialCategorySelection";
+
+    public static final String INTRO = "Intro";
+    public static final String GLANCE = "Glance";
 
     //Notification download progress values
     public static final Integer INT_TWENTY = 20;

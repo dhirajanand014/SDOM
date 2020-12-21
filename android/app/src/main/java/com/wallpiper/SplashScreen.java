@@ -6,17 +6,15 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.reactnativecommunity.asyncstorage.AsyncLocalStorageUtil;
-import com.reactnativecommunity.asyncstorage.ReactDatabaseSupplier;
+import com.wallpiper.constants.Constants;
+import com.wallpiper.helper.WallPiperHelper;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -29,6 +27,7 @@ import androidx.core.content.ContextCompat;
  * Main class for splash screen.
  */
 public class SplashScreen extends AppCompatActivity implements Observer {
+
     private NetworkChangeReceiver networkChangeReceiverSplashScreen = new NetworkChangeReceiver();
 
     @Override
@@ -90,17 +89,11 @@ public class SplashScreen extends AppCompatActivity implements Observer {
                 try {
                     Intent mainIntent = new Intent(SplashScreen.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    String value = null;
-                    SQLiteDatabase readableDatabase = ReactDatabaseSupplier.getInstance(this).getReadableDatabase();
 
-                    boolean isCategoryEmpty = TextUtils.isEmpty(AsyncLocalStorageUtil.getItemImpl(readableDatabase, "@save_category_id")) &&
-                            TextUtils.isEmpty(AsyncLocalStorageUtil.getItemImpl(readableDatabase, "@save_category_button_type"));
+                    boolean isCategoryEmpty = WallPiperHelper.isCategoryEmpty(this);
 
-                    readableDatabase.close();
-
-                    mainIntent.putExtra("navigationRoute", isCategoryEmpty ? "Intro" : "Glance");
+                    mainIntent.putExtra(Constants.NAVIGATION_ROUTE, isCategoryEmpty ? Constants.INTRO : Constants.GLANCE);
                     startActivity(mainIntent);
-                    animateSlideLeft(this);
                     finish();
                 } catch (Exception exception) {
                     System.out.println(exception);

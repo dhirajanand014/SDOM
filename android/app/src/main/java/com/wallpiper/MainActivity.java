@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -27,8 +28,6 @@ public class MainActivity extends ReactActivity {
     }
 
     public static class NavigationScreenDelegate extends ReactActivityDelegate {
-        private static final String NAVIGATION_ROUTE = "navigationRoute";
-        private static final String INITIAL_CATEGORY_SELECTION = "initialCategorySelection";
         private Bundle mInitialProps = null;
         private final @Nullable
         Activity mActivity;
@@ -43,17 +42,32 @@ public class MainActivity extends ReactActivity {
             // bundle is where we put our alarmID with launchIntent.putExtra
             if (null != mActivity) {
                 Bundle bundle = mActivity.getIntent().getExtras();
-                if (bundle != null && bundle.containsKey(NAVIGATION_ROUTE)) {
+                if (bundle != null) {
                     mInitialProps = new Bundle();
                     // put any initialProps here
-                    mInitialProps.putString(NAVIGATION_ROUTE, bundle.getString(NAVIGATION_ROUTE));
-                    if ("Intro".equalsIgnoreCase(bundle.getString(NAVIGATION_ROUTE))) {
-                        mInitialProps.putBoolean(INITIAL_CATEGORY_SELECTION, true);
-                    }
+                    putBundleList(bundle);
                 }
                 createNotificationChannel();
                 subscribeToFireBaseTopic();
                 super.onCreate(savedInstanceState);
+            }
+        }
+
+        /**
+         * Add activity extras as bundle to the main application.
+         *
+         * @param bundle
+         */
+        private void putBundleList(Bundle bundle) {
+            if (bundle.containsKey(Constants.NAVIGATION_ROUTE)) {
+                mInitialProps.putString(Constants.NAVIGATION_ROUTE, bundle.getString(Constants.NAVIGATION_ROUTE));
+                if (Constants.INTRO.equalsIgnoreCase(bundle.getString(Constants.NAVIGATION_ROUTE))) {
+                    mInitialProps.putBoolean(Constants.INITIAL_CATEGORY_SELECTION, true);
+                }
+                if (bundle.containsKey(Constants.POST_ID_FROM_NOTIFICATION)) {
+                    mInitialProps.putInt(Constants.POST_ID_FROM_NOTIFICATION,
+                            Integer.parseInt(bundle.getString(Constants.POST_ID_FROM_NOTIFICATION)));
+                }
             }
         }
 
@@ -107,4 +121,9 @@ public class MainActivity extends ReactActivity {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(Constants.FIREBASE_MESSAGING_TOPIC_NEW_POST);
     }
 
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent); // Propagate.
+        setIntent(intent); // Passing the new intent to setIntent() means this new intent will be the one returned whenever getIntent() is called.
+    }
 }
