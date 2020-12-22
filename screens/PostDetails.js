@@ -76,10 +76,10 @@ export const PostDetails = forwardRef((props, ref) => {
                     <Animated.View style={[glancePostStyles.smallButtonsContainer, postDetailsState.animationVisible && postTypeSpringStyle]}>
                         <Text style={glancePostStyles.titleName}>{posts[postDetailsState.currentPostIndex].postTitle}</Text>
                         {
-                            posts[postDetailsState.currentPostIndex].postLink &&
-                            <TouchableOpacity style={{ width: 38 }} onPress={() => Linking.openURL(posts[postDetailsState.currentPostIndex].postLink)}>
-                                <Animated.Image style={[glancePostStyles.icon_external_link]} source={post_external_link} />
-                            </TouchableOpacity>
+                            posts[postDetailsState.currentPostIndex].postLink ?
+                                <TouchableOpacity style={{ width: 38 }} onPress={() => Linking.openURL(posts[postDetailsState.currentPostIndex].postLink)}>
+                                    <Animated.Image style={[glancePostStyles.icon_external_link]} source={post_external_link} />
+                                </TouchableOpacity> : []
                         }
                     </Animated.View>
                     <Animated.View style={[glancePostStyles.postTitleAndProfileStyle, postDetailsState.animationVisible && postDescriptionSpringStyle]}>
