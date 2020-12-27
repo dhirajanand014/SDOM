@@ -69,6 +69,13 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
         }
     }
 
+    /**
+     * Method to download image from the link and display intent categories with image sharable applications of device onclick of the
+     * share link.
+     *
+     * @param inImageURL
+     * @param inTitle
+     */
     @ReactMethod
     public void shareImage(String inImageURL, String inTitle) {
         try {
@@ -80,21 +87,26 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setType("image/png");
+            intent.setType(Constants.SHARE_IMAGE_TYPE);
             intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
             intent.putExtra(Intent.EXTRA_TEXT, inTitle);
 
-            Intent chooserIntent = Intent.createChooser(intent, "Share Via");
+            Intent chooserIntent = Intent.createChooser(intent, Constants.SHARE_VIA);
             chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             reactContext.startActivity(chooserIntent);
         } catch (Exception exception) {
-            Toast.makeText(reactContext, "Cannot share image for "
-                    + inTitle, Toast.LENGTH_SHORT).show();
+            Toast.makeText(reactContext, "Cannot share image for " + inTitle, Toast.LENGTH_SHORT).show();
         }
     }
 
-
+    /**
+     * Method to download image to the device from the download link on click of the download link.
+     *
+     * @param inUrl
+     * @param inCategoryTitle
+     * @param postRequestType
+     */
     @ReactMethod
     public void downloadPostImage(String inUrl, String inCategoryTitle, String postRequestType) {
         try {
@@ -111,7 +123,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
      * @param src
      * @return
      */
-    private Bitmap getBitmapFromURL(String src) throws IOException {
+    private static Bitmap getBitmapFromURL(String src) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(src).openConnection();
         connection.setDoInput(true);
         connection.connect();
@@ -122,11 +134,9 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
     /**
      * Get the URL and the Post category title to set the wallpaper or the lock Screen image.
      */
-    private class AsyncSetImage extends AsyncTask<String, Integer, String> {
+    private static class AsyncSetImage extends AsyncTask<String, Integer, String> {
 
         private ReactApplicationContext mContext;
-        private final Integer NOTIFICATION_PROGRESS_START = 0;
-        private final Integer NOTIFICATION_PROGRESS_COMPLETE = 100;
         private String mPostTitle;
         private NotificationManager notificationManager;
         private NotificationCompat.Builder notificationBuilder;
@@ -139,12 +149,12 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             if (null != notificationBuilder && null != notificationManager) {
-                Integer progressValue = values[0];
-                if (100 == progressValue) {
-                    notificationBuilder.setContentText("Download Complete")
+                Integer progressValue = values[Constants.INT_ZERO];
+                if (Constants.INT_HUNDRED.equals(progressValue)) {
+                    notificationBuilder.setContentText(Constants.DOWNLOAD_COMPLETE)
                             .setOngoing(false)
-                            .setProgress(NOTIFICATION_PROGRESS_START,
-                                    NOTIFICATION_PROGRESS_START, false);
+                            .setProgress(Constants.INT_ZERO,
+                                    Constants.INT_HUNDRED, false);
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
 
@@ -160,7 +170,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                     notificationBuilder.setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND);
                     notificationBuilder.setContentIntent(activity);
                 } else {
-                    notificationBuilder.setProgress(NOTIFICATION_PROGRESS_COMPLETE, progressValue, false);
+                    notificationBuilder.setProgress(Constants.INT_HUNDRED, progressValue, false);
                 }
                 notificationManager.notify(Constants.NOTIFICATION_ID, notificationBuilder.build());
             }
@@ -169,14 +179,14 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
         @Override
         protected String doInBackground(String... inParameters) {
             try {
-                Bitmap bitmapImage = getBitmapFromURL(inParameters[0]);
-                mPostTitle = inParameters[1];
-                if (inParameters[2].equals(Constants.POST_WALLPAPER_SET)) {
+                Bitmap bitmapImage = getBitmapFromURL(inParameters[Constants.INT_ZERO]);
+                mPostTitle = inParameters[Constants.INT_ONE];
+                if (inParameters[Constants.INT_TWO].equals(Constants.POST_WALLPAPER_SET)) {
                     WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                     wallpaperManager.setBitmap(bitmapImage, null, true,
                             WallpaperManager.FLAG_LOCK | WallpaperManager.FLAG_SYSTEM);
                     return Constants.POST_WALLPAPER_SET;
-                } else if (inParameters[2].equals(Constants.POST_IMAGE_DOWNLOAD)) {
+                } else if (inParameters[Constants.INT_TWO].equals(Constants.POST_IMAGE_DOWNLOAD)) {
                     initNotification(bitmapImage);
                     return downloadImage(bitmapImage);
                 }
@@ -206,7 +216,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                             .setCategory(Notification.CATEGORY_MESSAGE)
                             .setAutoCancel(true)
                             .setOnlyAlertOnce(true)
-                            .setOngoing(true).setProgress(NOTIFICATION_PROGRESS_COMPLETE, NOTIFICATION_PROGRESS_START, false);
+                            .setOngoing(true).setProgress(Constants.INT_HUNDRED, Constants.INT_ZERO, false);
             notificationManager = (NotificationManager) reactContext.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(Constants.NOTIFICATION_ID, notificationBuilder.build());
         }
@@ -226,7 +236,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                 ContentResolver contentResolver = reactContext.getContentResolver();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, mPostTitle + ".png");
-                contentValues.put(MediaStore.Images.Media.MIME_TYPE, "images/png");
+                contentValues.put(MediaStore.Images.Media.MIME_TYPE, Constants.SHARE_IMAGE_TYPE);
                 contentValues.put(MediaStore.Images.Media.IS_PENDING, true);
                 contentValues.put(MediaStore.Downloads.RELATIVE_PATH, String.join(File.separator,
                         Environment.DIRECTORY_DOWNLOADS, Constants.WALLPIPER));
@@ -257,7 +267,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
                 }
             }
             publishProgress(Constants.INT_HUNDRED);
-            return result ? Constants.POST_IMAGE_DOWNLOAD : "";
+            return result ? Constants.POST_IMAGE_DOWNLOAD : Constants.EMPTY;
         }
 
         /**
@@ -267,8 +277,8 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
          */
         private ContentValues createContentValues() {
             ContentValues values = new ContentValues();
-            values.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
-            values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
+            values.put(MediaStore.Images.Media.MIME_TYPE, Constants.SHARE_IMAGE_TYPE);
+            values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / Constants.INT_THOUSAND);
             return values;
         }
 
@@ -282,7 +292,7 @@ public class WallpiperApiModule extends ReactContextBaseJavaModule {
          */
         private boolean saveImageFromURL(Bitmap bitmapImage, OutputStream fileOutputStream) throws IOException {
             if (null != fileOutputStream) {
-                bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                bitmapImage.compress(Bitmap.CompressFormat.PNG, Constants.INT_HUNDRED, fileOutputStream);
                 fileOutputStream.close();
                 return true;
             }

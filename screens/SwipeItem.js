@@ -22,7 +22,7 @@ export const SwipeItem = (props) => {
         <Animated.View key={`${index}_${item.categoryId}`}>
             <FastImage style={[{ width: width, height: height }]} source={{
                 uri: item.postImage,
-                priority: FastImage.priority.normal,
+                priority: FastImage.priority.high,
                 cache: FastImage.cacheControl.immutable
             }} onLoadEnd={() => scrollWhenPostIdFromNotification(sdomDatastate, postIdFromNotification, viewPagerRef,
                 postDetailsRef)} />

@@ -1,5 +1,7 @@
 package com.wallpiper.constants;
 
+import android.content.Intent;
+
 public class Constants {
     public static final String POST_WALLPAPER_SET = "postWallPaper";
     public static final String POST_IMAGE_DOWNLOAD = "postDownload";
@@ -26,9 +28,17 @@ public class Constants {
     public static final String INTRO = "Intro";
     public static final String GLANCE = "Glance";
 
+    public static final String SHARE_VIA = "Share Via";
+    public static final String SHARE_IMAGE_TYPE = "image/png";
+    public static final String DOWNLOAD_COMPLETE = "Download Complete";
+
     //Notification download progress values
+    public static final Integer INT_ZERO = 0;
+    public static final Integer INT_ONE = 1;
+    public static final Integer INT_TWO = 2;
     public static final Integer INT_TWENTY = 20;
     public static final Integer INT_FORTY = 40;
     public static final Integer INT_EIGHTY = 80;
     public static final Integer INT_HUNDRED = 100;
+    public static final Integer INT_THOUSAND = 1000;
 }
