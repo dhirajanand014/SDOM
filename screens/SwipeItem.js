@@ -1,12 +1,14 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, useDerivedValue } from 'react-native-reanimated';
-import { scrollWhenPostIdFromNotification } from '../helper/Helper';
+import { FallBackComponent } from '../components/FallBackComponent';
+import { componentErrorConsts, errorMessages } from '../constants/Constants';
+import { checkIsPostImageLoadFailed, scrollWhenPostIdFromNotification, setImageLoadError } from '../helper/Helper';
 
 export const SwipeItem = (props) => {
 
     const { width, height, item, index, postImageParallax, sdomDatastate, postIdFromNotification, viewPagerRef,
-        postDetailsRef } = props;
+        postDetailsRef, optionsState, setOptionsState } = props;
     const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 
     const verticalSpeed = Math.abs(height * 0.5 - height)
@@ -20,11 +22,16 @@ export const SwipeItem = (props) => {
 
     return (
         <Animated.View key={`${index}_${item.categoryId}`}>
+            {
+                (optionsState.isImageLoadError || checkIsPostImageLoadFailed(item.postId) &&
+                    <FallBackComponent width={width} height={height} componentErrorConst={componentErrorConsts.POST_IMAGE_LOAD_ERROR}
+                        descriptionText={errorMessages.POST_IMAGE_LOAD_ERROR} />)
+            }
             <FastImage style={[{ width: width, height: height }]} source={{
                 uri: item.postImage,
                 priority: FastImage.priority.high,
                 cache: FastImage.cacheControl.immutable
             }} onLoadEnd={() => scrollWhenPostIdFromNotification(sdomDatastate, postIdFromNotification, viewPagerRef,
-                postDetailsRef)} />
+                postDetailsRef)} onError={() => setImageLoadError(optionsState, setOptionsState, true, item.postId)} />
         </Animated.View>)
 }

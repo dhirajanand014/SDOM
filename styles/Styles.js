@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { colorConstants } from '../constants/Constants';
 
 export const glancePostStyles = StyleSheet.create({
     innerContainer: {
@@ -367,6 +368,11 @@ export const glancePostStyles = StyleSheet.create({
     preloaderStyle: {
         width: 30,
         height: 30
+    },
+    errorImageLoaderStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 
@@ -485,3 +491,45 @@ export const introStyles = StyleSheet.create({
         alignItems: 'center'
     }
 });
+
+export const errorBoundaryStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colorConstants.YELLOW
+    },
+    content: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+        padding: 15
+    },
+    infoIconStyle: {
+        alignSelf: 'center',
+        width: 60,
+        height: 60
+    },
+    textMessage1Style: {
+        fontSize: 32,
+        textAlign: 'center',
+        fontFamily: 'wallpiper_roman_font',
+    },
+    textMessage2Style: {
+        marginVertical: 10,
+        lineHeight: 23,
+        textAlign: 'center',
+        fontWeight: '500',
+        fontFamily: 'wallpiper_roman_font'
+    },
+    resetToCategorySelectionButton: {
+        borderRadius: 25,
+        marginTop: 25,
+        padding: 15,
+        elevation: 3,
+        backgroundColor: "#3d3d3d"
+    },
+    redirectButtonText: {
+        color: "white",
+        fontFamily: 'wallpiper_roman_font',
+        textAlign: "center",
+        fontSize: 20
+    }
+})

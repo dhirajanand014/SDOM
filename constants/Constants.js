@@ -9,6 +9,7 @@ export const urlConstants = {
 export const asyncStorageKeys = {
     SAVE_CATEGORY_ID: `@save_category_id`,
     SAVE_CATEGORY_BUTTON_TYPE: `@save_category_button_type`,
+    ADD_FAILED_POST_MAGE_LOAD: `@save_failed_post_image`,
     SAVE_POST_COUNTS: `@save_post_counts`,
     SAVE_SELECTED_REPORT: `@save_selected_report`
 }
@@ -17,9 +18,19 @@ export const savePostCountKeys = {
     SELECTED_POST_LIKES: `selectedPostIdLikesCount`
 }
 
+export const componentErrorConsts = {
+    ERROR_BOUNDARY: 1,
+    CATEGORY_WITHOUT_POST: 2,
+    POST_IMAGE_LOAD_ERROR: 3
+}
+
 export const setPostImages = {
     SET_POST_WALLPAPER: `postWallPaper`,
     SET_POST_DOWNLOAD: `postDownload`
+}
+
+export const jsonConstants = {
+    EMPTY: []
 }
 
 export const postCountTypes = {
@@ -69,6 +80,12 @@ export const alertTextMessages = {
     WALLPAPER_SET_SUCCESS_TEXT: `Image successfully set as wallpaper`
 }
 
+export const errorMessages = {
+    ERROR_BOUNDARY: `The app ran into a problem and could not continue.We apologise for any inconvenience this has caused! Press the button below to restart the app and sign back in.Please contact us if this issue persists.`,
+    SELECT_OTHER_CATEGORIES: `Selected category has no posts! Please select another category by clicking below.`,
+    POST_IMAGE_LOAD_ERROR: `Image failed to load!`,
+}
+
 export const reportAbuseRequestPayloadKeys = {
     POST_ID: `postId`,
     POST_REPORT_ABUSE_ID: `postReportAbuseId`,
@@ -87,5 +104,6 @@ export const colorConstants = {
     TRANSPARENT_BUTTON: `rgba(0, 0, 0, 0.0)`,
     GREY: `#99999`,
     YELLOW: `#fcc200`,
-    WHITE: `#ffffff`
+    WHITE: `#ffffff`,
+    BLACK: `#3d3d3d`
 }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
-import { stringConstants } from '../constants/Constants';
+import { componentErrorConsts, errorMessages, stringConstants } from '../constants/Constants';
 import {
     onSwiperScrollEnd, fetchPostsAndSaveToState,
-    resetAnimatePostTextDetails
+    resetAnimatePostTextDetails, setImageLoadError,
 } from '../helper/Helper';
 import { PostDescriptionModal } from '../components/PostDescriptionModal';
 import { PostReportAbuseModal } from '../components/PostReportAbuseModal';
@@ -15,6 +15,7 @@ import { SwipeItem } from './SwipeItem'
 import { PostDetails } from './PostDetails';
 import FastImage from 'react-native-fast-image';
 import { CategoryContext } from '../App';
+import { FallBackComponent } from '../components/FallBackComponent';
 
 const category_selection = require('../assets/category_selection_icon.png');
 const post_report_abuse = require('../assets/post_report_abuse_icon.png');
@@ -29,7 +30,8 @@ export function Glance({ navigation }) {
         selectedPost: stringConstants.EMPTY,
         selectedReportAbuse: {},
         reportAbuses: [],
-        reportAbuseSubmitDisabled: false
+        reportAbuseSubmitDisabled: false,
+        isImageLoadError: false
     });
     const { postIdFromNotification, categoryIdFromNotification } = useContext(CategoryContext);
     const viewPagerRef = useRef(null);
@@ -77,25 +79,23 @@ export function Glance({ navigation }) {
                 sdomDatastate.posts && sdomDatastate.posts.length &&
                 <View style={{ flex: 1 }}>
                     <Swiper ref={viewPagerRef} index={postDetailsRef?.current?.postIndex} horizontal={false} showsPagination={false} scrollEventThrottle={16}
-                        bounces={true} loop onMomentumScrollBegin={(event) => postDetailsRef?.current?.setPostAnimationVisible(true)}
+                        bounces={true} loop onMomentumScrollBegin={(event) => {
+                            setImageLoadError(optionsState, setOptionsState, false);
+                            postDetailsRef?.current?.setPostAnimationVisible(true);
+                        }}
                         onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
                         onScroll={(event) => {
                             resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
                                 textPostTypeAnimationValue_translate_x);
                             //onPostScrollFunction(event);
-                        }} loadMinimalLoader={
-                            <FastImage style={glancePostStyles.preloaderStyle} source={{
-                                uri: Image.resolveAssetSource(require(`../assets/wallpiper-preloader.gif`)).uri,
-                                priority: FastImage.priority.normal
-                            }} />
-                        }>
+                        }}>
                         {
                             sdomDatastate.posts.map((item, index) => {
                                 return <Animated.View key={index}>
                                     <SwipeItem width={width} height={height} item={item} index={index}
                                         postImageParallax={postImageParallax} sdomDatastate={sdomDatastate}
                                         postIdFromNotification={postIdFromNotification} viewPagerRef={viewPagerRef}
-                                        postDetailsRef={postDetailsRef} />
+                                        postDetailsRef={postDetailsRef} optionsState={optionsState} setOptionsState={setOptionsState} />
                                 </Animated.View>
                             })}
                     </Swiper>
@@ -104,7 +104,9 @@ export function Glance({ navigation }) {
                         width={width} height={height} optionsState={optionsState} setOptionsState={setOptionsState}
                         sdomDatastate={sdomDatastate} setSdomDatastate={setSdomDatastate} optionsState={optionsState}
                         setOptionsState={setOptionsState} viewPagerRef={viewPagerRef} textPostDescriptionAnimationValue={textPostDescriptionAnimationValue_translate_x} />
-                </View> || <View>
+                </View> || sdomDatastate.posts && !sdomDatastate.posts.length &&
+                <FallBackComponent width={width} height={height} componentErrorConst={componentErrorConsts.CATEGORY_WITHOUT_POST}
+                    descriptionText={errorMessages.SELECT_OTHER_CATEGORIES} navigation={navigation} /> || <View>
                     <Shimmer style={{ width: width, height: height }} duration={500} direction="up" tilt={45}>
                         <View style={glancePostStyles.shimmerViewInit}>
                             <FastImage style={glancePostStyles.preloaderStyle} source={{
