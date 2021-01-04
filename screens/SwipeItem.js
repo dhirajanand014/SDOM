@@ -23,7 +23,7 @@ export const SwipeItem = (props) => {
     return (
         <Animated.View key={`${index}_${item.categoryId}`}>
             {
-                (optionsState.isImageLoadError || checkIsPostImageLoadFailed(item.postId) &&
+                (optionsState.isImageLoadError &&
                     <FallBackComponent width={width} height={height} componentErrorConst={componentErrorConsts.POST_IMAGE_LOAD_ERROR}
                         descriptionText={errorMessages.POST_IMAGE_LOAD_ERROR} />)
             }
@@ -31,7 +31,9 @@ export const SwipeItem = (props) => {
                 uri: item.postImage,
                 priority: FastImage.priority.high,
                 cache: FastImage.cacheControl.immutable
-            }} onLoadEnd={() => scrollWhenPostIdFromNotification(sdomDatastate, postIdFromNotification, viewPagerRef,
-                postDetailsRef)} onError={() => setImageLoadError(optionsState, setOptionsState, true, item.postId)} />
+            }} fallback={optionsState.isImageLoadError} onLoadEnd={() => {
+                scrollWhenPostIdFromNotification(sdomDatastate, postIdFromNotification, viewPagerRef,
+                    postDetailsRef);
+            }} onError={() => setImageLoadError(optionsState, setOptionsState, true)} />
         </Animated.View>)
 }

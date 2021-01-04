@@ -551,45 +551,6 @@ export const checkAndAddCategoriesFromFCMNotification = async (selectedCategorie
     }
 }
 
-export const setFailedPostIds = async (inCategoryIds) => {
-    try {
-        await AsyncStorage.setItem(asyncStorageKeys.ADD_FAILED_POST_MAGE_LOAD, inCategoryIds);
-    } catch (error) {
-        console.log('Cannot set failed post ids to the storage', error);
-    }
-}
-
-export const getFailedPostIds = async () => {
-    try {
-        return await AsyncStorage.getItem(asyncStorageKeys.ADD_FAILED_POST_MAGE_LOAD) || jsonConstants.EMPTY;
-    } catch (error) {
-        console.log('Cannot get failed post ids from the storage', error);
-    }
-}
-
-export const setImageLoadError = async (optionsState, setOptionsState, bool, inFailedPostId) => {
-    try {
-        setOptionsState({ ...optionsState, isImageLoadError: bool });
-        if (bool) {
-            let failedPostIds = await getFailedPostIds();
-            if (failedPostIds) {
-                failedPostIds = JSON.parse(failedPostIds);
-            }
-            if (!failedPostIds.includes(inFailedPostId))
-                failedPostIds.push(inFailedPostId);
-            const failedPostIdsJSON = JSON.stringify(failedPostIds);
-            await setFailedPostIds(failedPostIdsJSON);
-        }
-    } catch (error) {
-        console.log('Cannot set post image load error', error);
-    }
-}
-
-export const checkIsPostImageLoadFailed = async (inPostId) => {
-    let failedPostIds = await getFailedPostIds();
-    if (failedPostIds) {
-        failedPostIds = JSON.parse(failedPostIds);
-        return failedPostIds.includes(inPostId);
-    }
-    return false;
+export const setImageLoadError = async (optionsState, setOptionsState, bool) => {
+    setOptionsState({ ...optionsState, isImageLoadError: bool });
 }
