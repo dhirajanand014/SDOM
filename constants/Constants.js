@@ -9,7 +9,6 @@ export const urlConstants = {
 export const asyncStorageKeys = {
     SAVE_CATEGORY_ID: `@save_category_id`,
     SAVE_CATEGORY_BUTTON_TYPE: `@save_category_button_type`,
-    ADD_FAILED_POST_MAGE_LOAD: `@save_failed_post_image`,
     SAVE_POST_COUNTS: `@save_post_counts`,
     SAVE_SELECTED_REPORT: `@save_selected_report`
 }

@@ -368,11 +368,6 @@ export const glancePostStyles = StyleSheet.create({
     preloaderStyle: {
         width: 30,
         height: 30
-    },
-    errorImageLoaderStyle: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     }
 });
 

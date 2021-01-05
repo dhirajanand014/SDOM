@@ -80,7 +80,9 @@ export function Glance({ navigation }) {
                 <View style={{ flex: 1 }}>
                     <Swiper ref={viewPagerRef} index={postDetailsRef?.current?.postIndex} horizontal={false} showsPagination={false} scrollEventThrottle={16}
                         bounces={true} loop onMomentumScrollBegin={(event) => {
-                            setImageLoadError(optionsState, setOptionsState, false);
+                            if (optionsState.isImageLoadError) {
+                                setImageLoadError(optionsState, setOptionsState, false);
+                            }
                             postDetailsRef?.current?.setPostAnimationVisible(true);
                         }}
                         onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
