@@ -3,7 +3,7 @@ import FastImage from 'react-native-fast-image';
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, useDerivedValue } from 'react-native-reanimated';
 import { FallBackComponent } from '../components/FallBackComponent';
 import { componentErrorConsts, errorMessages } from '../constants/Constants';
-import { checkIsPostImageLoadFailed, scrollWhenPostIdFromNotification, setImageLoadError } from '../helper/Helper';
+import { scrollWhenPostIdFromNotification, setImageLoadError } from '../helper/Helper';
 
 export const SwipeItem = (props) => {
 
