@@ -430,8 +430,7 @@ export const flatListItemStyles = StyleSheet.create({
         shadowColor: '#fcc200',
         shadowRadius: 18,
         borderRadius: 8,
-        shadowOpacity: .7,
-        overflow: 'hidden'
+        shadowOpacity: .7
     },
     imageBackGround: {
         width: '100%',
