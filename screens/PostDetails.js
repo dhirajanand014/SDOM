@@ -32,13 +32,15 @@ export const PostDetails = forwardRef((props, ref) => {
         currentPostIndex: 0,
         animationVisible: false,
         switchEnabled: true,
-        newPostViewed: false
+        newPostViewed: false,
+        isFromSearch: false
     });
 
     useImperativeHandle(ref,
         () => ({
             postIndex: postDetailsState.currentPostIndex,
             newPostViewed: postDetailsState.newPostViewed,
+            isFromSearch: postDetailsState.isFromSearch,
 
             setNewPostViewed(bool) {
                 setPostDetailsState({ ...postDetailsState, newPostViewed: bool });
@@ -50,7 +52,11 @@ export const PostDetails = forwardRef((props, ref) => {
 
             setPostAnimationVisible(isVisible) {
                 setPostDetailsState({ ...postDetailsState, animationVisible: isVisible });
-            }
+            },
+
+            setIsFromSearch(bool) {
+                setPostDetailsState({ ...postDetailsState, isFromSearch: bool });
+            },
         }));
 
     const postTypeSpringStyle = useAnimatedStyle(() => {
@@ -99,7 +105,7 @@ export const PostDetails = forwardRef((props, ref) => {
                     optionsState.showSearch &&
                     <PostSearch sdomDatastate={sdomDatastate} screenWidth={width} screenHeight={height}
                         optionsState={optionsState} setOptionsState={setOptionsState} viewPagerRef={viewPagerRef}
-                        post={posts[postDetailsState.currentPostIndex]} />
+                        post={posts[postDetailsState.currentPostIndex]} postDetailsRef={ref} />
                 }
             </View>
             <ActionButton buttonColor={colorConstants.TRANSPARENT_BUTTON} backgroundTappable={true} size={28} useNativeFeedback={false} degrees={0}

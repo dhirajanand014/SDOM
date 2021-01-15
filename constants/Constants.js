@@ -106,3 +106,7 @@ export const colorConstants = {
     WHITE: `#ffffff`,
     BLACK: `#3d3d3d`
 }
+
+export const backHandlerConstants = {
+    HARDWAREBACKPRESS: `hardwareBackPress`
+}

@@ -6,6 +6,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { saveCategoryButtonType, saveCategoryIdsToStorage } from '../helper/Helper'
 import { CategoryRenderer } from './CategoryRenderer.js';
 import { TourGuideZone, useTourGuideController } from 'rn-tourguide';
+import { backHandlerConstants } from '../constants/Constants';
 
 export function Category() {
 
@@ -23,9 +24,12 @@ export function Category() {
 
     useEffect(() => {
         fetchCategories(category, setCategory, initialCategorySelection);
-        const backHandler = BackHandler.addEventListener(`hardwareBackPress`, () => {
-            route.params.fromIntro && BackHandler.exitApp();
-            return true;
+        const backHandler = BackHandler.addEventListener(backHandlerConstants.HARDWAREBACKPRESS, () => {
+            if (route.params && route.params.fromIntro) {
+                BackHandler.exitApp();
+                return true;
+            }
+            return false;
         });
         return () => backHandler.remove();
     }, []);

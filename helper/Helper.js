@@ -6,7 +6,6 @@ import {
     permissionsButtons, permissionMessages,
     stringConstants, alertTextMessages,
     reportAbuseRequestPayloadKeys, responseStringData,
-    jsonConstants
 } from '../constants/Constants';
 import { Alert, InteractionManager, NativeModules, PermissionsAndroid, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -41,36 +40,7 @@ export const fetchAndUpdateCategoryState = async (category, setCategory) => {
 export const fetchPostsAndSaveToState = async (sdomDatastate, setSdomDatastate, optionsState,
     setOptionsState, categoryIdFromNotification) => {
     try {
-        let categoryPostsData = [];
-        const responseData = await axios.get(urlConstants.fetchPosts);
-        if (responseData) {
-            const responsePostsData = responseData.data.posts;
-            let selectedCategories = await getSelectedCategoryIdsFromStorage();
-
-            selectedCategories = await checkAndAddCategoriesFromFCMNotification(selectedCategories,
-                categoryIdFromNotification);
-
-            const fetchedPostCounts = await getPostCounts();
-            const postCounts = fetchedPostCounts && JSON.parse(fetchedPostCounts) || [];
-
-            const parsedCategoryIds = selectedCategories && JSON.parse(selectedCategories) || categoryPostsData;
-            categoryPostsData = parsedCategoryIds && parsedCategoryIds.length &&
-                responsePostsData.filter(post => parsedCategoryIds.some((selectedCategory) =>
-                    post.categoryIds[0].split(',').includes(selectedCategory.selectedCategoryId))).sort((datePost1, datePost2) => {
-                        return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
-                    }) || responsePostsData.sort((datePost1, datePost2) => {
-                        return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn)
-                    });
-
-            categoryPostsData.map(postItem => {
-                const postHasLikes = postCounts && postCounts[savePostCountKeys.SELECTED_POST_LIKES] &&
-                    postCounts[savePostCountKeys.SELECTED_POST_LIKES].some(postId => postItem.postId == postId);
-                if (postHasLikes) {
-                    postItem.likeDisabled = postHasLikes;
-                }
-                postItem.postCategoriesIn = fetchAndDisplayNamesAndCategoryTitles(postItem);
-            });
-        }
+        const categoryPostsData = await retrievePostData(categoryIdFromNotification);
         setSdomDatastate({ ...sdomDatastate, posts: categoryPostsData, });
         setOptionsState({ ...optionsState, showSearch: true });
     } catch (error) {
@@ -493,14 +463,24 @@ export const animateFinishedPostTextDetails = (textPostDescriptionAnimationValue
     textPostTypeAnimationValue.value = withDelay(50, withSpring(0, text_spring_config));
 }
 
-export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
+export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue,
+    sdomDatastate) => {
+
+    const postLength = sdomDatastate.posts.length;
+
     let index = 0;
     if (event.position || event.nativeEvent.position) {
         index = event.position - 1 || event.nativeEvent.position - 1;
     } else if (event.nativeEvent.layoutMeasurement) {
         index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
     }
-    postDetailsRef.current?.setPostIndex(index);
+
+    if (postLength == index + 1 && postDetailsRef?.current?.postIndex == 0) {
+
+    } else if (postLength == postDetailsRef?.current?.postIndex + 1 && index == 0) {
+
+    }
+    postDetailsRef?.current?.setPostIndex(index);
     animateFinishedPostTextDetails(textPostDescriptionAnimationValue, textPostTypeAnimationValue);
 }
 
@@ -554,3 +534,41 @@ export const checkAndAddCategoriesFromFCMNotification = async (selectedCategorie
 export const setImageLoadError = async (optionsState, setOptionsState, bool) => {
     setOptionsState({ ...optionsState, isImageLoadError: bool });
 }
+
+/**
+ * 
+ * @param {*} categoryIdFromNotification 
+ */
+const retrievePostData = async (categoryIdFromNotification) => {
+    let categoryPostsData = [];
+    const responseData = await axios.get(urlConstants.fetchPosts);
+    if (responseData) {
+        const responsePostsData = responseData.data.posts;
+        let selectedCategories = await getSelectedCategoryIdsFromStorage();
+
+        selectedCategories = await checkAndAddCategoriesFromFCMNotification(selectedCategories,
+            categoryIdFromNotification);
+
+        const fetchedPostCounts = await getPostCounts();
+        const postCounts = fetchedPostCounts && JSON.parse(fetchedPostCounts) || [];
+
+        const parsedCategoryIds = selectedCategories && JSON.parse(selectedCategories) || categoryPostsData;
+        categoryPostsData = parsedCategoryIds && parsedCategoryIds.length &&
+            responsePostsData.filter(post => parsedCategoryIds.some((selectedCategory) => post.categoryIds[0].split(',').includes(selectedCategory.selectedCategoryId))).sort((datePost1, datePost2) => {
+                return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn);
+            }) || responsePostsData.sort((datePost1, datePost2) => {
+                return Date.parse(datePost2.addedOn) - Date.parse(datePost1.addedOn);
+            });
+
+        categoryPostsData.map(postItem => {
+            const postHasLikes = postCounts && postCounts[savePostCountKeys.SELECTED_POST_LIKES] &&
+                postCounts[savePostCountKeys.SELECTED_POST_LIKES].some(postId => postItem.postId == postId);
+            if (postHasLikes) {
+                postItem.likeDisabled = postHasLikes;
+            }
+            postItem.postCategoriesIn = fetchAndDisplayNamesAndCategoryTitles(postItem);
+        });
+    }
+    return categoryPostsData;
+}
+

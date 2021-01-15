@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
-import { componentErrorConsts, errorMessages, stringConstants } from '../constants/Constants';
+import { colorConstants, componentErrorConsts, errorMessages, stringConstants } from '../constants/Constants';
 import {
     onSwiperScrollEnd, fetchPostsAndSaveToState,
     resetAnimatePostTextDetails, setImageLoadError,
@@ -77,18 +77,25 @@ export function Glance({ navigation }) {
             </TouchableOpacity>
             {
                 sdomDatastate.posts && sdomDatastate.posts.length &&
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, backgroundColor: colorConstants.YELLOW }}>
                     <Swiper ref={viewPagerRef} index={postDetailsRef?.current?.postIndex} horizontal={false} showsPagination={false} scrollEventThrottle={16}
-                        bounces={true} loop onMomentumScrollBegin={(event) => {
+                        bounces={true} onMomentumScrollBegin={(event) => {
                             if (optionsState.isImageLoadError) {
                                 setImageLoadError(optionsState, setOptionsState, false);
                             }
                             postDetailsRef?.current?.setPostAnimationVisible(true);
                         }}
-                        onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
+                        onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x, sdomDatastate, setSdomDatastate)}
                         onScroll={(event) => {
-                            resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
-                                textPostTypeAnimationValue_translate_x);
+                            const index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
+                            if (!(index == 0 || index == sdomDatastate.posts.length - 1) || index == postDetailsRef?.current?.postIndex && postDetailsRef?.current?.isFromSearch) {
+                                if (postDetailsRef?.current?.isFromSearch) {
+                                    postDetailsRef?.current?.setIsFromSearch(false);
+                                    return;
+                                }
+                                resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
+                                    textPostTypeAnimationValue_translate_x);
+                            };
                             //onPostScrollFunction(event);
                         }}>
                         {
@@ -101,7 +108,6 @@ export function Glance({ navigation }) {
                                 </Animated.View>
                             })}
                     </Swiper>
-
                     <PostDetails ref={postDetailsRef} posts={sdomDatastate.posts} textPostTypeAnimationValue={textPostTypeAnimationValue_translate_x}
                         width={width} height={height} optionsState={optionsState} setOptionsState={setOptionsState}
                         sdomDatastate={sdomDatastate} setSdomDatastate={setSdomDatastate} optionsState={optionsState}

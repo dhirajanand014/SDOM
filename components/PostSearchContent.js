@@ -7,7 +7,7 @@ import { glancePostStyles } from '../styles/Styles'
 
 export function PostSearchContent(props) {
     const { screenWidth, contentOpacity, contentTranslateY, searchValues, posts, inputBoxTranslateX, screenHeight,
-        inputTextRef, viewPagerRef, setSearchValues, postItem } = props;
+        inputTextRef, viewPagerRef, setSearchValues, postItem, postDetailsRef } = props;
 
     const translateSearchContent = useAnimatedStyle(() => {
         return {
@@ -38,6 +38,7 @@ export function PostSearchContent(props) {
                                                 togglePostSearchBox(searchValues, setSearchValues, postItem, inputBoxTranslateX,
                                                     contentTranslateY, contentOpacity, screenWidth, screenHeight, false,
                                                     inputTextRef, viewPagerRef);
+                                                postDetailsRef?.current?.setIsFromSearch(true);
                                             }}>
                                             <Text style={glancePostStyles.search_content_post_index}>{postIndex + 1}</Text>
                                             <Text style={glancePostStyles.search_content_post_title}>{` - ${post.postTitle}`}</Text>

@@ -11,7 +11,7 @@ const post_search = require('../assets/post_search_icon.png');
 
 export function PostSearch(props) {
 
-    const { sdomDatastate, screenWidth, screenHeight, post, viewPagerRef } = props;
+    const { sdomDatastate, screenWidth, screenHeight, post, viewPagerRef, postDetailsRef } = props;
     const { posts } = sdomDatastate;
     const [searchValues, setSearchValues] = useState({
         searchText: stringConstants.EMPTY,
@@ -69,7 +69,7 @@ export function PostSearch(props) {
                 <PostSearchContent postItem={post} screenWidth={screenWidth} searchValues={searchValues}
                     contentOpacity={content_opacity} contentTranslateY={content_translate_y} setSearchValues={setSearchValues}
                     searchValues={searchValues} posts={posts} inputBoxTranslateX={input_search_box_translate_x} screenHeight={screenHeight}
-                    inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} />
+                    inputTextRef={inputTextRef} viewPagerRef={viewPagerRef} postDetailsRef={postDetailsRef} />
             </React.Fragment>
         </View>
     )
