@@ -3,7 +3,7 @@ import { View, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-nati
 import { colorConstants, componentErrorConsts, errorMessages, stringConstants } from '../constants/Constants';
 import {
     onSwiperScrollEnd, fetchPostsAndSaveToState,
-    resetAnimatePostTextDetails, setImageLoadError,
+    resetAnimatePostTextDetails, setImageLoadError
 } from '../helper/Helper';
 import { PostDescriptionModal } from '../components/PostDescriptionModal';
 import { PostReportAbuseModal } from '../components/PostReportAbuseModal';
@@ -85,17 +85,13 @@ export function Glance({ navigation }) {
                             }
                             postDetailsRef?.current?.setPostAnimationVisible(true);
                         }}
-                        onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x, sdomDatastate, setSdomDatastate)}
+                        onMomentumScrollEnd={(event) => onSwiperScrollEnd(event, postDetailsRef, textPostDescriptionAnimationValue_translate_x, textPostTypeAnimationValue_translate_x)}
                         onScroll={(event) => {
                             const index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
-                            if (!(index == 0 || index == sdomDatastate.posts.length - 1) || index == postDetailsRef?.current?.postIndex && postDetailsRef?.current?.isFromSearch) {
-                                if (postDetailsRef?.current?.isFromSearch) {
-                                    postDetailsRef?.current?.setIsFromSearch(false);
-                                    return;
-                                }
+                            if (!(index == 0 || index == sdomDatastate.posts.length - 1)) {
                                 resetAnimatePostTextDetails(textPostDescriptionAnimationValue_translate_x,
                                     textPostTypeAnimationValue_translate_x);
-                            };
+                            }
                             //onPostScrollFunction(event);
                         }}>
                         {

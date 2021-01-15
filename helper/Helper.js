@@ -463,22 +463,12 @@ export const animateFinishedPostTextDetails = (textPostDescriptionAnimationValue
     textPostTypeAnimationValue.value = withDelay(50, withSpring(0, text_spring_config));
 }
 
-export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue,
-    sdomDatastate) => {
-
-    const postLength = sdomDatastate.posts.length;
-
+export const onSwiperScrollEnd = (event, postDetailsRef, textPostDescriptionAnimationValue, textPostTypeAnimationValue) => {
     let index = 0;
     if (event.position || event.nativeEvent.position) {
         index = event.position - 1 || event.nativeEvent.position - 1;
     } else if (event.nativeEvent.layoutMeasurement) {
         index = Math.round(event.nativeEvent.contentOffset.y / event.nativeEvent.layoutMeasurement.height) - 1;
-    }
-
-    if (postLength == index + 1 && postDetailsRef?.current?.postIndex == 0) {
-
-    } else if (postLength == postDetailsRef?.current?.postIndex + 1 && index == 0) {
-
     }
     postDetailsRef?.current?.setPostIndex(index);
     animateFinishedPostTextDetails(textPostDescriptionAnimationValue, textPostTypeAnimationValue);

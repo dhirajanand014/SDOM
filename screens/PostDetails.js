@@ -33,14 +33,12 @@ export const PostDetails = forwardRef((props, ref) => {
         animationVisible: false,
         switchEnabled: true,
         newPostViewed: false,
-        isFromSearch: false
     });
 
     useImperativeHandle(ref,
         () => ({
             postIndex: postDetailsState.currentPostIndex,
             newPostViewed: postDetailsState.newPostViewed,
-            isFromSearch: postDetailsState.isFromSearch,
 
             setNewPostViewed(bool) {
                 setPostDetailsState({ ...postDetailsState, newPostViewed: bool });
@@ -52,11 +50,7 @@ export const PostDetails = forwardRef((props, ref) => {
 
             setPostAnimationVisible(isVisible) {
                 setPostDetailsState({ ...postDetailsState, animationVisible: isVisible });
-            },
-
-            setIsFromSearch(bool) {
-                setPostDetailsState({ ...postDetailsState, isFromSearch: bool });
-            },
+            }
         }));
 
     const postTypeSpringStyle = useAnimatedStyle(() => {

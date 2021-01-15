@@ -34,11 +34,11 @@ export function PostSearchContent(props) {
                                     return (
                                         <TouchableOpacity key={`0_${post.postId}`} style={glancePostStyles.search_content_post_selection}
                                             onPress={() => {
-                                                viewPagerRef.current.scrollTo(postIndex + 1);
+                                                viewPagerRef.current.scrollBy(postIndex - postDetailsRef?.current?.postIndex);
                                                 togglePostSearchBox(searchValues, setSearchValues, postItem, inputBoxTranslateX,
                                                     contentTranslateY, contentOpacity, screenWidth, screenHeight, false,
                                                     inputTextRef, viewPagerRef);
-                                                postDetailsRef?.current?.setIsFromSearch(true);
+                                                postDetailsRef?.current?.setPostAnimationVisible(false);
                                             }}>
                                             <Text style={glancePostStyles.search_content_post_index}>{postIndex + 1}</Text>
                                             <Text style={glancePostStyles.search_content_post_title}>{` - ${post.postTitle}`}</Text>
