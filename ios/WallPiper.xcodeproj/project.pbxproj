@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
-		03D1D80892267789B69CD395 /* libPods-WallPiperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF30AEFA6A7C18705DE9BFF /* libPods-SDOMTests.a */; };
+		00E356F31AD99517003FC87E /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WallPiperTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1B1FE2F83F8E4390A69B22B6 /* wallpiper_bold_fonts_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */; };
+		1B1FE2F83F8E4390A69B22B6 /* sdom_bold_fonts_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SDOMTests.m */; };
-		348177D7A3816B1CB0339D39 /* libPods-WallPiper-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76E88A985825E787845243D /* libPods-SDOM-tvOS.a */; };
-		C4033F5CD159472DAFD4D084 /* wallpiper_roman_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9250657F54C2C88677228 /* sdom_roman_font.ttf */; };
-		D2F69264578C404154BC9F18 /* libPods-WallPiper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89886786AB3EDF8D59E29C99 /* libPods-SDOM.a */; };
-		D3BB671062D090D60D4CCD80 /* libPods-WallPiper-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90D9E739FDF9F0FC550CB10 /* libPods-SDOM-tvOSTests.a */; };
-		E62CA786CF334991B859CCB6 /* wallpiper_bold_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */; };
+		2DCD954D1E0B4F2C00145EB5 /* WallPiperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WallPiperTests.m */; };
+		348177D7A3816B1CB0339D39 /* libPods-WallPiper-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76E88A985825E787845243D /* libPods-WallPiper-tvOS.a */; };
+		5E7762B2A714AB0874512420 /* libPods-WallPiper-WallPiperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6383E5461EF9231EDF9F916D /* libPods-WallPiper-WallPiperTests.a */; };
+		C4033F5CD159472DAFD4D084 /* sdom_roman_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9250657F54C2C88677228 /* sdom_roman_font.ttf */; };
+		D2F69264578C404154BC9F18 /* libPods-WallPiper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89886786AB3EDF8D59E29C99 /* libPods-WallPiper.a */; };
+		D3BB671062D090D60D4CCD80 /* libPods-WallPiper-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A90D9E739FDF9F0FC550CB10 /* libPods-WallPiper-tvOSTests.a */; };
+		E62CA786CF334991B859CCB6 /* sdom_bold_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,35 +44,37 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00C9A829433DBD2DAB79F647 /* Pods-WallPiper-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOS/Pods-SDOM-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* WallPiperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDOMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00C9A829433DBD2DAB79F647 /* Pods-WallPiper-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-tvOS.release.xcconfig"; path = "Target Support Files/Pods-WallPiper-tvOS/Pods-WallPiper-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* WallPiperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallPiperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* WallPiperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDOMTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* WallPiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDOM.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SDOM/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SDOM/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* WallPiperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallPiperTests.m; sourceTree = "<group>"; };
+		047402CFB9E64967860031D1 /* Pods-WallPiper-WallPiperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-WallPiperTests.debug.xcconfig"; path = "Target Support Files/Pods-WallPiper-WallPiperTests/Pods-WallPiper-WallPiperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* WallPiper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallPiper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = WallPiper/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = WallPiper/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SDOM/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SDOM/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SDOM/main.m; sourceTree = "<group>"; };
-		1EF30AEFA6A7C18705DE9BFF /* libPods-SDOMTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDOMTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FE6CB4FB6E4D82E29ADACB3 /* Pods-SDOM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM.release.xcconfig"; path = "Target Support Files/Pods-SDOM/Pods-SDOM.release.xcconfig"; sourceTree = "<group>"; };
-		29E9250657F54C2C88677228 /* sdom_roman_font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_roman_font.ttf; path = ../assets/fonts/sdom_roman_font.ttf; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* SDOM-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SDOM-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* SDOM-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SDOM-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49C293721D3A6BAE70288EAF /* Pods-SDOMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOMTests.release.xcconfig"; path = "Target Support Files/Pods-SDOMTests/Pods-SDOMTests.release.xcconfig"; sourceTree = "<group>"; };
-		5DEA4B887D1DC64ED2EA0AA8 /* Pods-SDOMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOMTests.debug.xcconfig"; path = "Target Support Files/Pods-SDOMTests/Pods-SDOMTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_bold_fonts_.ttf; path = ../assets/fonts/sdom_bold_fonts_.ttf; sourceTree = "<group>"; };
-		79233D6A0704AAA2403AA92E /* Pods-SDOM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM.debug.xcconfig"; path = "Target Support Files/Pods-SDOM/Pods-SDOM.debug.xcconfig"; sourceTree = "<group>"; };
-		89886786AB3EDF8D59E29C99 /* libPods-SDOM.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDOM.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0A15443D2E713E05C618E44 /* Pods-SDOM-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOSTests/Pods-SDOM-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_bold_font.ttf; path = ../assets/fonts/sdom_bold_font.ttf; sourceTree = "<group>"; };
-		A90D9E739FDF9F0FC550CB10 /* libPods-SDOM-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDOM-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0607F71A255D4EDD83229C3 /* Pods-SDOM-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOSTests/Pods-SDOM-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E76E88A985825E787845243D /* libPods-SDOM-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDOM-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WallPiper/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WallPiper/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = WallPiper/main.m; sourceTree = "<group>"; };
+		1FE6CB4FB6E4D82E29ADACB3 /* Pods-WallPiper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper.release.xcconfig"; path = "Target Support Files/Pods-WallPiper/Pods-WallPiper.release.xcconfig"; sourceTree = "<group>"; };
+		29E9250657F54C2C88677228 /* sdom_roman_font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_roman_font.ttf; path = ../assets/fonts/sdom_roman_font.ttf; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* WallPiper-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WallPiper-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* WallPiper-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WallPiper-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C293721D3A6BAE70288EAF /* Pods-WallPiperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiperTests.release.xcconfig"; path = "Target Support Files/Pods-WallPiperTests/Pods-WallPiperTests.release.xcconfig"; sourceTree = "<group>"; };
+		5DEA4B887D1DC64ED2EA0AA8 /* Pods-WallPiperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiperTests.debug.xcconfig"; path = "Target Support Files/Pods-WallPiperTests/Pods-WallPiperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6383E5461EF9231EDF9F916D /* libPods-WallPiper-WallPiperTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WallPiper-WallPiperTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ABCCCA10AF84D7FB2F1470D /* sdom_bold_fonts_.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_bold_fonts_.ttf; path = ../assets/fonts/sdom_bold_fonts_.ttf; sourceTree = "<group>"; };
+		79233D6A0704AAA2403AA92E /* Pods-WallPiper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper.debug.xcconfig"; path = "Target Support Files/Pods-WallPiper/Pods-WallPiper.debug.xcconfig"; sourceTree = "<group>"; };
+		89886786AB3EDF8D59E29C99 /* libPods-WallPiper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WallPiper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0A15443D2E713E05C618E44 /* Pods-WallPiper-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-WallPiper-tvOSTests/Pods-WallPiper-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sdom_bold_font.ttf; path = ../assets/fonts/sdom_bold_font.ttf; sourceTree = "<group>"; };
+		A90D9E739FDF9F0FC550CB10 /* libPods-WallPiper-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WallPiper-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0607F71A255D4EDD83229C3 /* Pods-WallPiper-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WallPiper-tvOSTests/Pods-WallPiper-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B54B6EA3CE7004F24D411736 /* Pods-WallPiper-WallPiperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-WallPiperTests.release.xcconfig"; path = "Target Support Files/Pods-WallPiper-WallPiperTests/Pods-WallPiper-WallPiperTests.release.xcconfig"; sourceTree = "<group>"; };
+		E76E88A985825E787845243D /* libPods-WallPiper-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WallPiper-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FC118989EAD20AC8EDCCEEC9 /* Pods-SDOM-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDOM-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SDOM-tvOS/Pods-SDOM-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FC118989EAD20AC8EDCCEEC9 /* Pods-WallPiper-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WallPiper-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WallPiper-tvOS/Pods-WallPiper-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03D1D80892267789B69CD395 /* libPods-SDOMTests.a in Frameworks */,
+				5E7762B2A714AB0874512420 /* libPods-WallPiper-WallPiperTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2F69264578C404154BC9F18 /* libPods-SDOM.a in Frameworks */,
+				D2F69264578C404154BC9F18 /* libPods-WallPiper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				348177D7A3816B1CB0339D39 /* libPods-SDOM-tvOS.a in Frameworks */,
+				348177D7A3816B1CB0339D39 /* libPods-WallPiper-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,20 +106,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3BB671062D090D60D4CCD80 /* libPods-SDOM-tvOSTests.a in Frameworks */,
+				D3BB671062D090D60D4CCD80 /* libPods-WallPiper-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* SDOMTests */ = {
+		00E356EF1AD99517003FC87E /* WallPiperTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* SDOMTests.m */,
+				00E356F21AD99517003FC87E /* WallPiperTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = SDOMTests;
+			path = WallPiperTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -128,7 +130,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* SDOM */ = {
+		13B07FAE1A68108700A75B9A /* WallPiper */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -139,7 +141,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = SDOM;
+			name = WallPiper;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -147,10 +149,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				89886786AB3EDF8D59E29C99 /* libPods-SDOM.a */,
-				E76E88A985825E787845243D /* libPods-SDOM-tvOS.a */,
-				A90D9E739FDF9F0FC550CB10 /* libPods-SDOM-tvOSTests.a */,
-				1EF30AEFA6A7C18705DE9BFF /* libPods-SDOMTests.a */,
+				89886786AB3EDF8D59E29C99 /* libPods-WallPiper.a */,
+				E76E88A985825E787845243D /* libPods-WallPiper-tvOS.a */,
+				A90D9E739FDF9F0FC550CB10 /* libPods-WallPiper-tvOSTests.a */,
+				6383E5461EF9231EDF9F916D /* libPods-WallPiper-WallPiperTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,9 +167,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* SDOM */,
+				13B07FAE1A68108700A75B9A /* WallPiper */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* SDOMTests */,
+				00E356EF1AD99517003FC87E /* WallPiperTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				C90FBE61E32C4DD28511E72E /* Resources */,
@@ -181,10 +183,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* SDOM.app */,
-				00E356EE1AD99517003FC87E /* SDOMTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* SDOM-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* SDOM-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* WallPiper.app */,
+				00E356EE1AD99517003FC87E /* WallPiperTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* WallPiper-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* WallPiper-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,50 +199,51 @@
 				A1B547351D9A4367B12B4939 /* sdom_bold_font.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		D7D8C6F362E89C52B6FAAB2D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				79233D6A0704AAA2403AA92E /* Pods-SDOM.debug.xcconfig */,
-				1FE6CB4FB6E4D82E29ADACB3 /* Pods-SDOM.release.xcconfig */,
-				FC118989EAD20AC8EDCCEEC9 /* Pods-SDOM-tvOS.debug.xcconfig */,
-				00C9A829433DBD2DAB79F647 /* Pods-SDOM-tvOS.release.xcconfig */,
-				B0607F71A255D4EDD83229C3 /* Pods-SDOM-tvOSTests.debug.xcconfig */,
-				A0A15443D2E713E05C618E44 /* Pods-SDOM-tvOSTests.release.xcconfig */,
-				5DEA4B887D1DC64ED2EA0AA8 /* Pods-SDOMTests.debug.xcconfig */,
-				49C293721D3A6BAE70288EAF /* Pods-SDOMTests.release.xcconfig */,
+				79233D6A0704AAA2403AA92E /* Pods-WallPiper.debug.xcconfig */,
+				1FE6CB4FB6E4D82E29ADACB3 /* Pods-WallPiper.release.xcconfig */,
+				FC118989EAD20AC8EDCCEEC9 /* Pods-WallPiper-tvOS.debug.xcconfig */,
+				00C9A829433DBD2DAB79F647 /* Pods-WallPiper-tvOS.release.xcconfig */,
+				B0607F71A255D4EDD83229C3 /* Pods-WallPiper-tvOSTests.debug.xcconfig */,
+				A0A15443D2E713E05C618E44 /* Pods-WallPiper-tvOSTests.release.xcconfig */,
+				5DEA4B887D1DC64ED2EA0AA8 /* Pods-WallPiperTests.debug.xcconfig */,
+				49C293721D3A6BAE70288EAF /* Pods-WallPiperTests.release.xcconfig */,
+				047402CFB9E64967860031D1 /* Pods-WallPiper-WallPiperTests.debug.xcconfig */,
+				B54B6EA3CE7004F24D411736 /* Pods-WallPiper-WallPiperTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* SDOMTests */ = {
+		00E356ED1AD99517003FC87E /* WallPiperTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SDOMTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WallPiperTests" */;
 			buildPhases = (
 				CBCCF9BE34A96EE4F230095A /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				81114B11685D9454FAFCB43C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = SDOMTests;
-			productName = SDOMTests;
-			productReference = 00E356EE1AD99517003FC87E /* SDOMTests.xctest */;
+			name = WallPiperTests;
+			productName = WallPiperTests;
+			productReference = 00E356EE1AD99517003FC87E /* WallPiperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* SDOM */ = {
+		13B07F861A680F5B00A75B9A /* WallPiper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SDOM" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WallPiper" */;
 			buildPhases = (
 				8DFD03AD66367D75EC952238 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -254,14 +257,14 @@
 			);
 			dependencies = (
 			);
-			name = SDOM;
-			productName = SDOM;
-			productReference = 13B07F961A680F5B00A75B9A /* SDOM.app */;
+			name = WallPiper;
+			productName = WallPiper;
+			productReference = 13B07F961A680F5B00A75B9A /* WallPiper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* SDOM-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* WallPiper-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SDOM-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WallPiper-tvOS" */;
 			buildPhases = (
 				7814C78E480376852431A79A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -274,14 +277,14 @@
 			);
 			dependencies = (
 			);
-			name = "SDOM-tvOS";
-			productName = "SDOM-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* SDOM-tvOS.app */;
+			name = "WallPiper-tvOS";
+			productName = "WallPiper-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* WallPiper-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* SDOM-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* WallPiper-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SDOM-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WallPiper-tvOSTests" */;
 			buildPhases = (
 				9C51578A45AB3E113966F301 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -293,9 +296,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "SDOM-tvOSTests";
-			productName = "SDOM-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* SDOM-tvOSTests.xctest */;
+			name = "WallPiper-tvOSTests";
+			productName = "WallPiper-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* WallPiper-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -322,11 +325,12 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SDOM" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WallPiper" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -335,10 +339,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* SDOM */,
-				00E356ED1AD99517003FC87E /* SDOMTests */,
-				2D02E47A1E0B4A5D006451C7 /* SDOM-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* SDOM-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* WallPiper */,
+				00E356ED1AD99517003FC87E /* WallPiperTests */,
+				2D02E47A1E0B4A5D006451C7 /* WallPiper-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* WallPiper-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -415,7 +419,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SDOM/Pods-SDOM-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-WallPiper/Pods-WallPiper-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -424,7 +428,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SDOM/Pods-SDOM-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WallPiper/Pods-WallPiper-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7814C78E480376852431A79A /* [CP] Check Pods Manifest.lock */ = {
@@ -442,11 +446,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SDOM-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WallPiper-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81114B11685D9454FAFCB43C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WallPiper-WallPiperTests/Pods-WallPiper-WallPiperTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WallPiper-WallPiperTests/Pods-WallPiper-WallPiperTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8DFD03AD66367D75EC952238 /* [CP] Check Pods Manifest.lock */ = {
@@ -464,7 +486,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SDOM-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WallPiper-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -486,7 +508,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SDOM-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WallPiper-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -508,7 +530,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SDOMTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WallPiper-WallPiperTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -560,7 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* SDOMTests.m in Sources */,
+				00E356F31AD99517003FC87E /* WallPiperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* SDOMTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* WallPiperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,12 +617,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* SDOM */;
+			target = 13B07F861A680F5B00A75B9A /* WallPiper */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* SDOM-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* WallPiper-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -612,7 +634,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = SDOM;
+			path = WallPiper;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -620,14 +642,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DEA4B887D1DC64ED2EA0AA8 /* Pods-SDOMTests.debug.xcconfig */;
+			baseConfigurationReference = 047402CFB9E64967860031D1 /* Pods-WallPiper-WallPiperTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SDOMTests/Info.plist;
+				INFOPLIST_FILE = WallPiperTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -637,17 +659,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDOM.app/SDOM";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallPiper.app/WallPiper";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C293721D3A6BAE70288EAF /* Pods-SDOMTests.release.xcconfig */;
+			baseConfigurationReference = B54B6EA3CE7004F24D411736 /* Pods-WallPiper-WallPiperTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = SDOMTests/Info.plist;
+				INFOPLIST_FILE = WallPiperTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -657,18 +679,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDOM.app/SDOM";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallPiper.app/WallPiper";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79233D6A0704AAA2403AA92E /* Pods-SDOM.debug.xcconfig */;
+			baseConfigurationReference = 79233D6A0704AAA2403AA92E /* Pods-WallPiper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = SDOM/Info.plist;
+				INFOPLIST_FILE = WallPiper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -676,18 +698,18 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SDOM;
+				PRODUCT_NAME = WallPiper;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FE6CB4FB6E4D82E29ADACB3 /* Pods-SDOM.release.xcconfig */;
+			baseConfigurationReference = 1FE6CB4FB6E4D82E29ADACB3 /* Pods-WallPiper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = SDOM/Info.plist;
+				INFOPLIST_FILE = WallPiper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -695,14 +717,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SDOM;
+				PRODUCT_NAME = WallPiper;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC118989EAD20AC8EDCCEEC9 /* Pods-SDOM-tvOS.debug.xcconfig */;
+			baseConfigurationReference = FC118989EAD20AC8EDCCEEC9 /* Pods-WallPiper-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -713,14 +735,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SDOM-tvOS/Info.plist";
+				INFOPLIST_FILE = "WallPiper-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.SDOM-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.WallPiper-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -730,7 +752,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 00C9A829433DBD2DAB79F647 /* Pods-SDOM-tvOS.release.xcconfig */;
+			baseConfigurationReference = 00C9A829433DBD2DAB79F647 /* Pods-WallPiper-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -741,14 +763,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SDOM-tvOS/Info.plist";
+				INFOPLIST_FILE = "WallPiper-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.SDOM-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.WallPiper-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -758,7 +780,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0607F71A255D4EDD83229C3 /* Pods-SDOM-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = B0607F71A255D4EDD83229C3 /* Pods-WallPiper-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -768,24 +790,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SDOM-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "WallPiper-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.SDOM-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.WallPiper-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDOM-tvOS.app/SDOM-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallPiper-tvOS.app/WallPiper-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0A15443D2E713E05C618E44 /* Pods-SDOM-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = A0A15443D2E713E05C618E44 /* Pods-WallPiper-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -795,17 +817,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SDOM-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "WallPiper-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.SDOM-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.WallPiper-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDOM-tvOS.app/SDOM-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallPiper-tvOS.app/WallPiper-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -856,7 +878,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -902,7 +924,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -912,7 +934,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SDOMTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WallPiperTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -921,7 +943,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SDOM" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WallPiper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -930,7 +952,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SDOM-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WallPiper-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -939,7 +961,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SDOM-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WallPiper-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -948,7 +970,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SDOM" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "WallPiper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
