@@ -57,7 +57,7 @@ export const permissionMessages = {
 }
 
 export const stringConstants = {
-    EMPTY: "",
+    EMPTY: ``,
     COMMA: `,`,
     PLUS: `+`,
     SPACE: ` `,

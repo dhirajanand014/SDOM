@@ -42,7 +42,7 @@ export function Glance({ navigation }) {
             categoryIdFromNotification);
     }, []);
 
-    let { width, height } = Dimensions.get("window");
+    let { width, height } = Dimensions.get(`window`);
     height += StatusBar.currentHeight;
 
     const textPostDescriptionAnimationValue = useSharedValue(-10);
